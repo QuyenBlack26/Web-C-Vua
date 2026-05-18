@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cờ Vua Online - Chơi & Thắng</title>
+    <link rel="stylesheet" href="TrangChinh.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+</head>
+<body>
+
+<div class="stars"></div>
+<div class="gradient-bg"></div>
+
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="logo-modern">
+            <div class="logo-cube">♞</div>
+            <span>Chess Online</span>
+        </div>
+        <ul class="nav-menu">
+            <li><a href="#home">Trang Chủ</a></li>
+            <li><a href="#features">Tính Năng</a></li>
+            <li><a href="#play">Chơi Ngay</a></li>
+            <li><a href="DangNhap.html" class="btn-nav-login">Đăng Nhập</a></li>
+        </ul>
+        <!-- --> 
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</nav>
+
+
+<section class="hero" id="home">
+    <div class="hero-content">
+        <div class="hero-text">
+            <h1 class="hero-title">
+                <span class="letter">C</span>
+                <span class="letter">ờ</span>
+                <span class="letter"> </span>
+                <span class="letter">V</span>
+                <span class="letter">u</span>
+                <span class="letter">a</span>
+                <span class="letter"> </span>
+                <span class="letter">3</span>
+                <span class="letter">D</span>
+            </h1>
+            <p class="hero-subtitle">Trải nghiệm cờ vua tiên tiến với công nghệ AI</p>
+            <div class="hero-buttons">
+                <button class="btn-play">
+                    <i class="fas fa-play"></i> Chơi Ngay
+                </button>
+                <button class="btn-learn">
+                    <i class="fas fa-graduation-cap"></i> Học Cơ Bản
+                </button>
+            </div>
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-number">0+</span>
+                    <span class="stat-text">Người Chơi</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat">
+                    <span class="stat-number">0+</span>
+                    <span class="stat-text">Trận/Ngày</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat">
+                    <span class="stat-number">1+</span>
+                    <span class="stat-text">Quốc Gia</span>
+                </div>
+            </div>
+        </div>
+        <div class="hero-3d">
+            <canvas id="chessCanvas"></canvas>
+        </div>
+    </div>
+</section>
+
+<section class="features" id="features">
+    <h2 class="section-title">Tính Năng Độc Đáo</h2>
+    <div class="features-grid">
+        <div class="feature-card glassmorphism">
+            <div class="feature-icon">
+                <i class="fas fa-chess-queen"></i>
+            </div>
+            <h3>Chơi Trực Tiếp</h3>
+            <p>Đấu với hàng triệu người chơi từ khắp thế giới</p>
+        </div>
+
+        <div class="feature-card glassmorphism">
+            <div class="feature-icon">
+                <i class="fas fa-brain"></i>
+            </div>
+            <h3>AI Thông Minh</h3>
+            <p>Máy tính với trí tuệ nhân tạo có múc độ từ dễ đến khó</p>
+        </div>
+
+        <div class="feature-card glassmorphism">
+            <div class="feature-icon">
+                <i class="fas fa-chart-line"></i>
+            </div>
+            <h3>Phân Tích Chi Tiết</h3>
+            <p>Xem lại trò chơi với động cơ phân tích mạnh</p>
+        </div>
+
+        <div class="feature-card glassmorphism">
+            <div class="feature-icon">
+                <i class="fas fa-book"></i>
+            </div>
+            <h3>Học Từ Master</h3>
+            <p>Khoá học từ những người chơi chuyên nghiệp</p>
+        </div>
+
+        <div class="feature-card glassmorphism">
+            <div class="feature-icon">
+                <i class="fas fa-star"></i>
+            </div>
+            <h3>Bảng Xếp Hạng</h3>
+            <p>Cạnh tranh với xếp hạng rating ELO toàn cầu</p>
+        </div>
+
+        <div class="feature-card glassmorphism">
+            <div class="feature-icon">
+                <i class="fas fa-trophy"></i>
+            </div>
+            <h3>Giải Đấu</h3>
+            <p>Tham gia giải đấu hàng tuần với giải thưởng</p>
+        </div>
+    </div>
+</section>
+
+<section class="game-modes" id="play">
+    <h2 class="section-title">Chế Độ Chơi</h2>
+    <div class="modes-container">
+        <div class="mode-card-3d">
+            <div class="mode-icon">⚡</div>
+            <h3>Cờ Chớp</h3>
+            <p>3 phút</p>
+            <span class="mode-label">Nhanh & Kích Thích</span>
+        </div>
+
+        <div class="mode-card-3d">
+            <div class="mode-icon">⏱️</div>
+            <h3>Cờ Nhanh</h3>
+            <p>10 phút</p>
+            <span class="mode-label">Cân Bằng</span>
+        </div>
+
+        <div class="mode-card-3d">
+            <div class="mode-icon">♟️</div>
+            <h3>PvP</h3>
+            <p>45 phút</p>
+            <span class="mode-label">Chiến Lược</span>
+        </div>
+
+        <div class="mode-card-3d">
+            <div class="mode-icon">🤖</div>
+            <h3>vs AI</h3>
+            <p>Thời gian tùy chọn</p>
+            <span class="mode-label">Luyện Tập</span>
+        </div>
+    </div>
+</section>
+
+<section class="floating-section">
+    <h2 class="section-title">Tại Sao Chọn Chúng Tôi?</h2>
+    <div class="floating-cards">
+        <div class="floating-card">
+            <div class="card-content">
+                <span class="card-number">01</span>
+                <h4>Giao Diện Tương Tác</h4>
+                <p>Hiện Đại, Màu sắc hấp dẫn,Sống động qua các hiệu ứng</p>
+            </div>
+        </div>
+
+        <div class="floating-card">
+            <div class="card-content">
+                <span class="card-number">02</span>
+                <h4>Công Nghệ Mới</h4>
+                <p>Công nghệ tiên tiến để mang lại trải nghiệm chơi tốt nhất</p>
+            </div>
+        </div>
+
+        <div class="floating-card">
+            <div class="card-content">
+                <span class="card-number">03</span>
+                <h4>Cộng Đồng Năng Động</h4>
+                <p>Giao lưu, chia sẻ kinh nghiệm và học hỏi từ những người chơi giỏi</p>
+            </div>
+        </div>
+
+        <div class="floating-card">
+            <div class="card-content">
+                <span class="card-number">04</span>
+                <h4>Hoàn Toàn Miễn Phí</h4>
+                <p>Truy cập toàn bộ tính năng mà không cần trả phí</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="cta-premium">
+    <div class="cta-content">
+        <h2>Bạn Đã Sẵn Sàng Chưa?</h2>
+        <p>Tham gia hàng triệu người chơi cờ vua hôm nay</p>
+        <a href="DangNhap.html" class="btn-premium">Bắt Đầu Chơi</a>
+    </div>
+    <div class="cta-bg-effect"></div>
+</section>
+
+<footer class="footer-modern">
+    <div class="footer-grid">
+        <div class="footer-col">
+            <h4>Sản Phẩm</h4>
+            <ul>
+                <li><a href="#">Chơi Trực Tiếp</a></li>
+                <li><a href="#">Phân Tích</a></li>
+                <li><a href="#">Học Tập</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>Công Ty</h4>
+            <ul>
+                <li><a href="#">Về Chúng Tôi</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Liên Hệ</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>Pháp Lý</h4>
+            <ul>
+                <li><a href="#">Điều Khoản</a></li>
+                <li><a href="#">Privacy</a></li>
+                <li><a href="#">Cookies</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>Mạng Xã Hội</h4>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-discord"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2026 Chess Online. All rights reserved.</p>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="TrangChinh.js"></script>
+</body>
+</html>

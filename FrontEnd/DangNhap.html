@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Đăng Nhập / Đăng Ký</title>
+    <link rel="stylesheet" href="DangNhap.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- ĐĂNG NHẬP -->
+    <div class="form-box DangNhap">
+        <form>
+            <h1>Đăng Nhập</h1>
+
+            <!-- ĐĂNG NHẬP -->
+            <div class="input-box">
+                <input type="text" placeholder=" " required class="label" id="username1">
+                <label for="username1">Tên đăng nhập</label>
+                <i class="fas fa-user"></i>
+            </div>
+
+            <div class="input-box">
+                <input type="password" placeholder=" " required class="label" id="password1">
+                <label for="password1">Mật khẩu</label>
+                <i class="fas fa-lock"></i>
+                <i class="fas fa-eye toggle-password" id="togglePassword1"></i>
+            </div>
+
+            <div class="forgot-link">
+                <a href="#">Quên mật khẩu?</a>
+            </div>
+
+            <button class="btn">Đăng Nhập</button>
+
+            <p>Hoặc đăng nhập bằng</p>
+
+            <div class="social">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-google"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+        </form>
+    </div>
+
+    <!-- ĐĂNG KÝ -->
+    <div class="form-box DangKy">
+        <form>
+            <h1>Đăng Ký</h1>
+
+            <div class="input-box">
+                <input type="text" placeholder=" " required class="label" id="username2">
+                <label for="username2">Tên đăng nhập</label>
+                <i class="fas fa-user"></i>
+            </div>
+
+            <div class="input-box">
+                <input type="email" placeholder=" " required class="label" id="email">
+                <label for="email">Email</label>
+                <i class="fas fa-envelope"></i>
+            </div>
+
+            <div class="input-box">
+                <input type="password" placeholder=" " required class="label" id="password2">
+                <label for="password2">Mật khẩu</label>
+                <i class="fas fa-lock"></i>
+                <i class="fas fa-eye toggle-password" id="togglePassword2"></i>
+            </div>
+            <div class="input-box">
+                <input type="password" placeholder=" " required class="label" id="confirmPassword">
+                <label for="confirmPassword">Nhập lại mật khẩu</label>
+                <i class="fas fa-lock"></i>
+                <i class="fas fa-eye toggle-password" id="toggleConfirmPassword"></i>
+                <span class="match-message" id="matchMessage"></span>
+            </div>
+            <button class="btn DangKy">Đăng Ký</button>
+
+            <p>Hoặc đăng ký bằng</p>
+
+            <div class="social">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-google"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+        </form>
+    </div>
+
+    <!-- TOGGLE -->
+    <div class="toggle">
+
+        <div class="toggle-panel left">
+            <h1>Xin Chào!</h1>
+            <p>Chưa có tài khoản?</p>
+            <button id="registerBtn">Đăng Ký</button>
+        </div>
+
+        <div class="toggle-panel right">
+            <h1>Chào Mừng!</h1>
+            <p>Đã có tài khoản?</p>
+            <button id="loginBtn">Đăng Nhập</button>
+        </div>
+
+    </div>
+
+</div>
+
+<script src="DangNhap.js"></script>
+</body>
+</html>
