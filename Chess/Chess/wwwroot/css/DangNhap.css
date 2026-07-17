@@ -1,0 +1,403 @@
+/* RESET CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration-line: none;
+    list-style: none;
+}
+
+/* NỀN TRANG ĐĂNG NHẬP */
+body {
+    background: linear-gradient(135deg, #71b7e6, #9b59b6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* KHUNG ĐĂNG NHẬP VÀ ĐĂNG KÝ */
+.container {
+    position: relative;
+    width: 850px;
+    height: 550px;
+    background: #fff;
+    margin: 20px;
+    border-radius: 30px;
+    box-shadow: 0 0px 40px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+    .container h1 {
+        font-size: 36px;
+        margin: -10px 0;
+    }
+
+    .container p {
+        font-size: 14.5px;
+        margin: 15px 0;
+    }
+
+/* FORM ĐĂNG NHẬP VÀ ĐĂNG KÝ */
+form {
+    width: 100%;
+}
+
+.form-box {
+    position: absolute;
+    right: 0;
+    width: 50%;
+    height: 100%;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    color: #333;
+    text-align: center;
+    padding: 40px;
+    z-index: 1;
+    transition: 0.6s ease-in-out 1.2s, visibility 0s 1s;
+}
+
+.container.active .form-box {
+    right: 50%;
+}
+
+.form-box.DangKy {
+    visibility: hidden;
+}
+
+.container.active .form-box.DangKy {
+    visibility: visible;
+}
+
+/* KHU VỰC ICON MẠNG XÃ HỘI */
+.social {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+/* Ô NHẬP LIỆU */
+.input-box {
+    position: relative;
+    margin: 20px 0;
+}
+
+    .input-box input {
+        width: 100%;
+        padding: 10px 50px 10px 20px;
+        background: #fff;
+        border-radius: 12px;
+        border: none;
+        outline: none;
+        font-size: 16px;
+        color: #333;
+        font-weight: 500;
+    }
+
+        .input-box input::placeholder {
+            color: #333;
+            font-weight: 400;
+        }
+
+    .input-box i {
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 20px;
+    }
+
+/* LINK QUÊN MẬT KHẨU */
+.forgot-link {
+    margin: -15px 0 15px;
+    font-size: 14px;
+    text-align: right;
+}
+
+    .forgot-link a {
+        color: #0f0e0e;
+        font-size: 14px;
+        box-shadow: 0 0 0 0px rgba(0, 0, 0, 0.2);
+    }
+
+/* NÚT CHUNG */
+.btn {
+    width: 100%;
+    padding: 10px;
+    background: linear-gradient(135deg, #71b7e6, #9b59b6);
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: #fff;
+    font-weight: 600;
+}
+
+    .btn.registerBtn {
+        margin-bottom: 10px;
+        left: 0;
+    }
+
+/* ICON ĐĂNG NHẬP MẠNG XÃ HỘI */
+.social-icon {
+    display: inline-flex;
+    padding: 10px;
+    border: 2px solid #ccc;
+    background: #333;
+    font-size: 24px;
+    color: #fff;
+    margin: 0 10px;
+}
+
+/* HIỆU ỨNG CHUYỂN ĐỔI FORM */
+.toggle {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+    .toggle::before {
+        content: '';
+        position: absolute;
+        left: -250%;
+        width: 300%;
+        height: 100%;
+        background: linear-gradient(135deg, #71b7e6, #9b59b6);
+        border-radius: 150px;
+        z-index: 2;
+        transition: 1.8s ease-in-out;
+    }
+
+.container.active .toggle::before {
+    left: 50%;
+}
+
+/* PANEL CHUYỂN GIỮA ĐĂNG NHẬP VÀ ĐĂNG KÝ */
+.toggle-panel {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    transition: 0.6s ease-in-out;
+}
+
+    .toggle-panel.left {
+        left: 0;
+        transition-delay: 1.2s;
+    }
+
+.container.active .toggle-panel.left {
+    left: -50%;
+    transition-delay: 0.6s;
+}
+
+.toggle-panel.right {
+    left: -50%;
+    transition-delay: 1.2s;
+}
+
+.container.active .toggle-panel.right {
+    right: 0;
+    left: auto;
+    transition-delay: 0.6s;
+}
+
+.form-box {
+    z-index: 3;
+}
+
+.toggle-panel {
+    z-index: 2;
+}
+
+    .toggle-panel p {
+        margin-bottom: 20px;
+    }
+
+    /* NÚT CHUYỂN ĐĂNG NHẬP / ĐĂNG KÝ */
+    .toggle-panel button {
+        width: 165px;
+        height: 46px;
+        border: 2px solid rgba(255, 255, 255, 0.85);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.16);
+        color: #ffffff;
+        font-size: 15px;
+        font-weight: 800;
+        letter-spacing: 0.3px;
+        cursor: pointer;
+        backdrop-filter: blur(8px);
+        box-shadow: 0 10px 24px rgba(0, 0, 0, 0.16);
+        transition: all 0.25s ease;
+    }
+
+        .toggle-panel button:hover {
+            background: #ffffff;
+            color: #8b5cc7;
+            transform: translateY(-3px);
+            box-shadow: 0 14px 32px rgba(0, 0, 0, 0.22);
+        }
+
+        .toggle-panel button:active {
+            transform: translateY(-1px) scale(0.97);
+        }
+
+.input-box input {
+    border: 2px solid #ddd;
+    transition: border-color 0.3s ease;
+}
+
+    .input-box input:focus {
+        border-color: #71b7e6;
+    }
+
+/* NHÃN NỔI TRONG Ô NHẬP */
+.input-box label {
+    position: absolute;
+    top: 14px;
+    left: 20px;
+    font-size: 16px;
+    color: #999;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+.input-box input:focus ~ label,
+.input-box input:not(:placeholder-shown) ~ label {
+    top: -8px;
+    left: 16px;
+    font-size: 13px;
+    color: #9b59b6;
+    background: #fff;
+    padding: 0 4px;
+}
+
+.input-box .toggle-password {
+    right: 50px !important;
+    cursor: pointer;
+    color: #999;
+    font-size: 18px;
+    transition: color 0.3s ease;
+}
+
+    .input-box .toggle-password:hover {
+        color: #9b59b6;
+    }
+
+    .input-box .toggle-password.active {
+        color: #9b59b6;
+    }
+
+/* THÔNG BÁO KIỂM TRA MẬT KHẨU */
+.match-message {
+    display: block;
+    font-size: 12px;
+    margin-top: 5px;
+    text-align: left;
+    height: 16px;
+}
+
+    .match-message.error {
+        color: #ff4757;
+    }
+
+    .match-message.success {
+        color: #2ed573;
+    }
+
+/* TOAST THÔNG BÁO GÓC TRÊN */
+.top-alert {
+    position: fixed;
+    top: 22px;
+    right: 24px;
+    min-width: 280px;
+    max-width: 380px;
+    padding: 14px 18px;
+    border-radius: 14px;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.4;
+    z-index: 9999;
+    box-shadow: 0 14px 35px rgba(0, 0, 0, 0.18);
+    animation: toastIn 0.35s ease, toastOut 0.35s ease 3.2s forwards;
+}
+
+    .top-alert.error {
+        background: #fee2e2;
+        color: #991b1b;
+        border-left: 5px solid #ef4444;
+    }
+
+    .top-alert.success {
+        background: #dcfce7;
+        color: #166534;
+        border-left: 5px solid #22c55e;
+    }
+
+/* HIỆU ỨNG TOAST XUẤT HIỆN */
+@keyframes toastIn {
+    from {
+        opacity: 0;
+        transform: translateX(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* HIỆU ỨNG TOAST BIẾN MẤT */
+@keyframes toastOut {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateX(40px);
+        pointer-events: none;
+    }
+}
+
+/* NÚT CHUYỂN FORM ĐĂNG NHẬP / ĐĂNG KÝ */
+#registerBtn,
+#loginBtn {
+    width: 155px !important;
+    height: 44px !important;
+    border: none !important;
+    outline: none !important;
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    border-radius: 999px !important;
+    background: linear-gradient(135deg, #ffffff, #eef6ff) !important;
+    color: #7b3fb4 !important;
+    font-size: 15px !important;
+    font-weight: 800 !important;
+    letter-spacing: 0.3px !important;
+    cursor: pointer !important;
+    box-shadow: 0 10px 25px rgba(45, 25, 90, 0.25) !important;
+    transition: all 0.25s ease !important;
+}
+
+    #registerBtn:hover,
+    #loginBtn:hover {
+        background: linear-gradient(135deg, #71b7e6, #9b59b6) !important;
+        color: #ffffff !important;
+        transform: translateY(-3px) !important;
+        box-shadow: 0 14px 32px rgba(45, 25, 90, 0.35) !important;
+    }
+
+    #registerBtn:active,
+    #loginBtn:active {
+        transform: translateY(-1px) scale(0.97) !important;
+    }

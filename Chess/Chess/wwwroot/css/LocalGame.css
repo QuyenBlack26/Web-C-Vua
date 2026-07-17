@@ -1,0 +1,680 @@
+﻿/* =========================================================
+   LOCAL GAME - 2 NGƯỜI 1 MÁY + CỜ CÂU ĐỐ
+   File: wwwroot/css/LocalGame.css
+========================================================= */
+
+/* ===== Nền chung ===== */
+.local-select-page,
+.local-game-page {
+    min-height: 100vh;
+    padding: 115px 34px 70px;
+    background: radial-gradient(circle at top left, rgba(113, 183, 230, 0.22), transparent 32%), radial-gradient(circle at top right, rgba(155, 89, 182, 0.18), transparent 30%), linear-gradient(135deg, #eef4ff 0%, #f8f3ff 100%);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* =========================================================
+   TRANG CHỌN THỜI GIAN
+========================================================= */
+
+.local-hero {
+    max-width: 980px;
+    margin: 0 auto 34px;
+    text-align: center;
+}
+
+.local-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 18px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.86);
+    border: 1px solid rgba(255,255,255,0.9);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.06);
+    color: #6b6fc4;
+    font-weight: 900;
+    margin-bottom: 18px;
+}
+
+    .local-badge span {
+        font-size: 22px;
+    }
+
+.local-hero h1,
+.local-game-header h1 {
+    font-size: 48px;
+    color: #111827;
+    font-weight: 950;
+    margin-bottom: 12px;
+}
+
+.local-hero p,
+.local-game-header p {
+    max-width: 720px;
+    margin: 0 auto;
+    color: #6b7280;
+    font-size: 17px;
+    line-height: 1.7;
+}
+
+.time-panel {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 34px;
+    background: rgba(255,255,255,0.9);
+    border: 1px solid rgba(255,255,255,0.9);
+    border-radius: 30px;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.1);
+}
+
+.time-panel-header {
+    text-align: center;
+    margin-bottom: 26px;
+}
+
+    .time-panel-header h2 {
+        font-size: 30px;
+        color: #111827;
+        margin-bottom: 8px;
+    }
+
+    .time-panel-header p {
+        color: #6b7280;
+        font-weight: 600;
+    }
+
+.time-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 18px;
+}
+
+.time-card {
+    min-height: 190px;
+    padding: 24px 16px;
+    border-radius: 24px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    text-decoration: none;
+    color: #111827;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: 0.25s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+    .time-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(113,183,230,0.14), rgba(155,89,182,0.14));
+        opacity: 0;
+        transition: 0.25s ease;
+    }
+
+    .time-card:hover::before,
+    .time-card.active::before {
+        opacity: 1;
+    }
+
+    .time-card:hover,
+    .time-card.active {
+        transform: translateY(-7px);
+        border-color: #a78bfa;
+        box-shadow: 0 18px 36px rgba(124, 58, 237, 0.16);
+    }
+
+.time-icon {
+    width: 58px;
+    height: 58px;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #eef2ff;
+    font-size: 28px;
+    z-index: 1;
+}
+
+.time-card strong {
+    font-size: 28px;
+    font-weight: 950;
+    z-index: 1;
+}
+
+.time-card span {
+    color: #6b7280;
+    font-weight: 800;
+    z-index: 1;
+}
+
+.local-rule-box {
+    margin-top: 28px;
+    padding: 20px 24px;
+    border-radius: 20px;
+    background: #f8fafc;
+    border: 1px solid #e5e7eb;
+}
+
+    .local-rule-box h3 {
+        color: #5b21b6;
+        margin-bottom: 8px;
+        font-size: 20px;
+    }
+
+    .local-rule-box p {
+        color: #4b5563;
+        line-height: 1.7;
+    }
+
+.btn-back-mode {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 28px;
+    padding: 13px 20px;
+    border-radius: 14px;
+    background: #ffffff;
+    color: #374151;
+    text-decoration: none;
+    border: 1px solid #e5e7eb;
+    font-weight: 900;
+    box-shadow: 0 10px 24px rgba(0,0,0,0.06);
+    transition: 0.25s ease;
+}
+
+    .btn-back-mode:hover {
+        transform: translateY(-2px);
+        color: #5b21b6;
+    }
+
+/* =========================================================
+   TRANG BÀN CỜ LOCAL
+========================================================= */
+
+.local-game-header {
+    max-width: 1180px;
+    margin: 0 auto 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+}
+
+    .local-game-header p {
+        margin: 0;
+    }
+
+.local-game-layout {
+    max-width: 1180px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 320px 580px;
+    gap: 34px;
+    justify-content: center;
+    align-items: start;
+}
+
+/* ===== Panel đồng hồ ===== */
+.clock-panel {
+    background: rgba(255,255,255,0.92);
+    border-radius: 26px;
+    padding: 22px;
+    box-shadow: 0 22px 55px rgba(0,0,0,0.1);
+    border: 1px solid rgba(255,255,255,0.9);
+}
+
+.player-clock {
+    padding: 22px;
+    border-radius: 22px;
+    background: #f9fafb;
+    border: 2px solid #e5e7eb;
+    margin-bottom: 16px;
+    transition: 0.25s ease;
+}
+
+    .player-clock span {
+        display: block;
+        color: #6b7280;
+        font-weight: 900;
+        margin-bottom: 8px;
+    }
+
+    .player-clock strong {
+        display: block;
+        font-size: 38px;
+        color: #111827;
+        letter-spacing: 1px;
+    }
+
+    .player-clock small {
+        display: block;
+        margin-top: 10px;
+        color: #6b7280;
+        font-weight: 800;
+        line-height: 1.5;
+    }
+
+    .player-clock.active {
+        border-color: #8b5cf6;
+        background: #ede9fe;
+        box-shadow: 0 14px 28px rgba(124, 58, 237, 0.16);
+    }
+
+.black-clock {
+    background: #111827;
+    border-color: #111827;
+}
+
+    .black-clock span,
+    .black-clock strong {
+        color: #ffffff;
+    }
+
+    .black-clock small {
+        color: #d1d5db;
+    }
+
+    .black-clock.active {
+        background: #312e81;
+        border-color: #8b5cf6;
+    }
+
+/* ===== Trạng thái ván cờ ===== */
+.game-status-box {
+    background: linear-gradient(135deg, #71b7e6, #9b59b6);
+    color: white;
+    border-radius: 22px;
+    padding: 20px;
+    margin-bottom: 16px;
+    text-align: center;
+    box-shadow: 0 16px 30px rgba(113, 183, 230, 0.24);
+}
+
+    .game-status-box p {
+        font-weight: 900;
+        margin-bottom: 14px;
+    }
+
+.status-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+    .status-actions button,
+    .game-status-box button {
+        min-width: 92px;
+        padding: 11px 16px;
+        border: none;
+        border-radius: 12px;
+        background: #ffffff;
+        color: #5b21b6;
+        font-weight: 900;
+        cursor: pointer;
+        transition: 0.2s ease;
+    }
+
+        .status-actions button:hover,
+        .game-status-box button:hover {
+            transform: translateY(-2px);
+        }
+
+/* =========================================================
+   BÀN CỜ
+========================================================= */
+
+.board-wrap {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    overflow: visible;
+    padding-bottom: 34px;
+}
+
+.board-label {
+    font-weight: 900;
+    color: #6b7280;
+    letter-spacing: 1px;
+}
+
+.local-board {
+    width: 560px;
+    height: 560px;
+    display: grid;
+    grid-template-columns: repeat(8, 70px);
+    grid-template-rows: repeat(8, 70px);
+    border: 10px solid #ffffff;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 26px 70px rgba(0,0,0,0.2);
+    background: #ffffff;
+    position: relative;
+}
+
+    .local-board.flipped {
+        transform: rotate(180deg);
+    }
+
+        .local-board.flipped .local-square {
+            transform: rotate(180deg);
+        }
+
+.local-square {
+    width: 70px;
+    height: 70px;
+    min-width: 70px;
+    min-height: 70px;
+    max-width: 70px;
+    max-height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 38px;
+    line-height: 1;
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+    transition: 0.15s ease;
+}
+
+    .local-square:hover {
+        filter: brightness(1.08);
+    }
+
+    .local-square.light {
+        background: #f0d9b5;
+    }
+
+    .local-square.dark {
+        background: #b58863;
+    }
+
+/* Quân cờ */
+.local-piece {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    font-size: 38px;
+    line-height: 1;
+    position: relative;
+    z-index: 2;
+    transform: translateY(-2px);
+    pointer-events: none;
+    user-select: none;
+    filter: drop-shadow(0 3px 3px rgba(0,0,0,0.16));
+}
+
+/* Ô được chọn */
+.local-square.selected {
+    outline: 4px solid #22c55e;
+    outline-offset: -4px;
+    box-shadow: inset 0 0 0 999px rgba(34, 197, 94, 0.16);
+}
+
+/* Nước vừa đi */
+.local-square.last-move {
+    box-shadow: inset 0 0 0 999px rgba(250, 204, 21, 0.32);
+}
+
+/* Gợi ý nước đi */
+.local-square.hint::after {
+    content: "";
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: rgba(34, 197, 94, 0.65);
+    position: absolute;
+    z-index: 1;
+}
+
+/* Gợi ý ăn quân */
+.local-square.capture-hint {
+    box-shadow: inset 0 0 0 999px rgba(239, 68, 68, 0.28);
+}
+
+/* Ván kết thúc */
+.game-over-board {
+    opacity: 0.75;
+    pointer-events: none;
+}
+
+/* =========================================================
+   MODAL PHONG CẤP
+========================================================= */
+
+.promotion-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(17, 24, 39, 0.55);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+    .promotion-modal.show {
+        display: flex;
+    }
+
+.promotion-box {
+    width: 360px;
+    background: #ffffff;
+    border-radius: 24px;
+    padding: 28px;
+    text-align: center;
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.25);
+}
+
+    .promotion-box h2 {
+        color: #111827;
+        font-size: 28px;
+        margin-bottom: 8px;
+    }
+
+    .promotion-box p {
+        color: #6b7280;
+        font-weight: 700;
+        margin-bottom: 22px;
+    }
+
+.promotion-options {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+.promotion-choice {
+    width: 68px;
+    height: 68px;
+    border: 1px solid #e5e7eb;
+    border-radius: 18px;
+    background: #f8fafc;
+    font-size: 42px;
+    cursor: pointer;
+    transition: 0.22s ease;
+}
+
+    .promotion-choice:hover {
+        background: #ede9fe;
+        border-color: #a78bfa;
+        transform: translateY(-4px);
+    }
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1100px) {
+    .time-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .local-game-layout {
+        grid-template-columns: 1fr;
+        justify-items: center;
+    }
+
+    .local-game-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 620px) {
+    .local-select-page,
+    .local-game-page {
+        padding: 95px 18px 50px;
+    }
+
+    .local-hero h1,
+    .local-game-header h1 {
+        font-size: 34px;
+    }
+
+    .time-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .time-panel {
+        padding: 22px;
+    }
+
+    .clock-panel {
+        width: 100%;
+        max-width: 340px;
+    }
+
+    .local-board {
+        width: 320px;
+        height: 320px;
+        grid-template-columns: repeat(8, 40px);
+        grid-template-rows: repeat(8, 40px);
+        border-width: 8px;
+        border-radius: 18px;
+    }
+
+    .local-square {
+        width: 40px;
+        height: 40px;
+        min-width: 40px;
+        min-height: 40px;
+        max-width: 40px;
+        max-height: 40px;
+    }
+
+    .local-piece {
+        font-size: 28px;
+        transform: translateY(-1px);
+    }
+
+    .local-square.hint::after {
+        width: 12px;
+        height: 12px;
+    }
+
+    .promotion-box {
+        width: calc(100% - 40px);
+    }
+
+    .promotion-choice {
+        width: 58px;
+        height: 58px;
+        font-size: 34px;
+    }
+}
+
+/* LOGO NHỎ TRONG BADGE TRANG LOCAL */
+.local-badge-logo {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    display: block;
+}
+
+/* LOGO TRONG THẺ CHỌN THỜI GIAN */
+.time-card-logo {
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
+    display: block;
+}
+
+/* LOGO NHỎ TRONG TIÊU ĐỀ MODAL */
+.modal-title-logo {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 8px;
+}
+/* =========================================================
+   FIX LOGO TRANG LOCAL - KHÔNG CHO ẢNH BỊ PHÓNG TO
+   Áp dụng cả khi HTML còn dùng class play-mode-logo
+========================================================= */
+
+/* Logo nhỏ trong badge đầu trang "Local Chess" */
+.local-badge img,
+.local-badge .play-mode-logo,
+.local-badge-logo {
+    width: 34px !important;
+    height: 34px !important;
+    max-width: 34px !important;
+    max-height: 34px !important;
+    object-fit: contain !important;
+    display: block !important;
+}
+
+/* Khung badge không bị giãn */
+.local-badge span {
+    width: 38px;
+    height: 38px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+/* Logo trong ô chọn thời gian */
+.time-icon img,
+.time-icon .play-mode-logo,
+.time-card-logo {
+    width: 42px !important;
+    height: 42px !important;
+    max-width: 42px !important;
+    max-height: 42px !important;
+    object-fit: contain !important;
+    display: block !important;
+}
+
+/* Logo nhỏ trong tiêu đề modal / about */
+.about-item h3 img,
+.modal-title-logo {
+    width: 28px !important;
+    height: 28px !important;
+    max-width: 28px !important;
+    max-height: 28px !important;
+    object-fit: contain !important;
+    display: inline-block !important;
+    vertical-align: middle !important;
+    margin-right: 8px;
+}
+
+/* Không cho logo trong trang Local ăn kích thước lớn của trang Play */
+.local-select-page .play-mode-logo,
+.local-game-page .play-mode-logo {
+    width: auto;
+    height: auto;
+}

@@ -1,0 +1,693 @@
+﻿@{
+    ViewData["Title"] = "Thông tin cá nhân";
+
+}
+@{
+    Layout = null;
+}
+
+<!-- FILE CSS TRANG CHÍNH VÀ THÔNG TIN CÁ NHÂN -->
+<link rel="stylesheet" href="~/css/ThongTinCaNhan.css" />
+
+
+<link rel="stylesheet" href="~/css/BanCo.css" />
+<link rel="stylesheet" href="~/css/TrangChinh.css" asp-append-version="true">
+<link rel="stylesheet" href="~/css/KichThuoc.css" asp-append-version="true" />
+
+
+@using Microsoft.AspNetCore.Http
+
+<!-- THANH ĐIỀU HƯỚNG DÙNG CHUNG -->
+<nav class="navbar">
+    <div class="nav-container">
+
+        <!-- LOGO WEBSITE -->
+        <a asp-controller="Home"
+           asp-action="Index"
+           class="logo-modern nav-logo-link">
+            <img src="/IMG/Logo/LogoTrangChinh.png" alt="Logo Quyến" class="main-logo-img">
+            <span>Chess Online</span>
+        </a>
+
+        <!-- MENU TRANG CHÍNH -->
+        <ul class="nav-menu">
+            <li>
+                <a asp-controller="Home"
+                   asp-action="Index"
+                   asp-fragment="home">
+                    Trang Chủ
+                </a>
+            </li>
+
+            <li>
+                <a asp-controller="Home"
+                   asp-action="Index"
+                   asp-fragment="features">
+                    Tính Năng
+                </a>
+            </li>
+
+            <li>
+                <a asp-controller="Home"
+                   asp-action="Index"
+                   asp-fragment="play">
+                    Chơi Ngay
+                </a>
+            </li>
+
+            <li><a asp-controller="Friend" asp-action="Index">Bạn bè</a></li>
+
+            @if (Context.Session.GetString("TenDangNhap") != null)
+            {
+                var avatar = Context.Session.GetString("Avatar");
+                var tenDangNhap = Context.Session.GetString("TenDangNhap") ?? "U";
+                var hoTen = Context.Session.GetString("HoTen");
+                var tenHienThi = string.IsNullOrWhiteSpace(hoTen) ? tenDangNhap : hoTen;
+                var chuCai = tenHienThi.Length > 0 ? tenHienThi.Substring(0, 1).ToUpper() : "U";
+
+                <li class="user-menu">
+                    <details class="user-dropdown">
+
+                        <!-- AVATAR USER -->
+                        <summary class="avatar-btn">
+                            <div class="avatar-circle">
+                                @if (!string.IsNullOrWhiteSpace(avatar))
+                                {
+                                    <img src="@avatar"
+                                         alt="Avatar"
+                                         class="avatar-img" />
+                                }
+                                else
+                                {
+                                    @chuCai
+                                }
+                            </div>
+                        </summary>
+
+                        <!-- DROPDOWN THÔNG TIN USER -->
+                        <div class="user-card">
+                            <div class="user-card-header">
+                                <div class="user-avatar-lg">
+                                    @if (!string.IsNullOrWhiteSpace(avatar))
+                                    {
+                                        <img src="@avatar"
+                                             alt="Avatar"
+                                             class="user-avatar-img" />
+                                    }
+                                    else
+                                    {
+                                        @chuCai
+                                    }
+                                </div>
+
+                                <div>
+                                    <p class="user-card-name">@tenHienThi</p>
+                                    <p class="user-card-role">Người chơi</p>
+                                </div>
+                            </div>
+
+                            <a asp-controller="Home"
+                               asp-action="ThongTinCaNhan"
+                               class="btn-detail">
+                                👤 Xem chi tiết
+                            </a>
+
+                            <a asp-controller="Home"
+                               asp-action="DangXuat"
+                               class="btn-logout">
+                                🚪 Đăng xuất
+                            </a>
+                        </div>
+
+                    </details>
+                </li>
+            }
+            else
+            {
+                <li>
+                    <a asp-controller="Home"
+                       asp-action="DangNhap"
+                       class="btn-nav-login">
+                        Đăng Nhập
+                    </a>
+                </li>
+            }
+        </ul>
+
+        <!-- NÚT MENU MOBILE -->
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+    </div>
+</nav>
+
+<!-- TRANG THÔNG TIN CÁ NHÂN -->
+<div class="profile-page">
+
+    <!-- THẺ THÔNG TIN CÁ NHÂN -->
+    <div class="profile-card">
+
+        <!-- PHẦN ĐẦU HỒ SƠ -->
+        <div class="profile-header">
+            <div class="profile-avatar-img">
+                <img src="@ViewBag.Avatar" alt="Avatar" />
+            </div>
+
+            <div>
+                <h1>Thông tin cá nhân</h1>
+                <p>Tài khoản: <strong>@ViewBag.TenDangNhap</strong></p>
+            </div>
+        </div>
+
+        <!-- THÔNG BÁO LỖI -->
+        @if (ViewBag.Error != null)
+        {
+            <div class="alert error">@ViewBag.Error</div>
+        }
+
+        <!-- THÔNG BÁO THÀNH CÔNG -->
+        @if (ViewBag.Success != null)
+        {
+            <div class="alert success">@ViewBag.Success</div>
+        }
+
+        <!-- FORM CẬP NHẬT THÔNG TIN CÁ NHÂN -->
+        <form asp-controller="Home"
+              asp-action="ThongTinCaNhan"
+              method="post"
+              enctype="multipart/form-data"
+              class="profile-form">
+
+            <!-- Ô NHẬP HỌ TÊN -->
+            <div class="form-group">
+                <label>Họ tên</label>
+                <input type="text" name="hoTen" value="@ViewBag.HoTen" placeholder="Nhập họ tên của bạn" />
+            </div>
+
+            <!-- Ô NHẬP SỐ ĐIỆN THOẠI -->
+            <div class="form-group">
+                <label>Số điện thoại</label>
+
+                <div class="phone-row">
+                    <select id="maQuocGia">
+                        <option value="+84" selected>🇻🇳 Việt Nam (+84)</option>
+                        <option value="+1">🇺🇸 Mỹ / Canada (+1)</option>
+                        <option value="+81">🇯🇵 Nhật Bản (+81)</option>
+                        <option value="+82">🇰🇷 Hàn Quốc (+82)</option>
+                        <option value="+86">🇨🇳 Trung Quốc (+86)</option>
+                        <option value="+44">🇬🇧 Anh (+44)</option>
+                        <option value="+33">🇫🇷 Pháp (+33)</option>
+                        <option value="+49">🇩🇪 Đức (+49)</option>
+                        <option value="+61">🇦🇺 Úc (+61)</option>
+                        <option value="+65">🇸🇬 Singapore (+65)</option>
+                    </select>
+
+                    <input type="text"
+                           id="soDienThoaiNhap"
+                           placeholder="Ví dụ: 0901234567"
+                           autocomplete="tel" />
+                </div>
+
+                <input type="hidden" name="soDienThoai" id="soDienThoai" value="@ViewBag.SoDienThoai" />
+                <small>Hệ thống sẽ tự lưu dạng quốc tế, ví dụ: +84901234567.</small>
+            </div>
+
+            <!-- Ô NHẬP GMAIL -->
+            <div class="form-group">
+                <label>Gmail</label>
+                <input type="email" name="gmail" value="@ViewBag.Gmail" placeholder="Nhập Gmail" required />
+            </div>
+
+            <!-- Ô NHẬP NGÀY SINH -->
+            <div class="form-group">
+                <label>Ngày sinh</label>
+                <input type="date" name="ngaySinh" value="@ViewBag.NgaySinh" />
+            </div>
+
+            <!-- Ô CHỌN GIỚI TÍNH -->
+            <div class="form-group">
+                <label>Giới tính</label>
+                <select name="gioiTinh">
+                    <option value="">Chưa cập nhật</option>
+                    <option value="NAM" selected="@(ViewBag.GioiTinh == "NAM")">Nam</option>
+                    <option value="NU" selected="@(ViewBag.GioiTinh == "NU")">Nữ</option>
+                    <option value="KHAC" selected="@(ViewBag.GioiTinh == "KHAC")">Khác</option>
+                </select>
+            </div>
+
+            <!-- Ô CHỌN ẢNH ĐẠI DIỆN -->
+            <div class="form-group">
+                <label>Ảnh đại diện</label>
+                <input type="file" name="avatarFile" accept="image/*" />
+                <small>Chọn ảnh từ thiết bị. Hỗ trợ JPG, PNG, GIF, WEBP. Tối đa 2MB.</small>
+            </div>
+
+            <!-- NÚT LƯU VÀ QUAY LẠI -->
+            <div class="profile-actions">
+                <button type="submit" class="btn-save">Lưu thông tin</button>
+                <a asp-controller="Home" asp-action="Index" class="btn-back">Quay về trang chủ</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- FOOTER DÙNG CHUNG CHO CÁC TRANG -->
+<footer class="footer-modern">
+    <div class="footer-grid">
+
+        <div class="footer-col">
+            <h4>Sản Phẩm</h4>
+            <ul>
+                <li>
+                    <a asp-controller="Play" asp-action="Online">
+                        Chơi Trực Tiếp
+                    </a>
+                </li>
+
+                <li>
+                    <a asp-controller="Play" asp-action="Analysis">
+                        Phân Tích
+                    </a>
+                </li>
+
+                <li>
+                    <a asp-controller="Play" asp-action="HocCoBan">
+                        Học Tập
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h4>Công Ty</h4>
+            <ul>
+                <li>
+                    <a href="#" class="js-open-about-modal">
+                        Về Chúng Tôi
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="js-open-blog-modal">
+                        Blog
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="js-open-contact-modal">
+                        Liên Hệ
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h4>Pháp Lý</h4>
+            <ul>
+                <li>
+                    <a href="#" class="js-open-terms-modal">
+                        Điều Khoản
+                    </a>
+                </li>
+
+                <li>
+                    <a asp-controller="Home" asp-action="Privacy">
+                        Privacy
+                    </a>
+                </li>
+
+                <li>
+                    <a asp-controller="Home" asp-action="Cookies">
+                        Cookies
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h4>Mạng Xã Hội</h4>
+
+            <div class="social-links">
+                <a href="https://www.facebook.com/"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   aria-label="Facebook">
+                    f
+                </a>
+
+                <a href="https://x.com/"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   aria-label="X Twitter">
+                    x
+                </a>
+
+                <a href="https://www.youtube.com/"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   aria-label="YouTube">
+                    ▶
+                </a>
+
+                <a href="https://discord.com/"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   aria-label="Discord">
+                    ☎
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        <p>&copy; 2026 Chess Online. All rights reserved.</p>
+    </div>
+</footer>
+
+
+<!-- MODAL LIÊN HỆ -->
+<div class="contact-modal-overlay" id="contactModalOverlay">
+    <div class="contact-modal-box">
+
+        <button type="button" class="contact-modal-close" id="contactModalClose">
+            <span class="modal-x-symbol">×</span>
+        </button>
+
+        <div class="contact-modal-header">
+            <span class="contact-modal-icon">
+                ✉
+            </span>
+
+            <h2>Liên Hệ</h2>
+            <p>
+                Gửi góp ý, báo lỗi hoặc yêu cầu hỗ trợ cho Chess Online.
+            </p>
+        </div>
+
+        <form class="contact-modal-form">
+            <div class="contact-form-group">
+                <label>Họ tên</label>
+                <input type="text" placeholder="Nhập họ tên của bạn">
+            </div>
+
+            <div class="contact-form-group">
+                <label>Email</label>
+                <input type="email" placeholder="Nhập email của bạn">
+            </div>
+
+            <div class="contact-form-group">
+                <label>Chủ đề</label>
+                <input type="text" placeholder="Ví dụ: Báo lỗi, góp ý, hỗ trợ tài khoản...">
+            </div>
+
+            <div class="contact-form-group">
+                <label>Nội dung</label>
+                <textarea rows="4" placeholder="Nhập nội dung cần liên hệ..."></textarea>
+            </div>
+
+            <button type="button" class="btn-send-contact">
+                Gửi Liên Hệ
+            </button>
+        </form>
+
+    </div>
+</div>
+
+
+<!-- MODAL ĐIỀU KHOẢN -->
+<div class="terms-modal-overlay" id="termsModalOverlay">
+    <div class="terms-modal-box">
+
+        <button type="button" class="terms-modal-close" id="termsModalClose">
+            <span class="modal-x-symbol">×</span>
+        </button>
+
+        <div class="terms-modal-header">
+            <span class="terms-modal-icon">
+                📄
+            </span>
+
+            <h2>Điều Khoản Sử Dụng</h2>
+            <p>
+                Khi sử dụng Chess Online, bạn đồng ý tuân thủ các điều khoản bên dưới.
+            </p>
+        </div>
+
+        <div class="terms-modal-content">
+            <div class="terms-item">
+                <h3>1. Tài khoản người dùng</h3>
+                <p>
+                    Người dùng cần cung cấp thông tin chính xác khi đăng ký.
+                    Không sử dụng tài khoản của người khác hoặc chia sẻ tài khoản cho mục đích gian lận.
+                </p>
+            </div>
+
+            <div class="terms-item">
+                <h3>2. Hành vi khi chơi</h3>
+                <p>
+                    Không được sử dụng công cụ hỗ trợ bên ngoài trong các trận đấu với người chơi khác.
+                    Không spam, phá ván hoặc có hành vi gây ảnh hưởng xấu đến trải nghiệm của người khác.
+                </p>
+            </div>
+
+            <div class="terms-item">
+                <h3>3. Dữ liệu ván cờ</h3>
+                <p>
+                    Hệ thống có thể lưu lại lịch sử ván đấu, nước đi và kết quả để phục vụ tính năng xem lại,
+                    phân tích và xếp hạng.
+                </p>
+            </div>
+
+            <div class="terms-item">
+                <h3>4. Bảng xếp hạng</h3>
+                <p>
+                    Điểm số và thứ hạng có thể thay đổi dựa trên kết quả thi đấu.
+                    Nếu phát hiện gian lận, hệ thống có quyền điều chỉnh hoặc hủy kết quả.
+                </p>
+            </div>
+
+            <div class="terms-item">
+                <h3>5. Thay đổi điều khoản</h3>
+                <p>
+                    Chess Online có thể cập nhật điều khoản khi cần thiết để cải thiện hệ thống và bảo vệ người dùng.
+                </p>
+            </div>
+        </div>
+
+        <button type="button" class="btn-terms-ok" id="termsModalOk">
+            Tôi đã hiểu
+        </button>
+
+    </div>
+</div>
+
+
+<!-- MODAL BLOG -->
+<div class="blog-modal-overlay" id="blogModalOverlay">
+    <div class="blog-modal-box">
+
+        <button type="button" class="blog-modal-close" id="blogModalClose">
+            <span class="modal-x-symbol">×</span>
+        </button>
+
+        <div class="blog-modal-header">
+            <span class="blog-modal-icon">
+                📰
+            </span>
+
+            <h2>Blog Chess Online</h2>
+            <p>
+                Nơi chia sẻ mẹo chơi cờ, kiến thức luyện tập và cập nhật mới của website.
+            </p>
+        </div>
+
+        <div class="blog-list">
+            <div class="blog-item">
+                <div class="blog-tag">Người mới</div>
+                <h3>5 nguyên tắc khai cuộc cơ bản</h3>
+                <p>
+                    Kiểm soát trung tâm, phát triển quân nhẹ, nhập thành sớm và không di chuyển một quân quá nhiều lần.
+                </p>
+                <button type="button" class="btn-blog-read">
+                    Đọc nhanh
+                </button>
+            </div>
+
+            <div class="blog-item">
+                <div class="blog-tag">Chiến thuật</div>
+                <h3>Cách tránh mất quân đơn giản</h3>
+                <p>
+                    Trước khi đi, hãy kiểm tra quân nào đang bị tấn công,
+                    Vua có an toàn không và đối thủ có nước bắt quân không.
+                </p>
+                <button type="button" class="btn-blog-read">
+                    Đọc nhanh
+                </button>
+            </div>
+
+            <div class="blog-item">
+                <div class="blog-tag">AI</div>
+                <h3>AI phân tích ván cờ hoạt động thế nào?</h3>
+                <p>
+                    AI sẽ xem lại từng nước đi, so sánh với nước tốt hơn và đánh giá lỗi như thiếu chính xác,
+                    sai lầm hoặc lỗi nặng.
+                </p>
+                <button type="button" class="btn-blog-read">
+                    Đọc nhanh
+                </button>
+            </div>
+
+            <div class="blog-item">
+                <div class="blog-tag">Giải đấu</div>
+                <h3>Chuẩn bị trước khi tham gia giải đấu</h3>
+                <p>
+                    Luyện khai cuộc quen thuộc, giữ bình tĩnh ở trung cuộc và quản lý thời gian tốt trong từng ván đấu.
+                </p>
+                <button type="button" class="btn-blog-read">
+                    Đọc nhanh
+                </button>
+            </div>
+        </div>
+
+        <button type="button" class="btn-blog-ok" id="blogModalOk">
+            Đóng Blog
+        </button>
+
+    </div>
+</div>
+
+
+<!-- MODAL VỀ CHÚNG TÔI -->
+<div class="about-modal-overlay" id="aboutModalOverlay">
+    <div class="about-modal-box">
+
+        <button type="button" class="about-modal-close" id="aboutModalClose">
+            <span class="modal-x-symbol">×</span>
+        </button>
+
+        <div class="about-modal-header">
+            <span class="about-modal-icon">
+                ♞
+            </span>
+
+            <h2>Về Chess Online</h2>
+            <p>
+                Chess Online là website chơi cờ vua trực tuyến kết hợp AI, lịch sử ván đấu,
+                phân tích nước đi và bảng xếp hạng người chơi.
+            </p>
+        </div>
+
+        <div class="about-modal-content">
+            <div class="about-item">
+                <h3>🎯 Mục tiêu</h3>
+                <p>
+                    Tạo một nền tảng giúp người chơi vừa giải trí,
+                    vừa học cờ vua thông qua phân tích ván đấu và luyện tập với AI.
+                </p>
+            </div>
+
+            <div class="about-item">
+                <h3><img src="/IMG/Logo/1VS1.png" alt="1vs1 Online" class="play-mode-logo"> Tính năng chính</h3>
+                <p>
+                    Website hỗ trợ chơi với AI, chơi online, lưu lịch sử ván cờ,
+                    xem lại từng nước đi, phân tích lỗi và theo dõi bảng xếp hạng.
+                </p>
+            </div>
+
+            <div class="about-item">
+                <h3><img src="/IMG/Logo/AI.png" alt="Chơi với AI" class="play-mode-logo"> AI phân tích</h3>
+                <p>
+                    AI giúp đánh giá nước đi, chỉ ra lỗi thiếu chính xác,
+                    sai lầm, lỗi nặng và gợi ý cách cải thiện.
+                </p>
+            </div>
+
+            <div class="about-item">
+                <h3>🏆 Hướng phát triển</h3>
+                <p>
+                    Trong tương lai, hệ thống có thể mở rộng thêm giải đấu,
+                    phòng chơi online, phân tích chuyên sâu và học từ các ván cờ mẫu.
+                </p>
+            </div>
+        </div>
+
+        <button type="button" class="btn-about-ok" id="aboutModalOk">
+            Đã hiểu
+        </button>
+
+    </div>
+</div>
+
+
+<!-- FILE JAVASCRIPT FOOTER + MODAL -->
+<script src="~/js/TrangChinh.js" asp-append-version="true"></script>
+
+<script>
+    /* LẤY CÁC PHẦN TỬ XỬ LÝ SỐ ĐIỆN THOẠI */
+    const hiddenPhoneInput = document.getElementById("soDienThoai");
+    const phoneInput = document.getElementById("soDienThoaiNhap");
+    const countryCodeSelect = document.getElementById("maQuocGia");
+    const profileForm = document.querySelector(".profile-form");
+
+    /* HIỂN THỊ LẠI SỐ ĐIỆN THOẠI CŨ */
+    function loadOldPhone() {
+        const oldPhone = hiddenPhoneInput.value;
+
+        if (!oldPhone || !oldPhone.startsWith("+")) {
+            return;
+        }
+
+        const codes = Array.from(countryCodeSelect.options)
+            .map(option => option.value)
+            .sort((a, b) => b.length - a.length);
+
+        const matchedCode = codes.find(code => oldPhone.startsWith(code));
+
+        if (matchedCode) {
+            countryCodeSelect.value = matchedCode;
+            phoneInput.value = oldPhone.substring(matchedCode.length);
+        }
+    }
+
+    /* TẠO SỐ ĐIỆN THOẠI DẠNG QUỐC TẾ */
+    function buildInternationalPhone() {
+        let countryCode = countryCodeSelect.value;
+        let localNumber = phoneInput.value.trim();
+
+        localNumber = localNumber.replace(/[\s\-\.]/g, "");
+
+        if (localNumber.startsWith("+")) {
+            hiddenPhoneInput.value = localNumber;
+            return;
+        }
+
+        while (localNumber.startsWith("0")) {
+            localNumber = localNumber.substring(1);
+        }
+
+        if (localNumber === "") {
+            hiddenPhoneInput.value = "";
+            return;
+        }
+
+        hiddenPhoneInput.value = countryCode + localNumber;
+    }
+
+    /* CẬP NHẬT SỐ ĐIỆN THOẠI KHI NGƯỜI DÙNG NHẬP */
+    phoneInput.addEventListener("input", buildInternationalPhone);
+    countryCodeSelect.addEventListener("change", buildInternationalPhone);
+
+    /* CẬP NHẬT SỐ ĐIỆN THOẠI TRƯỚC KHI GỬI FORM */
+    if (profileForm) {
+        profileForm.addEventListener("submit", function () {
+            buildInternationalPhone();
+        });
+    }
+
+    /* CHẠY HIỂN THỊ SỐ ĐIỆN THOẠI CŨ */
+    loadOldPhone();
+</script>

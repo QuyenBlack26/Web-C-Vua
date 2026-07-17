@@ -1,0 +1,918 @@
+﻿@{
+    ViewData["Title"] = "Giải Đấu";
+
+    var tournaments = ViewBag.Tournaments as List<Dictionary<string, object>>;
+    var selectedTournament = ViewBag.SelectedTournament as Dictionary<string, object>;
+    var players = ViewBag.Players as List<Dictionary<string, object>>;
+    var matches = ViewBag.Matches as List<Dictionary<string, object>>;
+
+    int currentUserId = ViewBag.CurrentUserId ?? 0;
+    int currentGiaiDauId = ViewBag.CurrentGiaiDauId ?? 0;
+
+    string selectedStatus = selectedTournament == null
+        ? ""
+        : selectedTournament["TrangThai"]?.ToString() ?? "";
+
+    var roundConfigs = new List<Dictionary<string, string>>
+    {
+        new Dictionary<string, string> { { "Title", "Vòng bảng" }, { "Code", "VONG_BANG" } },
+        new Dictionary<string, string> { { "Title", "Vòng 1/16" }, { "Code", "VONG_1_16" } },
+        new Dictionary<string, string> { { "Title", "Tứ kết" }, { "Code", "TU_KET" } },
+        new Dictionary<string, string> { { "Title", "Bán kết" }, { "Code", "BAN_KET" } },
+        new Dictionary<string, string> { { "Title", "Chung kết" }, { "Code", "CHUNG_KET" } }
+    };
+
+    int? nguoiTaoId = null;
+
+    if (selectedTournament != null &&
+        selectedTournament.ContainsKey("NguoiTaoID") &&
+        selectedTournament["NguoiTaoID"] != null &&
+        selectedTournament["NguoiTaoID"].ToString() != "")
+    {
+        nguoiTaoId = Convert.ToInt32(selectedTournament["NguoiTaoID"]);
+    }
+
+    bool isCreator = nguoiTaoId.HasValue && nguoiTaoId.Value == currentUserId;
+
+    bool alreadyJoined = false;
+
+    if (players != null)
+    {
+        alreadyJoined = players.Any(p => Convert.ToInt32(p["UserID"]) == currentUserId);
+    }
+
+    int playerCount = players == null ? 0 : players.Count;
+}
+
+@{
+    Layout = null;
+}
+
+<link rel="stylesheet" href="~/css/Tournament.css" asp-append-version="true" />
+
+<link rel="stylesheet" href="~/css/TrangChinh.css" asp-append-version="true">
+<link rel="stylesheet" href="~/css/KichThuoc.css" asp-append-version="true" />
+
+
+@using Microsoft.AspNetCore.Http
+
+<!-- THANH ĐIỀU HƯỚNG DÙNG CHUNG -->
+<nav class="navbar">
+    <div class="nav-container">
+
+        <!-- LOGO WEBSITE -->
+        <a asp-controller="Home"
+           asp-action="Index"
+           class="logo-modern nav-logo-link">
+            <img src="/IMG/Logo/LogoTrangChinh.png" alt="Logo Quyến" class="main-logo-img">
+            <span>Chess Online</span>
+        </a>
+
+        <!-- MENU TRANG CHÍNH -->
+        <ul class="nav-menu">
+            <li>
+                <a asp-controller="Home"
+                   asp-action="Index"
+                   asp-fragment="home">
+                    Trang Chủ
+                </a>
+            </li>
+
+            <li>
+                <a asp-controller="Home"
+                   asp-action="Index"
+                   asp-fragment="features">
+                    Tính Năng
+                </a>
+            </li>
+
+            <li>
+                <a asp-controller="Home"
+                   asp-action="Index"
+                   asp-fragment="play">
+                    Chơi Ngay
+                </a>
+            </li>
+
+            <li><a asp-controller="Friend" asp-action="Index">Bạn bè</a></li>
+
+            @if (Context.Session.GetString("TenDangNhap") != null)
+            {
+                var avatar = Context.Session.GetString("Avatar");
+                var tenDangNhap = Context.Session.GetString("TenDangNhap") ?? "U";
+                var hoTen = Context.Session.GetString("HoTen");
+                var tenHienThi = string.IsNullOrWhiteSpace(hoTen) ? tenDangNhap : hoTen;
+                var chuCai = tenHienThi.Length > 0 ? tenHienThi.Substring(0, 1).ToUpper() : "U";
+
+                <li class="user-menu">
+                    <details class="user-dropdown">
+
+                        <!-- AVATAR USER -->
+                        <summary class="avatar-btn">
+                            <div class="avatar-circle">
+                                @if (!string.IsNullOrWhiteSpace(avatar))
+                                {
+                                    <img src="@avatar"
+                                         alt="Avatar"
+                                         class="avatar-img" />
+                                }
+                                else
+                                {
+                                    @chuCai
+                                }
+                            </div>
+                        </summary>
+
+                        <!-- DROPDOWN THÔNG TIN USER -->
+                        <div class="user-card">
+                            <div class="user-card-header">
+                                <div class="user-avatar-lg">
+                                    @if (!string.IsNullOrWhiteSpace(avatar))
+                                    {
+                                        <img src="@avatar"
+                                             alt="Avatar"
+                                             class="user-avatar-img" />
+                                    }
+                                    else
+                                    {
+                                        @chuCai
+                                    }
+                                </div>
+
+                                <div>
+                                    <p class="user-card-name">@tenHienThi</p>
+                                    <p class="user-card-role">Người chơi</p>
+                                </div>
+                            </div>
+
+                            <a asp-controller="Home"
+                               asp-action="ThongTinCaNhan"
+                               class="btn-detail">
+                                👤 Xem chi tiết
+                            </a>
+
+                            <a asp-controller="Home"
+                               asp-action="DangXuat"
+                               class="btn-logout">
+                                🚪 Đăng xuất
+                            </a>
+                        </div>
+
+                    </details>
+                </li>
+            }
+            else
+            {
+                <li>
+                    <a asp-controller="Home"
+                       asp-action="DangNhap"
+                       class="btn-nav-login">
+                        Đăng Nhập
+                    </a>
+                </li>
+            }
+        </ul>
+
+        <!-- NÚT MENU MOBILE -->
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+    </div>
+</nav>
+
+<section class="tournament-page">
+
+    <div class="tournament-hero">
+        <span class="tournament-badge">Tournament</span>
+
+        <h1>Giải Đấu Cờ Vua</h1>
+
+        <p>
+            Một giải đấu có 16 bảng, mỗi bảng gồm 2 người chơi.
+            Người thắng từng bảng sẽ vào vòng trong cho đến khi tìm ra nhà vô địch.
+        </p>
+    </div>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="tournament-alert success">
+            @TempData["Success"]
+        </div>
+    }
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="tournament-alert error">
+            @TempData["Error"]
+        </div>
+    }
+
+    <div class="tournament-top-actions">
+        <form asp-controller="Play" asp-action="TaoGiaiDau" method="post">
+            <button type="submit" class="btn-create-tournament">
+                + Tạo giải đấu mới
+            </button>
+        </form>
+
+        <a asp-controller="Home" asp-action="Index" class="btn-back-home">
+            ← Về trang chủ
+        </a>
+    </div>
+
+    <div class="tournament-layout">
+
+        <!-- CỘT TRÁI: DANH SÁCH GIẢI ĐẤU -->
+        <aside class="tournament-list-card">
+            <div class="tournament-card-header">
+                <h2>Danh sách giải đấu</h2>
+                <p>Chọn một giải đấu để xem chi tiết.</p>
+            </div>
+
+            @if (tournaments == null || tournaments.Count == 0)
+            {
+                <div class="tournament-empty">
+                    Chưa có giải đấu nào.
+                </div>
+            }
+            else
+            {
+                <div class="tournament-list">
+                    @foreach (var item in tournaments)
+                    {
+                        int giaiDauId = Convert.ToInt32(item["GiaiDauID"]);
+                        string activeClass = giaiDauId == currentGiaiDauId ? "active" : "";
+
+                        string tenGiaiDau = item["TenGiaiDau"]?.ToString() ?? "";
+                        string trangThai = item["TrangThai"]?.ToString() ?? "";
+                        string tenVoDich = item["TenVoDich"]?.ToString() ?? "";
+                        int soNguoiDangKy = Convert.ToInt32(item["SoNguoiDangKy"]);
+
+                        <a asp-controller="Play"
+                           asp-action="Tournament"
+                           asp-route-giaiDauId="@giaiDauId"
+                           class="tournament-list-item @activeClass">
+
+                            <div>
+                                <strong>@tenGiaiDau</strong>
+                                <span>@soNguoiDangKy / 32 người</span>
+                            </div>
+
+                            <small class="status-badge @trangThai">
+                                @trangThai
+                            </small>
+
+                            @if (!string.IsNullOrWhiteSpace(tenVoDich))
+                            {
+                                <p class="mini-champion">🏆 @tenVoDich</p>
+                            }
+                        </a>
+                    }
+                </div>
+            }
+        </aside>
+
+        <!-- CỘT PHẢI: CHI TIẾT GIẢI ĐẤU -->
+        <main class="tournament-detail-card">
+
+            @if (selectedTournament == null)
+            {
+                <div class="tournament-empty big">
+                    <h2>Chưa chọn giải đấu</h2>
+                    <p>Hãy tạo giải đấu mới hoặc chọn một giải đấu ở danh sách bên trái.</p>
+                </div>
+            }
+            else
+            {
+                string tenGiaiDau = selectedTournament["TenGiaiDau"]?.ToString() ?? "";
+                string tenNguoiTao = selectedTournament["TenNguoiTao"]?.ToString() ?? "";
+                string tenVoDich = selectedTournament["TenVoDich"]?.ToString() ?? "";
+
+                <div class="tournament-detail-header">
+                    <div>
+                        <h2>@tenGiaiDau</h2>
+                        <p>
+                            Người tạo: <strong>@tenNguoiTao</strong>
+                        </p>
+                    </div>
+
+                    <span class="status-badge large @selectedStatus">
+                        @selectedStatus
+                    </span>
+                </div>
+
+                <div class="tournament-summary-grid">
+                    <div class="summary-box">
+                        <span>Số người</span>
+                        <strong>@playerCount / 32</strong>
+                    </div>
+
+                    <div class="summary-box">
+                        <span>Số bảng</span>
+                        <strong>16</strong>
+                    </div>
+
+                    <div class="summary-box">
+                        <span>Thể thức</span>
+                        <strong>Loại trực tiếp</strong>
+                    </div>
+
+                    <div class="summary-box champion">
+                        <span>Vô địch</span>
+                        <strong>
+                            @(string.IsNullOrWhiteSpace(tenVoDich) ? "Chưa có" : tenVoDich)
+                        </strong>
+                    </div>
+                </div>
+
+                <div class="tournament-action-panel">
+
+                    @if (selectedStatus == "CHO_DANG_KY")
+                    {
+                        if (!alreadyJoined && playerCount < 32)
+                        {
+                            <form asp-controller="Play" asp-action="ThamGiaGiaiDau" method="post">
+                                <input type="hidden" name="giaiDauId" value="@currentGiaiDauId" />
+
+                                <button type="submit" class="btn-join-tournament">
+                                    Tham gia giải đấu
+                                </button>
+                            </form>
+                        }
+                        else if (alreadyJoined)
+                        {
+                            <button type="button" class="btn-disabled" disabled>
+                                Bạn đã tham gia
+                            </button>
+                        }
+                        else
+                        {
+                            <button type="button" class="btn-disabled" disabled>
+                                Giải đấu đã đủ người
+                            </button>
+                        }
+
+                        if (isCreator)
+                        {
+                            <form asp-controller="Play" asp-action="BatDauGiaiDau" method="post">
+                                <input type="hidden" name="giaiDauId" value="@currentGiaiDauId" />
+
+                                @if (playerCount == 32)
+                                {
+                                    <button type="submit" class="btn-start-tournament">
+                                        Bắt đầu giải đấu
+                                    </button>
+                                }
+                                else
+                                {
+                                    <button type="button" class="btn-start-tournament" disabled>
+                                        Cần đủ 32 người
+                                    </button>
+                                }
+                            </form>
+                        }
+                    }
+                    else
+                    {
+                        <button type="button" class="btn-disabled" disabled>
+                            Đăng ký đã đóng
+                        </button>
+                    }
+
+                </div>
+
+                <div class="tournament-section">
+                    <h3>Người chơi tham gia</h3>
+
+                    @if (players == null || players.Count == 0)
+                    {
+                        <div class="tournament-empty">
+                            Chưa có người chơi nào tham gia.
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="player-grid">
+                            @foreach (var player in players)
+                            {
+                                string avatar = player["Avatar"]?.ToString() ?? "/images/default-avatar.png";
+                                string tenDangNhap = player["TenDangNhap"]?.ToString() ?? "";
+                                string trangThaiNguoiChoi = player["TrangThai"]?.ToString() ?? "";
+                                int soThuTu = Convert.ToInt32(player["SoThuTu"]);
+
+                                <div class="player-card">
+                                    <img src="@avatar" alt="Avatar" />
+
+                                    <div>
+                                        <strong>#@soThuTu - @tenDangNhap</strong>
+                                        <span>@trangThaiNguoiChoi</span>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    }
+                </div>
+
+                <div class="tournament-section">
+                    <h3>Sơ đồ trận đấu</h3>
+
+                    @if (matches == null || matches.Count == 0)
+                    {
+                        <div class="tournament-empty">
+                            Chưa có trận đấu. Khi đủ 32 người, người tạo có thể bấm bắt đầu giải đấu.
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="bracket-scroll">
+                            <div class="bracket-layout">
+
+                                @foreach (var round in roundConfigs)
+                                {
+                                    string roundTitle = round["Title"];
+                                    string roundCode = round["Code"];
+
+                                    var roundMatches = matches
+                                    .Where(m => m["VongDau"]?.ToString() == roundCode)
+                                    .OrderBy(m => Convert.ToInt32(m["ThuTuTran"]))
+                                    .ToList();
+
+                                    <div class="bracket-round">
+                                        <h4>@roundTitle</h4>
+
+                                        @if (roundMatches.Count == 0)
+                                        {
+                                            <div class="empty-round">
+                                                Chưa có trận
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            foreach (var match in roundMatches)
+                                            {
+                                                int tranId = Convert.ToInt32(match["TranDauGiaiDauID"]);
+
+                                                int nguoiChoi1Id = match["NguoiChoi1ID"] == null || match["NguoiChoi1ID"].ToString() == ""
+                                                ? 0
+                                                : Convert.ToInt32(match["NguoiChoi1ID"]);
+
+                                                int nguoiChoi2Id = match["NguoiChoi2ID"] == null || match["NguoiChoi2ID"].ToString() == ""
+                                                ? 0
+                                                : Convert.ToInt32(match["NguoiChoi2ID"]);
+
+                                                int nguoiThangId = match["NguoiThangID"] == null || match["NguoiThangID"].ToString() == ""
+                                                ? 0
+                                                : Convert.ToInt32(match["NguoiThangID"]);
+
+                                                string tenNguoiChoi1 = match["TenNguoiChoi1"]?.ToString() ?? "Đang chờ";
+                                                string tenNguoiChoi2 = match["TenNguoiChoi2"]?.ToString() ?? "Đang chờ";
+                                                string tenNguoiThang = match["TenNguoiThang"]?.ToString() ?? "";
+                                                string trangThaiTran = match["TrangThai"]?.ToString() ?? "";
+                                                string tenBang = match["TenBang"]?.ToString() ?? "";
+                                                int thuTuTran = Convert.ToInt32(match["ThuTuTran"]);
+
+                                                bool finished = nguoiThangId > 0;
+
+                                                <div class="match-card">
+                                                    <div class="match-head">
+                                                        <span>
+                                                            @(string.IsNullOrWhiteSpace(tenBang) ? $"Trận {thuTuTran}" : tenBang)
+                                                        </span>
+
+                                                        <small>@trangThaiTran</small>
+                                                    </div>
+
+                                                    <div class="match-player @(nguoiThangId == nguoiChoi1Id ? "winner" : "")">
+                                                        <span>@tenNguoiChoi1</span>
+
+                                                        @if (!finished && selectedStatus == "DANG_DIEN_RA" && nguoiChoi1Id > 0)
+                                                        {
+                                                            <form asp-controller="Play" asp-action="ChonNguoiThangGiaiDau" method="post">
+                                                                <input type="hidden" name="tranDauGiaiDauId" value="@tranId" />
+                                                                <input type="hidden" name="winnerId" value="@nguoiChoi1Id" />
+
+                                                                <button type="submit">Thắng</button>
+                                                            </form>
+                                                        }
+                                                        else if (nguoiThangId == nguoiChoi1Id)
+                                                        {
+                                                            <strong>Thắng</strong>
+                                                        }
+                                                    </div>
+
+                                                    <div class="match-player @(nguoiThangId == nguoiChoi2Id ? "winner" : "")">
+                                                        <span>@tenNguoiChoi2</span>
+
+                                                        @if (!finished && selectedStatus == "DANG_DIEN_RA" && nguoiChoi2Id > 0)
+                                                        {
+                                                            <form asp-controller="Play" asp-action="ChonNguoiThangGiaiDau" method="post">
+                                                                <input type="hidden" name="tranDauGiaiDauId" value="@tranId" />
+                                                                <input type="hidden" name="winnerId" value="@nguoiChoi2Id" />
+
+                                                                <button type="submit">Thắng</button>
+                                                            </form>
+                                                        }
+                                                        else if (nguoiThangId == nguoiChoi2Id)
+                                                        {
+                                                            <strong>Thắng</strong>
+                                                        }
+                                                    </div>
+
+                                                    @if (finished)
+                                                    {
+                                                        <div class="match-winner">
+                                                            Người thắng: <b>@tenNguoiThang</b>
+                                                        </div>
+                                                    }
+                                                </div>
+                                            }
+                                        }
+                                    </div>
+                                }
+
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+
+        </main>
+
+    </div>
+
+</section>
+
+<!-- FOOTER DÙNG CHUNG CHO CÁC TRANG -->
+<footer class="footer-modern">
+    <div class="footer-grid">
+
+        <div class="footer-col">
+            <h4>Sản Phẩm</h4>
+            <ul>
+                <li>
+                    <a asp-controller="Play" asp-action="Online">
+                        Chơi Trực Tiếp
+                    </a>
+                </li>
+
+                <li>
+                    <a asp-controller="Play" asp-action="Analysis">
+                        Phân Tích
+                    </a>
+                </li>
+
+                <li>
+                    <a asp-controller="Play" asp-action="HocCoBan">
+                        Học Tập
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h4>Công Ty</h4>
+            <ul>
+                <li>
+                    <a href="#" class="js-open-about-modal">
+                        Về Chúng Tôi
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="js-open-blog-modal">
+                        Blog
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="js-open-contact-modal">
+                        Liên Hệ
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h4>Pháp Lý</h4>
+            <ul>
+                <li>
+                    <a href="#" class="js-open-terms-modal">
+                        Điều Khoản
+                    </a>
+                </li>
+
+                <li>
+                    <a asp-controller="Home" asp-action="Privacy">
+                        Privacy
+                    </a>
+                </li>
+
+                <li>
+                    <a asp-controller="Home" asp-action="Cookies">
+                        Cookies
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h4>Mạng Xã Hội</h4>
+
+            <div class="social-links">
+                <a href="https://www.facebook.com/"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   aria-label="Facebook">
+                    f
+                </a>
+
+                <a href="https://x.com/"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   aria-label="X Twitter">
+                    x
+                </a>
+
+                <a href="https://www.youtube.com/"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   aria-label="YouTube">
+                    ▶
+                </a>
+
+                <a href="https://discord.com/"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   aria-label="Discord">
+                    ☎
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        <p>&copy; 2026 Chess Online. All rights reserved.</p>
+    </div>
+</footer>
+
+
+<!-- MODAL LIÊN HỆ -->
+<div class="contact-modal-overlay" id="contactModalOverlay">
+    <div class="contact-modal-box">
+
+        <button type="button" class="contact-modal-close" id="contactModalClose">
+            <span class="modal-x-symbol">×</span>
+        </button>
+
+        <div class="contact-modal-header">
+            <span class="contact-modal-icon">
+                ✉
+            </span>
+
+            <h2>Liên Hệ</h2>
+            <p>
+                Gửi góp ý, báo lỗi hoặc yêu cầu hỗ trợ cho Chess Online.
+            </p>
+        </div>
+
+        <form class="contact-modal-form">
+            <div class="contact-form-group">
+                <label>Họ tên</label>
+                <input type="text" placeholder="Nhập họ tên của bạn">
+            </div>
+
+            <div class="contact-form-group">
+                <label>Email</label>
+                <input type="email" placeholder="Nhập email của bạn">
+            </div>
+
+            <div class="contact-form-group">
+                <label>Chủ đề</label>
+                <input type="text" placeholder="Ví dụ: Báo lỗi, góp ý, hỗ trợ tài khoản...">
+            </div>
+
+            <div class="contact-form-group">
+                <label>Nội dung</label>
+                <textarea rows="4" placeholder="Nhập nội dung cần liên hệ..."></textarea>
+            </div>
+
+            <button type="button" class="btn-send-contact">
+                Gửi Liên Hệ
+            </button>
+        </form>
+
+    </div>
+</div>
+
+
+<!-- MODAL ĐIỀU KHOẢN -->
+<div class="terms-modal-overlay" id="termsModalOverlay">
+    <div class="terms-modal-box">
+
+        <button type="button" class="terms-modal-close" id="termsModalClose">
+            <span class="modal-x-symbol">×</span>
+        </button>
+
+        <div class="terms-modal-header">
+            <span class="terms-modal-icon">
+                📄
+            </span>
+
+            <h2>Điều Khoản Sử Dụng</h2>
+            <p>
+                Khi sử dụng Chess Online, bạn đồng ý tuân thủ các điều khoản bên dưới.
+            </p>
+        </div>
+
+        <div class="terms-modal-content">
+            <div class="terms-item">
+                <h3>1. Tài khoản người dùng</h3>
+                <p>
+                    Người dùng cần cung cấp thông tin chính xác khi đăng ký.
+                    Không sử dụng tài khoản của người khác hoặc chia sẻ tài khoản cho mục đích gian lận.
+                </p>
+            </div>
+
+            <div class="terms-item">
+                <h3>2. Hành vi khi chơi</h3>
+                <p>
+                    Không được sử dụng công cụ hỗ trợ bên ngoài trong các trận đấu với người chơi khác.
+                    Không spam, phá ván hoặc có hành vi gây ảnh hưởng xấu đến trải nghiệm của người khác.
+                </p>
+            </div>
+
+            <div class="terms-item">
+                <h3>3. Dữ liệu ván cờ</h3>
+                <p>
+                    Hệ thống có thể lưu lại lịch sử ván đấu, nước đi và kết quả để phục vụ tính năng xem lại,
+                    phân tích và xếp hạng.
+                </p>
+            </div>
+
+            <div class="terms-item">
+                <h3>4. Bảng xếp hạng</h3>
+                <p>
+                    Điểm số và thứ hạng có thể thay đổi dựa trên kết quả thi đấu.
+                    Nếu phát hiện gian lận, hệ thống có quyền điều chỉnh hoặc hủy kết quả.
+                </p>
+            </div>
+
+            <div class="terms-item">
+                <h3>5. Thay đổi điều khoản</h3>
+                <p>
+                    Chess Online có thể cập nhật điều khoản khi cần thiết để cải thiện hệ thống và bảo vệ người dùng.
+                </p>
+            </div>
+        </div>
+
+        <button type="button" class="btn-terms-ok" id="termsModalOk">
+            Tôi đã hiểu
+        </button>
+
+    </div>
+</div>
+
+
+<!-- MODAL BLOG -->
+<div class="blog-modal-overlay" id="blogModalOverlay">
+    <div class="blog-modal-box">
+
+        <button type="button" class="blog-modal-close" id="blogModalClose">
+            <span class="modal-x-symbol">×</span>
+        </button>
+
+        <div class="blog-modal-header">
+            <span class="blog-modal-icon">
+                📰
+            </span>
+
+            <h2>Blog Chess Online</h2>
+            <p>
+                Nơi chia sẻ mẹo chơi cờ, kiến thức luyện tập và cập nhật mới của website.
+            </p>
+        </div>
+
+        <div class="blog-list">
+            <div class="blog-item">
+                <div class="blog-tag">Người mới</div>
+                <h3>5 nguyên tắc khai cuộc cơ bản</h3>
+                <p>
+                    Kiểm soát trung tâm, phát triển quân nhẹ, nhập thành sớm và không di chuyển một quân quá nhiều lần.
+                </p>
+                <button type="button" class="btn-blog-read">
+                    Đọc nhanh
+                </button>
+            </div>
+
+            <div class="blog-item">
+                <div class="blog-tag">Chiến thuật</div>
+                <h3>Cách tránh mất quân đơn giản</h3>
+                <p>
+                    Trước khi đi, hãy kiểm tra quân nào đang bị tấn công,
+                    Vua có an toàn không và đối thủ có nước bắt quân không.
+                </p>
+                <button type="button" class="btn-blog-read">
+                    Đọc nhanh
+                </button>
+            </div>
+
+            <div class="blog-item">
+                <div class="blog-tag">AI</div>
+                <h3>AI phân tích ván cờ hoạt động thế nào?</h3>
+                <p>
+                    AI sẽ xem lại từng nước đi, so sánh với nước tốt hơn và đánh giá lỗi như thiếu chính xác,
+                    sai lầm hoặc lỗi nặng.
+                </p>
+                <button type="button" class="btn-blog-read">
+                    Đọc nhanh
+                </button>
+            </div>
+
+            <div class="blog-item">
+                <div class="blog-tag">Giải đấu</div>
+                <h3>Chuẩn bị trước khi tham gia giải đấu</h3>
+                <p>
+                    Luyện khai cuộc quen thuộc, giữ bình tĩnh ở trung cuộc và quản lý thời gian tốt trong từng ván đấu.
+                </p>
+                <button type="button" class="btn-blog-read">
+                    Đọc nhanh
+                </button>
+            </div>
+        </div>
+
+        <button type="button" class="btn-blog-ok" id="blogModalOk">
+            Đóng Blog
+        </button>
+
+    </div>
+</div>
+
+
+<!-- MODAL VỀ CHÚNG TÔI -->
+<div class="about-modal-overlay" id="aboutModalOverlay">
+    <div class="about-modal-box">
+
+        <button type="button" class="about-modal-close" id="aboutModalClose">
+            <span class="modal-x-symbol">×</span>
+        </button>
+
+        <div class="about-modal-header">
+            <span class="about-modal-icon">
+                ♞
+            </span>
+
+            <h2>Về Chess Online</h2>
+            <p>
+                Chess Online là website chơi cờ vua trực tuyến kết hợp AI, lịch sử ván đấu,
+                phân tích nước đi và bảng xếp hạng người chơi.
+            </p>
+        </div>
+
+        <div class="about-modal-content">
+            <div class="about-item">
+                <h3>🎯 Mục tiêu</h3>
+                <p>
+                    Tạo một nền tảng giúp người chơi vừa giải trí,
+                    vừa học cờ vua thông qua phân tích ván đấu và luyện tập với AI.
+                </p>
+            </div>
+
+            <div class="about-item">
+                <h3><img src="/IMG/Logo/1VS1.png" alt="1vs1 Online" class="play-mode-logo"> Tính năng chính</h3>
+                <p>
+                    Website hỗ trợ chơi với AI, chơi online, lưu lịch sử ván cờ,
+                    xem lại từng nước đi, phân tích lỗi và theo dõi bảng xếp hạng.
+                </p>
+            </div>
+
+            <div class="about-item">
+                <h3><img src="/IMG/Logo/AI.png" alt="Chơi với AI" class="play-mode-logo"> AI phân tích</h3>
+                <p>
+                    AI giúp đánh giá nước đi, chỉ ra lỗi thiếu chính xác,
+                    sai lầm, lỗi nặng và gợi ý cách cải thiện.
+                </p>
+            </div>
+
+            <div class="about-item">
+                <h3>🏆 Hướng phát triển</h3>
+                <p>
+                    Trong tương lai, hệ thống có thể mở rộng thêm giải đấu,
+                    phòng chơi online, phân tích chuyên sâu và học từ các ván cờ mẫu.
+                </p>
+            </div>
+        </div>
+
+        <button type="button" class="btn-about-ok" id="aboutModalOk">
+            Đã hiểu
+        </button>
+
+    </div>
+</div>
+
+
+<!-- FILE JAVASCRIPT FOOTER + MODAL -->
+<script src="~/js/TrangChinh.js" asp-append-version="true"></script>
+<script src="~/js/GameResultModal.js" asp-append-version="true"></script>

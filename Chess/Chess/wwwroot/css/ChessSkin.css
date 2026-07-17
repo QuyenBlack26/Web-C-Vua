@@ -1,0 +1,197 @@
+﻿/* ========================= */
+/* CHESS SKIN DÙNG CHUNG */
+/* ========================= */
+
+#chessBoard,
+.chess-board,
+#localBoard,
+.local-board,
+#reviewBoard,
+.review-board,
+#skinPreviewBoard,
+.skin-preview-board {
+    --skin-light-square: #f0d9b5;
+    --skin-dark-square: #b58863;
+    --skin-light-image: none;
+    --skin-dark-image: none;
+    --skin-board-image: none;
+}
+
+    /* Ô sáng: ưu tiên ảnh ô sáng, nếu không có ảnh thì dùng màu dự phòng */
+    #chessBoard .square.light,
+    .chess-board .square.light,
+    #localBoard .local-square.light,
+    .local-board .local-square.light,
+    #reviewBoard .review-square.light,
+    .review-board .review-square.light,
+    #skinPreviewBoard .preview-square.light,
+    .skin-preview-board .preview-square.light {
+        background-color: var(--skin-light-square) !important;
+        background-image: var(--skin-light-image) !important;
+        background-size: cover !important;
+        background-position: center !important;
+        background-repeat: no-repeat !important;
+    }
+
+    /* Ô tối: ưu tiên ảnh ô tối, nếu không có ảnh thì dùng màu dự phòng */
+    #chessBoard .square.dark,
+    .chess-board .square.dark,
+    #localBoard .local-square.dark,
+    .local-board .local-square.dark,
+    #reviewBoard .review-square.dark,
+    .review-board .review-square.dark,
+    #skinPreviewBoard .preview-square.dark,
+    .skin-preview-board .preview-square.dark {
+        background-color: var(--skin-dark-square) !important;
+        background-image: var(--skin-dark-image) !important;
+        background-size: cover !important;
+        background-position: center !important;
+        background-repeat: no-repeat !important;
+    }
+
+    /* Không dùng ảnh nguyên bàn cờ nữa, tránh bị lệch tọa độ */
+    #chessBoard.skin-has-board-image,
+    .chess-board.skin-has-board-image,
+    #localBoard.skin-has-board-image,
+    .local-board.skin-has-board-image,
+    #reviewBoard.skin-has-board-image,
+    .review-board.skin-has-board-image,
+    #skinPreviewBoard.skin-has-board-image,
+    .skin-preview-board.skin-has-board-image {
+        background-image: none !important;
+    }
+
+/* Căn giữa quân trong ô */
+.square,
+.local-square,
+.review-square,
+.preview-square {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow: hidden !important;
+}
+
+/* Ảnh quân cờ */
+.skin-piece-img {
+    width: 82% !important;
+    height: 82% !important;
+    max-width: 82% !important;
+    max-height: 82% !important;
+    object-fit: contain !important;
+    pointer-events: none !important;
+    user-select: none !important;
+    display: block !important;
+}
+
+/* Preview ảnh quân */
+.preview-square .skin-piece-img,
+.preview-square img {
+    width: 78% !important;
+    height: 78% !important;
+    max-width: 78% !important;
+    max-height: 78% !important;
+    object-fit: contain !important;
+    display: block !important;
+}
+
+/* Nếu còn dùng Unicode thì vẫn có hiệu ứng */
+.piece-classic .square,
+.piece-classic .local-piece,
+.piece-classic .review-square,
+.piece-classic .preview-square {
+    font-family: "Segoe UI Symbol", "Arial Unicode MS", serif !important;
+}
+
+.piece-shadow .square,
+.piece-shadow .local-piece,
+.piece-shadow .review-square,
+.piece-shadow .preview-square {
+    text-shadow: 0 6px 10px rgba(0, 0, 0, 0.35) !important;
+}
+
+.piece-glow .square,
+.piece-glow .local-piece,
+.piece-glow .review-square,
+.piece-glow .preview-square {
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.9), 0 0 16px rgba(113, 183, 230, 0.85) !important;
+}
+
+/* Panel chọn skin cũ nếu trang nào còn dùng */
+.skin-setting-panel {
+    width: 100%;
+    max-width: 720px;
+    padding: 22px;
+    border-radius: 22px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
+}
+
+    .skin-setting-panel h3 {
+        font-size: 24px;
+        color: #111827;
+        margin-bottom: 14px;
+    }
+
+.skin-setting-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+}
+
+.skin-form-group {
+    display: grid;
+    gap: 7px;
+}
+
+    .skin-form-group label {
+        color: #374151;
+        font-weight: 800;
+        font-size: 14px;
+    }
+
+    .skin-form-group select {
+        width: 100%;
+        padding: 12px 14px;
+        border-radius: 14px;
+        border: 1px solid #d1d5db;
+        outline: none;
+        font-weight: 700;
+        background: #ffffff;
+    }
+
+        .skin-form-group select:focus {
+            border-color: #a78bfa;
+            box-shadow: 0 0 0 4px rgba(167, 139, 250, 0.16);
+        }
+
+.btn-save-skin {
+    margin-top: 16px;
+    width: 100%;
+    border: none;
+    padding: 13px 18px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #71b7e6, #9b59b6);
+    color: #ffffff;
+    font-weight: 900;
+    cursor: pointer;
+    transition: 0.22s ease;
+}
+
+    .btn-save-skin:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 14px 30px rgba(113, 183, 230, 0.35);
+    }
+
+.skin-message {
+    margin-top: 12px;
+    font-weight: 800;
+    color: #15803d;
+}
+
+@media (max-width: 650px) {
+    .skin-setting-grid {
+        grid-template-columns: 1fr;
+    }
+}

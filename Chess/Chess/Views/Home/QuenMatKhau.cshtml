@@ -1,0 +1,121 @@
+@{
+    ViewData["Title"] = "Quên mật khẩu";
+    Layout = null;
+
+    int step = ViewBag.Step == null ? 1 : (int)ViewBag.Step;
+}
+
+<!-- CẤU TRÚC HTML TRANG QUÊN MẬT KHẨU -->
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <title>Quên mật khẩu</title>
+    <link rel="stylesheet" href="~/css/DangNhap.css" />
+    <link rel="stylesheet" href="~/css/KichThuoc.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+
+    <!-- KHUNG CHỨA FORM QUÊN MẬT KHẨU -->
+    <div class="container">
+        <div class="form-box" style="width:100%; right:0;">
+
+            <!-- BƯỚC 1: NHẬP TÀI KHOẢN VÀ GMAIL -->
+            @if (step == 1)
+            {
+                <form asp-controller="Home" asp-action="GuiMaXacMinh" method="post">
+                    <h1>Quên Mật Khẩu</h1>
+
+                    <p>Nhập tài khoản và Gmail để tạo mã xác minh.</p>
+
+                    <div class="input-box">
+                        <input type="text" name="tenDangNhap" placeholder=" " required class="label">
+                        <label>Tên đăng nhập</label>
+                        <i class="fas fa-user"></i>
+                    </div>
+
+                    <div class="input-box">
+                        <input type="email" name="gmail" placeholder=" " required class="label">
+                        <label>Gmail đã đăng ký</label>
+                        <i class="fas fa-envelope"></i>
+                    </div>
+
+                    <!-- THÔNG BÁO LỖI -->
+                    @if (ViewBag.Error != null)
+                    {
+                        <p style="color:red; text-align:center;">@ViewBag.Error</p>
+                    }
+
+                    <!-- THÔNG BÁO THÀNH CÔNG -->
+                    @if (ViewBag.Success != null)
+                    {
+                        <p style="color:green; text-align:center;">@ViewBag.Success</p>
+                    }
+
+                    <button type="submit" class="btn">Gửi mã xác minh</button>
+
+                    <!-- LINK QUAY LẠI ĐĂNG NHẬP -->
+                    <p style="margin-top:15px;">
+                        <a asp-controller="Home" asp-action="DangNhap">Quay lại đăng nhập</a>
+                    </p>
+                </form>
+            }
+            else
+            {
+                <!-- BƯỚC 2: XÁC MINH VÀ ĐỔI MẬT KHẨU -->
+                <form asp-controller="Home" asp-action="XacMinhDoiMatKhau" method="post">
+                    <h1>Xác Minh</h1>
+
+                    <p>Nhập mã xác minh và mật khẩu mới.</p>
+
+                    <!-- MÃ TEST KHI PHÁT TRIỂN -->
+                    @if (ViewBag.DevCode != null)
+                    {
+                        <p style="color:#6d28d9; font-weight:bold; text-align:center;">
+                            Mã test của bạn: @ViewBag.DevCode
+                        </p>
+                    }
+
+                    <div class="input-box">
+                        <input type="text" name="maXacMinh" placeholder=" " required class="label">
+                        <label>Mã xác minh</label>
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+
+                    <div class="input-box">
+                        <input type="password" name="matKhauMoi" placeholder=" " required class="label">
+                        <label>Mật khẩu mới</label>
+                        <i class="fas fa-lock"></i>
+                    </div>
+
+                    <div class="input-box">
+                        <input type="password" name="xacNhanMatKhauMoi" placeholder=" " required class="label">
+                        <label>Nhập lại mật khẩu mới</label>
+                        <i class="fas fa-lock"></i>
+                    </div>
+
+                    <!-- THÔNG BÁO LỖI -->
+                    @if (ViewBag.Error != null)
+                    {
+                        <p style="color:red; text-align:center;">@ViewBag.Error</p>
+                    }
+
+                    <!-- THÔNG BÁO THÀNH CÔNG -->
+                    @if (ViewBag.Success != null)
+                    {
+                        <p style="color:green; text-align:center;">@ViewBag.Success</p>
+                    }
+
+                    <button type="submit" class="btn">Xác minh và đổi mật khẩu</button>
+
+                    <!-- LINK TẠO MÃ MỚI -->
+                    <p style="margin-top:15px;">
+                        <a asp-controller="Home" asp-action="QuenMatKhau">Tạo mã mới</a>
+                    </p>
+                </form>
+            }
+        </div>
+    </div>
+</body>
+</html>

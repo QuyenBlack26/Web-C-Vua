@@ -1,0 +1,153 @@
+﻿@{
+    ViewData["Title"] = "Quản lý tài khoản";
+    var users = ViewBag.Users as List<Dictionary<string, object>>;
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User</title>
+    <!-- FILE CSS ADMIN -->
+    <link rel="stylesheet" href="~/css/Admin.css" />
+    <link rel="stylesheet" href="~/css/KichThuoc.css" asp-append-version="true" />
+</head>
+<body>
+    <!-- KHUNG TRANG ADMIN -->
+    <div class="admin-page">
+
+        <!-- SIDEBAR ADMIN -->
+        <aside class="admin-sidebar">
+            <h2>Admin</h2>
+
+            <a asp-controller="Admin" asp-action="Index">Dashboard</a>
+            <a asp-controller="Admin" asp-action="Users">Tài khoản</a>
+            <a asp-controller="Admin" asp-action="Skins">Skin cờ</a>
+            <a asp-controller="Admin" asp-action="Puzzles">Câu đố</a>
+            <a asp-controller="Home" asp-action="Index">Về trang chủ</a>
+        </aside>
+
+        <!-- NỘI DUNG CHÍNH -->
+        <main class="admin-main">
+            <h1>Quản lý tài khoản</h1>
+
+            <!-- NÚT THÊM TÀI KHOẢN -->
+            <div style="margin-bottom: 16px;">
+                <a asp-controller="Admin" asp-action="CreateUser" class="btn-admin-save">
+                    + Thêm tài khoản
+                </a>
+            </div>
+
+            <!-- THÔNG BÁO LỖI -->
+            @if (TempData["Error"] != null)
+            {
+                <div class="admin-alert error">@TempData["Error"]</div>
+            }
+
+            <!-- THÔNG BÁO THÀNH CÔNG -->
+            @if (TempData["Success"] != null)
+            {
+                <div class="admin-alert success">@TempData["Success"]</div>
+            }
+
+            <!-- BẢNG QUẢN LÝ TÀI KHOẢN -->
+            <div class="admin-table-wrap">
+                <table class="admin-table">
+
+                    <!-- TIÊU ĐỀ CỘT CỦA BẢNG -->
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Avatar</th>
+                            <th>Tên đăng nhập</th>
+                            <th>Họ tên</th>
+                            <th>Gmail</th>
+                            <th>SĐT</th>
+                            <th>Ngày sinh</th>
+                            <th>Giới tính</th>
+                            <th>Vai trò</th>
+                            <th>Ngày tạo</th>
+                            <th>Ngày cập nhật</th>
+                            <th>Trạng thái</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+
+                    <!-- DỮ LIỆU TÀI KHOẢN -->
+                    <tbody>
+                        @if (users != null)
+                        {
+                            foreach (var u in users)
+                            {
+                                var avatar = u["Avatar"]?.ToString();
+                                if (string.IsNullOrWhiteSpace(avatar))
+                                {
+                                    avatar = "/images/default-avatar.png";
+                                }
+
+                                var trangThai = u["TrangThai"]?.ToString();
+                                bool isActive = trangThai == "True" || trangThai == "1";
+
+                                <tr>
+                                    <td>@u["UserID"]</td>
+
+                                    <td>
+                                        <img src="@avatar" class="admin-avatar" />
+                                    </td>
+
+                                    <td>@u["TenDangNhap"]</td>
+                                    <td>@u["HoTen"]</td>
+                                    <td>@u["Gmail"]</td>
+                                    <td>@u["SoDienThoai"]</td>
+                                    <td>@u["NgaySinh"]</td>
+                                    <td>@u["GioiTinh"]</td>
+                                    <td>@u["TenVaiTro"]</td>
+                                    <td>@u["NgayTao"]</td>
+                                    <td>@u["NgayCapNhat"]</td>
+
+                                    <!-- TRẠNG THÁI TÀI KHOẢN -->
+                                    <td>
+                                        @if (isActive)
+                                        {
+                                            <span class="status-badge active">Hoạt động</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="status-badge locked">Khóa</span>
+                                        }
+                                    </td>
+
+                                    <!-- NÚT SỬA VÀ KHÓA TÀI KHOẢN -->
+                                    <td class="admin-actions">
+                                        <a asp-controller="Admin"
+                                           asp-action="EditUser"
+                                           asp-route-id="@u["UserID"]"
+                                           class="btn-admin-edit">
+                                            Sửa
+                                        </a>
+
+                                        <form asp-controller="Admin"
+                                              asp-action="ToggleUserStatus"
+                                              method="post"
+                                              style="display:inline;">
+                                            <input type="hidden" name="id" value="@u["UserID"]" />
+
+                                            <button type="submit"
+                                                    class="btn-admin-delete"
+                                                    onclick="return confirm('Bạn có chắc muốn đổi trạng thái tài khoản này?');">
+                                                @(isActive ? "Khóa" : "Mở")
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

@@ -1,0 +1,521 @@
+﻿@{
+    ViewData["Title"] = "Quản lý Skin";
+    Layout = null;
+
+    var boardSkins = ViewBag.BoardSkins as List<Dictionary<string, object>>;
+    var pieceSkins = ViewBag.PieceSkins as List<Dictionary<string, object>>;
+
+    string GetValue(Dictionary<string, object> item, string key)
+    {
+        if (item == null || !item.ContainsKey(key) || item[key] == null)
+        {
+            return "";
+        }
+
+        return item[key].ToString() ?? "";
+    }
+
+    string StatusText(string value)
+    {
+        return value == "True" || value == "1" ? "Đang dùng" : "Đã ẩn";
+    }
+
+    string StatusClass(string value)
+    {
+        return value == "True" || value == "1" ? "active" : "locked";
+    }
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skin</title>
+    <link rel="stylesheet" href="~/css/Admin.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/AdminSkin.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/KichThuoc.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="admin-page">
+
+        <aside class="admin-sidebar">
+            <h2>Admin</h2>
+
+            <a asp-controller="Admin" asp-action="Index">Dashboard</a>
+            <a asp-controller="Admin" asp-action="Users">Tài khoản</a>
+            <a asp-controller="Admin" asp-action="Skins">Skin cờ</a>
+            <a asp-controller="Admin" asp-action="Puzzles">Câu đố</a>
+            <a asp-controller="Home" asp-action="Index">Về trang chủ</a>
+        </aside>
+
+        <main class="admin-main">
+            <h1>Quản lý Skin Cờ</h1>
+
+            @if (TempData["Error"] != null)
+            {
+                <div class="admin-alert error">@TempData["Error"]</div>
+            }
+
+            @if (TempData["Success"] != null)
+            {
+                <div class="admin-alert success">@TempData["Success"]</div>
+            }
+
+            <div class="admin-skin-grid">
+
+                <section class="admin-skin-card">
+                    <h2>Thêm skin bàn cờ</h2>
+
+                    <form asp-controller="Admin"
+                          asp-action="AddBoardSkin"
+                          method="post"
+                          enctype="multipart/form-data"
+                          class="admin-form skin-form">
+
+                        <div class="admin-form-group">
+                            <label>Tên skin</label>
+                            <input type="text" name="tenSkin" placeholder="Ví dụ: Bàn gỗ" required />
+                        </div>
+
+                        <div class="admin-form-group">
+                            <label>Mã skin</label>
+                            <input type="text" name="maSkin" placeholder="Ví dụ: wood-board" required />
+                        </div>
+
+                        <input type="hidden" name="mauOTrang" value="#f0d9b5" />
+                        <input type="hidden" name="mauODen" value="#b58863" />
+
+                        <div class="admin-form-group">
+                            <label>Ảnh preview bàn cờ PNG nếu có</label>
+                            <input type="file" name="anhBanCo" accept=".png,image/png" />
+                        </div>
+
+                        <div class="skin-color-row">
+                            <div class="admin-form-group">
+                                <label>Ảnh ô sáng PNG</label>
+                                <input type="file" name="anhOSang" accept=".png,image/png" required />
+                            </div>
+
+                            <div class="admin-form-group">
+                                <label>Ảnh ô tối PNG</label>
+                                <input type="file" name="anhODen" accept=".png,image/png" required />
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn-admin-save">
+                            Thêm skin bàn cờ
+                        </button>
+                    </form>
+                </section>
+
+                <section class="admin-skin-card">
+                    <h2>Thêm skin quân cờ PNG</h2>
+
+                    <form asp-controller="Admin"
+                          asp-action="AddPieceSkin"
+                          method="post"
+                          enctype="multipart/form-data"
+                          class="admin-form skin-form">
+
+                        <div class="admin-form-group">
+                            <label>Tên skin</label>
+                            <input type="text" name="tenSkin" placeholder="Ví dụ: Quân gỗ" required />
+                        </div>
+
+                        <div class="admin-form-group">
+                            <label>Mã skin</label>
+                            <input type="text" name="maSkin" placeholder="Ví dụ: wood-piece" required />
+                        </div>
+
+                        <div class="piece-upload-grid">
+                            <div class="admin-form-group">
+                                <label>Vua trắng</label>
+                                <input type="file" name="wK" accept=".png,image/png" required />
+                            </div>
+
+                            <div class="admin-form-group">
+                                <label>Hậu trắng</label>
+                                <input type="file" name="wQ" accept=".png,image/png" required />
+                            </div>
+
+                            <div class="admin-form-group">
+                                <label>Xe trắng</label>
+                                <input type="file" name="wR" accept=".png,image/png" required />
+                            </div>
+
+                            <div class="admin-form-group">
+                                <label>Tượng trắng</label>
+                                <input type="file" name="wB" accept=".png,image/png" required />
+                            </div>
+
+                            <div class="admin-form-group">
+                                <label>Mã trắng</label>
+                                <input type="file" name="wN" accept=".png,image/png" required />
+                            </div>
+
+                            <div class="admin-form-group">
+                                <label>Tốt trắng</label>
+                                <input type="file" name="wP" accept=".png,image/png" required />
+                            </div>
+
+                            <div class="admin-form-group">
+                                <label>Vua đen</label>
+                                <input type="file" name="bK" accept=".png,image/png" required />
+                            </div>
+
+                            <div class="admin-form-group">
+                                <label>Hậu đen</label>
+                                <input type="file" name="bQ" accept=".png,image/png" required />
+                            </div>
+
+                            <div class="admin-form-group">
+                                <label>Xe đen</label>
+                                <input type="file" name="bR" accept=".png,image/png" required />
+                            </div>
+
+                            <div class="admin-form-group">
+                                <label>Tượng đen</label>
+                                <input type="file" name="bB" accept=".png,image/png" required />
+                            </div>
+
+                            <div class="admin-form-group">
+                                <label>Mã đen</label>
+                                <input type="file" name="bN" accept=".png,image/png" required />
+                            </div>
+
+                            <div class="admin-form-group">
+                                <label>Tốt đen</label>
+                                <input type="file" name="bP" accept=".png,image/png" required />
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn-admin-save">
+                            Thêm skin quân cờ
+                        </button>
+                    </form>
+                </section>
+
+            </div>
+
+            <section class="admin-skin-list-section">
+                <h2>Danh sách skin bàn cờ</h2>
+
+                <div class="admin-table-wrap">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Tên</th>
+                                <th>Mã</th>
+                                <th>Ảnh preview</th>
+                                <th>Ảnh ô sáng</th>
+                                <th>Ảnh ô tối</th>
+                                <th>Loại cờ</th>
+                                <th>Trạng thái</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @if (boardSkins != null)
+                            {
+                                foreach (var item in boardSkins)
+                                {
+                                    <tr>
+                                        <td>@GetValue(item, "SkinBanCoID")</td>
+                                        <td>@GetValue(item, "TenSkin")</td>
+                                        <td>@GetValue(item, "MaSkin")</td>
+
+                                        <td class="path-cell">@GetValue(item, "AnhNenBanCo")</td>
+                                        <td class="path-cell">@GetValue(item, "AnhOSang")</td>
+                                        <td class="path-cell">@GetValue(item, "AnhODen")</td>
+                                        <td>@GetValue(item, "TenLoai")</td>
+
+                                        <td>
+                                            <span class="status-badge @StatusClass(GetValue(item, "TrangThai"))">
+                                                @StatusText(GetValue(item, "TrangThai"))
+                                            </span>
+                                        </td>
+
+                                        <td class="admin-action-cell">
+                                            <button type="button"
+                                                    class="btn-admin-edit btn-open-board-edit"
+                                                    data-id="@GetValue(item, "SkinBanCoID")"
+                                                    data-name="@GetValue(item, "TenSkin")"
+                                                    data-code="@GetValue(item, "MaSkin")"
+                                                    data-light="@GetValue(item, "MauOTrang")"
+                                                    data-dark="@GetValue(item, "MauODen")">
+                                                Sửa
+                                            </button>
+
+                                            <form asp-controller="Admin"
+                                                  asp-action="DeleteBoardSkin"
+                                                  method="post"
+                                                  class="inline-form"
+                                                  onsubmit="return confirm('Bạn có chắc muốn xóa skin bàn cờ này không?');">
+                                                <input type="hidden" name="skinBanCoId" value="@GetValue(item, "SkinBanCoID")" />
+                                                <button type="submit" class="btn-admin-delete">Xóa</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="admin-skin-list-section">
+                <h2>Danh sách skin quân cờ</h2>
+
+                <div class="admin-table-wrap">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Tên</th>
+                                <th>Mã</th>
+                                <th>Kiểu</th>
+                                <th>Thư mục</th>
+                                <th>Số quân</th>
+                                <th>Loại cờ</th>
+                                <th>Trạng thái</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @if (pieceSkins != null)
+                            {
+                                foreach (var item in pieceSkins)
+                                {
+                                    <tr>
+                                        <td>@GetValue(item, "SkinQuanCoID")</td>
+                                        <td>@GetValue(item, "TenSkin")</td>
+                                        <td>@GetValue(item, "MaSkin")</td>
+                                        <td>@GetValue(item, "KieuHienThi")</td>
+                                        <td class="path-cell">@GetValue(item, "DuongDanThuMuc")</td>
+                                        <td>@GetValue(item, "SoQuan") / 12</td>
+                                        <td>@GetValue(item, "TenLoai")</td>
+
+                                        <td>
+                                            <span class="status-badge @StatusClass(GetValue(item, "TrangThai"))">
+                                                @StatusText(GetValue(item, "TrangThai"))
+                                            </span>
+                                        </td>
+
+                                        <td class="admin-action-cell">
+                                            <button type="button"
+                                                    class="btn-admin-edit btn-open-piece-edit"
+                                                    data-id="@GetValue(item, "SkinQuanCoID")"
+                                                    data-name="@GetValue(item, "TenSkin")"
+                                                    data-code="@GetValue(item, "MaSkin")">
+                                                Sửa
+                                            </button>
+
+                                            <form asp-controller="Admin"
+                                                  asp-action="DeletePieceSkin"
+                                                  method="post"
+                                                  class="inline-form"
+                                                  onsubmit="return confirm('Bạn có chắc muốn xóa skin quân cờ này không?');">
+                                                <input type="hidden" name="skinQuanCoId" value="@GetValue(item, "SkinQuanCoID")" />
+                                                <button type="submit" class="btn-admin-delete">Xóa</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <div class="admin-modal" id="editBoardSkinModal">
+        <div class="admin-modal-box">
+            <button type="button" class="admin-modal-close" id="closeEditBoardSkin">×</button>
+
+            <h2>Sửa skin bàn cờ</h2>
+
+            <form asp-controller="Admin"
+                  asp-action="EditBoardSkin"
+                  method="post"
+                  enctype="multipart/form-data"
+                  class="admin-form modal-form">
+
+                <input type="hidden" name="skinBanCoId" id="editBoardSkinId" />
+                <input type="hidden" name="mauOTrang" id="editBoardMauOTrang" value="#f0d9b5" />
+                <input type="hidden" name="mauODen" id="editBoardMauODen" value="#b58863" />
+
+                <div class="admin-form-group">
+                    <label>Tên skin</label>
+                    <input type="text" name="tenSkin" id="editBoardTenSkin" required />
+                </div>
+
+                <div class="admin-form-group">
+                    <label>Mã skin</label>
+                    <input type="text" name="maSkin" id="editBoardMaSkin" required />
+                </div>
+
+                <div class="admin-form-group">
+                    <label>Đổi ảnh preview nếu muốn</label>
+                    <input type="file" name="anhBanCo" accept=".png,image/png" />
+                </div>
+
+                <div class="skin-color-row">
+                    <div class="admin-form-group">
+                        <label>Đổi ảnh ô sáng nếu muốn</label>
+                        <input type="file" name="anhOSang" accept=".png,image/png" />
+                    </div>
+
+                    <div class="admin-form-group">
+                        <label>Đổi ảnh ô tối nếu muốn</label>
+                        <input type="file" name="anhODen" accept=".png,image/png" />
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-admin-save">
+                    Lưu thay đổi bàn cờ
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div class="admin-modal" id="editPieceSkinModal">
+        <div class="admin-modal-box wide">
+            <button type="button" class="admin-modal-close" id="closeEditPieceSkin">×</button>
+
+            <h2>Sửa skin quân cờ</h2>
+
+            <form asp-controller="Admin"
+                  asp-action="EditPieceSkin"
+                  method="post"
+                  enctype="multipart/form-data"
+                  class="admin-form modal-form">
+
+                <input type="hidden" name="skinQuanCoId" id="editPieceSkinId" />
+
+                <div class="admin-form-group">
+                    <label>Tên skin</label>
+                    <input type="text" name="tenSkin" id="editPieceTenSkin" required />
+                </div>
+
+                <div class="admin-form-group">
+                    <label>Mã skin</label>
+                    <input type="text" name="maSkin" id="editPieceMaSkin" required />
+                </div>
+
+                <p class="admin-form-note">
+                    Nếu không muốn đổi ảnh quân nào thì bỏ trống file đó.
+                </p>
+
+                <div class="piece-upload-grid">
+                    <div class="admin-form-group">
+                        <label>Vua trắng</label>
+                        <input type="file" name="wK" accept=".png,image/png" />
+                    </div>
+                    <div class="admin-form-group">
+                        <label>Hậu trắng</label>
+                        <input type="file" name="wQ" accept=".png,image/png" />
+                    </div>
+                    <div class="admin-form-group">
+                        <label>Xe trắng</label>
+                        <input type="file" name="wR" accept=".png,image/png" />
+                    </div>
+                    <div class="admin-form-group">
+                        <label>Tượng trắng</label>
+                        <input type="file" name="wB" accept=".png,image/png" />
+                    </div>
+                    <div class="admin-form-group">
+                        <label>Mã trắng</label>
+                        <input type="file" name="wN" accept=".png,image/png" />
+                    </div>
+                    <div class="admin-form-group">
+                        <label>Tốt trắng</label>
+                        <input type="file" name="wP" accept=".png,image/png" />
+                    </div>
+
+                    <div class="admin-form-group">
+                        <label>Vua đen</label>
+                        <input type="file" name="bK" accept=".png,image/png" />
+                    </div>
+                    <div class="admin-form-group">
+                        <label>Hậu đen</label>
+                        <input type="file" name="bQ" accept=".png,image/png" />
+                    </div>
+                    <div class="admin-form-group">
+                        <label>Xe đen</label>
+                        <input type="file" name="bR" accept=".png,image/png" />
+                    </div>
+                    <div class="admin-form-group">
+                        <label>Tượng đen</label>
+                        <input type="file" name="bB" accept=".png,image/png" />
+                    </div>
+                    <div class="admin-form-group">
+                        <label>Mã đen</label>
+                        <input type="file" name="bN" accept=".png,image/png" />
+                    </div>
+                    <div class="admin-form-group">
+                        <label>Tốt đen</label>
+                        <input type="file" name="bP" accept=".png,image/png" />
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-admin-save">
+                    Lưu thay đổi quân cờ
+                </button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+    const boardModal = document.getElementById("editBoardSkinModal");
+    const pieceModal = document.getElementById("editPieceSkinModal");
+
+    document.querySelectorAll(".btn-open-board-edit").forEach(function (button) {
+        button.addEventListener("click", function () {
+            document.getElementById("editBoardSkinId").value = button.dataset.id || "";
+            document.getElementById("editBoardTenSkin").value = button.dataset.name || "";
+            document.getElementById("editBoardMaSkin").value = button.dataset.code || "";
+            document.getElementById("editBoardMauOTrang").value = button.dataset.light || "#f0d9b5";
+            document.getElementById("editBoardMauODen").value = button.dataset.dark || "#b58863";
+
+            boardModal.classList.add("show");
+        });
+    });
+
+    document.querySelectorAll(".btn-open-piece-edit").forEach(function (button) {
+        button.addEventListener("click", function () {
+            document.getElementById("editPieceSkinId").value = button.dataset.id || "";
+            document.getElementById("editPieceTenSkin").value = button.dataset.name || "";
+            document.getElementById("editPieceMaSkin").value = button.dataset.code || "";
+
+            pieceModal.classList.add("show");
+        });
+    });
+
+    document.getElementById("closeEditBoardSkin").addEventListener("click", function () {
+        boardModal.classList.remove("show");
+    });
+
+    document.getElementById("closeEditPieceSkin").addEventListener("click", function () {
+        pieceModal.classList.remove("show");
+    });
+
+    boardModal.addEventListener("click", function (event) {
+        if (event.target === boardModal) {
+            boardModal.classList.remove("show");
+        }
+    });
+
+    pieceModal.addEventListener("click", function (event) {
+        if (event.target === pieceModal) {
+            pieceModal.classList.remove("show");
+        }
+    });
+</script>

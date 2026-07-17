@@ -1,0 +1,474 @@
+﻿/* ========================= */
+/* TRANG CHƠI VỚI AI 3D */
+/* ========================= */
+
+.ai3d-page {
+    min-height: 100vh;
+    padding: 130px 40px 60px;
+    background: linear-gradient(135deg, #eef4ff, #f8f3ff);
+    display: grid;
+    grid-template-columns: 420px 1fr;
+    gap: 34px;
+    align-items: start;
+}
+
+.ai3d-setup-card {
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(113, 183, 230, 0.22);
+    border-radius: 28px;
+    padding: 30px;
+    box-shadow: 0 24px 70px rgba(79, 70, 229, 0.18);
+}
+
+.ai3d-badge {
+    display: inline-flex;
+    padding: 8px 15px;
+    border-radius: 999px;
+    background: #ede9fe;
+    color: #6d28d9;
+    font-weight: 900;
+    margin-bottom: 14px;
+}
+
+.ai3d-setup-card h1 {
+    font-size: 34px;
+    font-weight: 900;
+    color: #111827;
+    margin-bottom: 12px;
+}
+
+.ai3d-setup-card p {
+    color: #4b5563;
+    font-weight: 600;
+    line-height: 1.6;
+    margin-bottom: 22px;
+}
+
+.ai3d-setup-grid {
+    display: grid;
+    gap: 14px;
+    margin-bottom: 22px;
+}
+
+.ai3d-field {
+    display: grid;
+    gap: 8px;
+}
+
+    .ai3d-field label {
+        font-weight: 900;
+        color: #111827;
+    }
+
+    .ai3d-field select {
+        width: 100%;
+        padding: 13px 14px;
+        border-radius: 15px;
+        border: 1px solid #c4b5fd;
+        background: white;
+        font-size: 16px;
+        font-weight: 700;
+        color: #111827;
+    }
+
+.ai3d-start-btn {
+    width: 100%;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 17px;
+    background: linear-gradient(135deg, #71b7e6, #9b59b6);
+    color: white;
+    font-size: 17px;
+    font-weight: 900;
+    cursor: pointer;
+    box-shadow: 0 16px 35px rgba(113, 183, 230, 0.35);
+    transition: 0.2s ease;
+}
+
+    .ai3d-start-btn:hover {
+        transform: translateY(-2px);
+    }
+
+.ai3d-board-placeholder {
+    min-height: 620px;
+    border-radius: 30px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.82), rgba(240,244,255,0.88)), radial-gradient(circle at top right, rgba(113,183,230,0.24), transparent 45%), radial-gradient(circle at bottom left, rgba(155,89,182,0.18), transparent 45%);
+    border: 1px solid rgba(255,255,255,0.9);
+    box-shadow: 0 24px 70px rgba(15, 23, 42, 0.12);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #111827;
+    text-align: center;
+    padding: 30px;
+}
+
+.ai3d-board-title {
+    font-size: 38px;
+    font-weight: 900;
+    margin-bottom: 12px;
+}
+
+.ai3d-board-placeholder p {
+    color: #6b7280;
+    font-weight: 700;
+}
+
+@media (max-width: 1000px) {
+    .ai3d-page {
+        grid-template-columns: 1fr;
+        padding: 110px 18px 40px;
+    }
+
+    .ai3d-board-placeholder {
+        min-height: 460px;
+    }
+}
+
+/* ========================= */
+/* KHU VỰC BÀN CỜ 3D */
+/* ========================= */
+
+.ai3d-board-area {
+    min-height: 680px;
+    border-radius: 30px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(240,244,255,0.92)), radial-gradient(circle at top right, rgba(113,183,230,0.24), transparent 45%), radial-gradient(circle at bottom left, rgba(155,89,182,0.18), transparent 45%);
+    border: 1px solid rgba(255,255,255,0.9);
+    box-shadow: 0 24px 70px rgba(15, 23, 42, 0.12);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.ai3d-board-top {
+    padding: 22px 26px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 18px;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.24);
+}
+
+    .ai3d-board-top h2 {
+        margin: 0 0 4px;
+        font-size: 26px;
+        font-weight: 900;
+        color: #111827;
+    }
+
+    .ai3d-board-top p {
+        margin: 0;
+        color: #6b7280;
+        font-weight: 700;
+    }
+
+.ai3d-status-pill {
+    padding: 10px 15px;
+    border-radius: 999px;
+    background: #ede9fe;
+    color: #5b21b6;
+    font-weight: 900;
+    white-space: nowrap;
+}
+
+.ai3d-scene-container {
+    flex: 1;
+    min-height: 600px;
+    position: relative;
+    background: radial-gradient(circle at center, #eef4ff 0%, #dbeafe 45%, #c7d2fe 100%);
+}
+
+    .ai3d-scene-container canvas {
+        width: 100% !important;
+        height: 100% !important;
+        display: block;
+    }
+
+.ai3d-scene-placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    text-align: center;
+    color: #111827;
+}
+
+    .ai3d-scene-placeholder span {
+        font-size: 70px;
+        color: #7c3aed;
+    }
+
+    .ai3d-scene-placeholder strong {
+        font-size: 25px;
+        font-weight: 900;
+    }
+
+    .ai3d-scene-placeholder p {
+        color: #6b7280;
+        font-weight: 700;
+    }
+
+@media (max-width: 1000px) {
+    .ai3d-board-area {
+        min-height: 560px;
+    }
+
+    .ai3d-scene-container {
+        min-height: 480px;
+    }
+
+    .ai3d-board-top {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+/* ========================= */
+/* GỢI Ý TƯƠNG TÁC BÀN CỜ 3D */
+/* ========================= */
+
+.ai3d-help-box {
+    margin-top: 16px;
+    padding: 14px 16px;
+    border-radius: 16px;
+    background: #f8fafc;
+    border: 1px solid #e5e7eb;
+    color: #4b5563;
+    font-weight: 700;
+    line-height: 1.6;
+}
+
+    .ai3d-help-box strong {
+        color: #111827;
+    }
+
+.ai3d-scene-container {
+    cursor: grab;
+}
+
+    .ai3d-scene-container:active {
+        cursor: grabbing;
+    }
+
+/* ========================= */
+/* AI 3D - ACTION + HISTORY */
+/* ========================= */
+
+.ai3d-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+    .ai3d-actions button {
+        border: none;
+        padding: 11px 15px;
+        border-radius: 14px;
+        background: #111827;
+        color: white;
+        font-weight: 900;
+        cursor: pointer;
+        transition: 0.2s ease;
+    }
+
+        .ai3d-actions button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px rgba(15, 23, 42, 0.22);
+        }
+
+.ai3d-resign-btn {
+    background: #ef4444 !important;
+}
+
+    .ai3d-resign-btn:hover {
+        background: #dc2626 !important;
+    }
+
+.ai3d-bottom-panel {
+    padding: 18px 22px 22px;
+    border-top: 1px solid rgba(148, 163, 184, 0.24);
+    background: rgba(255, 255, 255, 0.72);
+}
+
+.ai3d-history-card {
+    background: #f8fafc;
+    border: 1px solid #e5e7eb;
+    border-radius: 18px;
+    padding: 16px;
+}
+
+    .ai3d-history-card h3 {
+        margin: 0 0 12px;
+        color: #111827;
+        font-size: 20px;
+        font-weight: 900;
+    }
+
+.ai3d-move-history {
+    max-height: 170px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    color: #6b7280;
+    font-weight: 700;
+}
+
+.ai3d-history-row {
+    display: grid;
+    grid-template-columns: 36px 1fr;
+    gap: 10px;
+    align-items: center;
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 13px;
+    padding: 9px 10px;
+}
+
+    .ai3d-history-row.player {
+        border-left: 4px solid #4f46e5;
+    }
+
+    .ai3d-history-row.ai {
+        border-left: 4px solid #ef4444;
+    }
+
+.ai3d-history-index {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #f3f4f6;
+    color: #374151;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+}
+
+.ai3d-history-main {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.ai3d-history-side {
+    font-size: 12px;
+    color: #6b7280;
+    font-weight: 900;
+}
+
+.ai3d-history-move {
+    color: #111827;
+    font-size: 15px;
+    font-weight: 900;
+}
+
+/* ========================= */
+/* AI 3D - MODAL PHONG CẤP */
+/* ========================= */
+
+.ai3d-promotion-overlay {
+    position: fixed;
+    inset: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background: rgba(15, 23, 42, 0.58);
+    backdrop-filter: blur(8px);
+    z-index: 99999;
+    padding: 20px;
+}
+
+    .ai3d-promotion-overlay.show {
+        display: flex;
+    }
+
+.ai3d-promotion-box {
+    width: min(430px, 94vw);
+    background: #ffffff;
+    border-radius: 28px;
+    padding: 28px 24px;
+    text-align: center;
+    box-shadow: 0 30px 80px rgba(15, 23, 42, 0.35);
+    animation: ai3dPromotionPop 0.25s ease-out;
+}
+
+    .ai3d-promotion-box h2 {
+        margin: 0 0 8px;
+        color: #111827;
+        font-size: 28px;
+        font-weight: 900;
+    }
+
+    .ai3d-promotion-box p {
+        margin: 0 0 20px;
+        color: #6b7280;
+        font-weight: 700;
+    }
+
+.ai3d-promotion-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.ai3d-promotion-choice {
+    border: none;
+    border-radius: 18px;
+    padding: 13px 8px;
+    background: #f3f4f6;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+    .ai3d-promotion-choice span {
+        display: block;
+        font-size: 40px;
+        line-height: 1;
+        margin-bottom: 8px;
+    }
+
+    .ai3d-promotion-choice strong {
+        display: block;
+        color: #111827;
+        font-size: 13px;
+        font-weight: 900;
+    }
+
+    .ai3d-promotion-choice:hover {
+        transform: translateY(-3px);
+        background: #ede9fe;
+        box-shadow: 0 14px 28px rgba(79, 70, 229, 0.2);
+    }
+
+@keyframes ai3dPromotionPop {
+    from {
+        opacity: 0;
+        transform: translateY(18px) scale(0.94);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@media (max-width: 600px) {
+    .ai3d-promotion-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.ai3d-scene-container,
+.ai3d-scene-container canvas {
+    user-select: none;
+}
+
+    .ai3d-scene-container canvas {
+        touch-action: none;
+    }

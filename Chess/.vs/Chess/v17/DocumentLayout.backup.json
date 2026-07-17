@@ -1,0 +1,570 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\QUYEN\\Documents\\GitHub\\Web-C-Vua\\Chess\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{6684C329-040B-4075-9C3F-919C533952F2}|Chess\\Chess.csproj|c:\\users\\quyen\\documents\\github\\web-c-vua\\chess\\chess\\controllers\\friendcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6684C329-040B-4075-9C3F-919C533952F2}|Chess\\Chess.csproj|solutionrelative:chess\\controllers\\friendcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6684C329-040B-4075-9C3F-919C533952F2}|Chess\\Chess.csproj|c:\\users\\quyen\\documents\\github\\web-c-vua\\chess\\chess\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6684C329-040B-4075-9C3F-919C533952F2}|Chess\\Chess.csproj|solutionrelative:chess\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6684C329-040B-4075-9C3F-919C533952F2}|Chess\\Chess.csproj|c:\\users\\quyen\\documents\\github\\web-c-vua\\chess\\chess\\wwwroot\\js\\friendsearch.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{6684C329-040B-4075-9C3F-919C533952F2}|Chess\\Chess.csproj|solutionrelative:chess\\wwwroot\\js\\friendsearch.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6684C329-040B-4075-9C3F-919C533952F2}|Chess\\Chess.csproj|c:\\users\\quyen\\documents\\github\\web-c-vua\\chess\\chess\\wwwroot\\js\\analysis.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{6684C329-040B-4075-9C3F-919C533952F2}|Chess\\Chess.csproj|solutionrelative:chess\\wwwroot\\js\\analysis.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6684C329-040B-4075-9C3F-919C533952F2}|Chess\\Chess.csproj|c:\\users\\quyen\\documents\\github\\web-c-vua\\chess\\chess\\wwwroot\\js\\banco.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{6684C329-040B-4075-9C3F-919C533952F2}|Chess\\Chess.csproj|solutionrelative:chess\\wwwroot\\js\\banco.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6684C329-040B-4075-9C3F-919C533952F2}|Chess\\Chess.csproj|c:\\users\\quyen\\documents\\github\\web-c-vua\\chess\\chess\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6684C329-040B-4075-9C3F-919C533952F2}|Chess\\Chess.csproj|solutionrelative:chess\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6684C329-040B-4075-9C3F-919C533952F2}|Chess\\Chess.csproj|c:\\users\\quyen\\documents\\github\\web-c-vua\\chess\\chess\\wwwroot\\js\\dangnhap.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{6684C329-040B-4075-9C3F-919C533952F2}|Chess\\Chess.csproj|solutionrelative:chess\\wwwroot\\js\\dangnhap.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6684C329-040B-4075-9C3F-919C533952F2}|Chess\\Chess.csproj|c:\\users\\quyen\\documents\\github\\web-c-vua\\chess\\chess\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{6684C329-040B-4075-9C3F-919C533952F2}|Chess\\Chess.csproj|solutionrelative:chess\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6684C329-040B-4075-9C3F-919C533952F2}|Chess\\Chess.csproj|c:\\users\\quyen\\documents\\github\\web-c-vua\\chess\\chess\\controllers\\playcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6684C329-040B-4075-9C3F-919C533952F2}|Chess\\Chess.csproj|solutionrelative:chess\\controllers\\playcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6684C329-040B-4075-9C3F-919C533952F2}|Chess\\Chess.csproj|c:\\users\\quyen\\documents\\github\\web-c-vua\\chess\\chess\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{6684C329-040B-4075-9C3F-919C533952F2}|Chess\\Chess.csproj|solutionrelative:chess\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6684C329-040B-4075-9C3F-919C533952F2}|Chess\\Chess.csproj|c:\\users\\quyen\\documents\\github\\web-c-vua\\chess\\chess\\wwwroot\\js\\puzzle.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{6684C329-040B-4075-9C3F-919C533952F2}|Chess\\Chess.csproj|solutionrelative:chess\\wwwroot\\js\\puzzle.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6684C329-040B-4075-9C3F-919C533952F2}|Chess\\Chess.csproj|c:\\users\\quyen\\documents\\github\\web-c-vua\\chess\\chess\\wwwroot\\js\\hoccoban.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{6684C329-040B-4075-9C3F-919C533952F2}|Chess\\Chess.csproj|solutionrelative:chess\\wwwroot\\js\\hoccoban.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6684C329-040B-4075-9C3F-919C533952F2}|Chess\\Chess.csproj|c:\\users\\quyen\\documents\\github\\web-c-vua\\chess\\chess\\wwwroot\\js\\pvponline.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{6684C329-040B-4075-9C3F-919C533952F2}|Chess\\Chess.csproj|solutionrelative:chess\\wwwroot\\js\\pvponline.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6684C329-040B-4075-9C3F-919C533952F2}|Chess\\Chess.csproj|c:\\users\\quyen\\documents\\github\\web-c-vua\\chess\\chess\\views\\puzzle\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{6684C329-040B-4075-9C3F-919C533952F2}|Chess\\Chess.csproj|solutionrelative:chess\\views\\puzzle\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6684C329-040B-4075-9C3F-919C533952F2}|Chess\\Chess.csproj|c:\\users\\quyen\\documents\\github\\web-c-vua\\chess\\chess\\views\\home\\choivoiai3d.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{6684C329-040B-4075-9C3F-919C533952F2}|Chess\\Chess.csproj|solutionrelative:chess\\views\\home\\choivoiai3d.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6684C329-040B-4075-9C3F-919C533952F2}|Chess\\Chess.csproj|c:\\users\\quyen\\documents\\github\\web-c-vua\\chess\\chess\\views\\play\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{6684C329-040B-4075-9C3F-919C533952F2}|Chess\\Chess.csproj|solutionrelative:chess\\views\\play\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6684C329-040B-4075-9C3F-919C533952F2}|Chess\\Chess.csproj|c:\\users\\quyen\\documents\\github\\web-c-vua\\chess\\chess\\views\\friend\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{6684C329-040B-4075-9C3F-919C533952F2}|Chess\\Chess.csproj|solutionrelative:chess\\views\\friend\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6684C329-040B-4075-9C3F-919C533952F2}|Chess\\Chess.csproj|c:\\users\\quyen\\documents\\github\\web-c-vua\\chess\\chess\\wwwroot\\js\\banco3d.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{6684C329-040B-4075-9C3F-919C533952F2}|Chess\\Chess.csproj|solutionrelative:chess\\wwwroot\\js\\banco3d.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6684C329-040B-4075-9C3F-919C533952F2}|Chess\\Chess.csproj|c:\\users\\quyen\\documents\\github\\web-c-vua\\chess\\chess\\views\\play\\local.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{6684C329-040B-4075-9C3F-919C533952F2}|Chess\\Chess.csproj|solutionrelative:chess\\views\\play\\local.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6684C329-040B-4075-9C3F-919C533952F2}|Chess\\Chess.csproj|c:\\users\\quyen\\documents\\github\\web-c-vua\\chess\\chess\\wwwroot\\css\\localgame.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{6684C329-040B-4075-9C3F-919C533952F2}|Chess\\Chess.csproj|solutionrelative:chess\\wwwroot\\css\\localgame.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6684C329-040B-4075-9C3F-919C533952F2}|Chess\\Chess.csproj|c:\\users\\quyen\\documents\\github\\web-c-vua\\chess\\chess\\views\\play\\localgame.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{6684C329-040B-4075-9C3F-919C533952F2}|Chess\\Chess.csproj|solutionrelative:chess\\views\\play\\localgame.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6684C329-040B-4075-9C3F-919C533952F2}|Chess\\Chess.csproj|c:\\users\\quyen\\documents\\github\\web-c-vua\\chess\\chess\\wwwroot\\css\\kichthuoc.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{6684C329-040B-4075-9C3F-919C533952F2}|Chess\\Chess.csproj|solutionrelative:chess\\wwwroot\\css\\kichthuoc.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6684C329-040B-4075-9C3F-919C533952F2}|Chess\\Chess.csproj|c:\\users\\quyen\\documents\\github\\web-c-vua\\chess\\chess\\wwwroot\\css\\play.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{6684C329-040B-4075-9C3F-919C533952F2}|Chess\\Chess.csproj|solutionrelative:chess\\wwwroot\\css\\play.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6684C329-040B-4075-9C3F-919C533952F2}|Chess\\Chess.csproj|c:\\users\\quyen\\documents\\github\\web-c-vua\\chess\\chess\\wwwroot\\js\\localgame.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{6684C329-040B-4075-9C3F-919C533952F2}|Chess\\Chess.csproj|solutionrelative:chess\\wwwroot\\js\\localgame.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6684C329-040B-4075-9C3F-919C533952F2}|Chess\\Chess.csproj|c:\\users\\quyen\\documents\\github\\web-c-vua\\chess\\chess\\views\\play\\room.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{6684C329-040B-4075-9C3F-919C533952F2}|Chess\\Chess.csproj|solutionrelative:chess\\views\\play\\room.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6684C329-040B-4075-9C3F-919C533952F2}|Chess\\Chess.csproj|c:\\users\\quyen\\documents\\github\\web-c-vua\\chess\\chess\\views\\play\\online.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{6684C329-040B-4075-9C3F-919C533952F2}|Chess\\Chess.csproj|solutionrelative:chess\\views\\play\\online.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6684C329-040B-4075-9C3F-919C533952F2}|Chess\\Chess.csproj|c:\\users\\quyen\\documents\\github\\web-c-vua\\chess\\chess\\views\\home\\choivoiai.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{6684C329-040B-4075-9C3F-919C533952F2}|Chess\\Chess.csproj|solutionrelative:chess\\views\\home\\choivoiai.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6684C329-040B-4075-9C3F-919C533952F2}|Chess\\Chess.csproj|c:\\users\\quyen\\documents\\github\\web-c-vua\\chess\\chess\\wwwroot\\css\\trangchinh.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{6684C329-040B-4075-9C3F-919C533952F2}|Chess\\Chess.csproj|solutionrelative:chess\\wwwroot\\css\\trangchinh.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6684C329-040B-4075-9C3F-919C533952F2}|Chess\\Chess.csproj|c:\\users\\quyen\\documents\\github\\web-c-vua\\chess\\chess\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{6684C329-040B-4075-9C3F-919C533952F2}|Chess\\Chess.csproj|solutionrelative:chess\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6684C329-040B-4075-9C3F-919C533952F2}|Chess\\Chess.csproj|c:\\users\\quyen\\documents\\github\\web-c-vua\\chess\\chess\\views\\home\\dangnhap.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{6684C329-040B-4075-9C3F-919C533952F2}|Chess\\Chess.csproj|solutionrelative:chess\\views\\home\\dangnhap.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6684C329-040B-4075-9C3F-919C533952F2}|Chess\\Chess.csproj|c:\\users\\quyen\\documents\\github\\web-c-vua\\chess\\chess\\views\\shared\\error.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{6684C329-040B-4075-9C3F-919C533952F2}|Chess\\Chess.csproj|solutionrelative:chess\\views\\shared\\error.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6684C329-040B-4075-9C3F-919C533952F2}|Chess\\Chess.csproj|c:\\users\\quyen\\documents\\github\\web-c-vua\\chess\\chess\\views\\play\\analysis.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{6684C329-040B-4075-9C3F-919C533952F2}|Chess\\Chess.csproj|solutionrelative:chess\\views\\play\\analysis.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6684C329-040B-4075-9C3F-919C533952F2}|Chess\\Chess.csproj|c:\\users\\quyen\\documents\\github\\web-c-vua\\chess\\chess\\views\\play\\ranking.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{6684C329-040B-4075-9C3F-919C533952F2}|Chess\\Chess.csproj|solutionrelative:chess\\views\\play\\ranking.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "FriendSearch.js",
+              "DocumentMoniker": "C:\\Users\\QUYEN\\Documents\\GitHub\\Web-C-Vua\\Chess\\Chess\\wwwroot\\js\\FriendSearch.js",
+              "RelativeDocumentMoniker": "Chess\\wwwroot\\js\\FriendSearch.js",
+              "ToolTip": "C:\\Users\\QUYEN\\Documents\\GitHub\\Web-C-Vua\\Chess\\Chess\\wwwroot\\js\\FriendSearch.js",
+              "RelativeToolTip": "Chess\\wwwroot\\js\\FriendSearch.js",
+              "ViewState": "AgIAAKwAAAAAAAAAAAAkwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2026-06-18T05:15:09.897Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\QUYEN\\Documents\\GitHub\\Web-C-Vua\\Chess\\Chess\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "Chess\\Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Users\\QUYEN\\Documents\\GitHub\\Web-C-Vua\\Chess\\Chess\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "Chess\\Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAAPkAAAAAAAAAAAAjwA0BAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-06-08T08:13:55.674Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "PlayController.cs",
+              "DocumentMoniker": "C:\\Users\\QUYEN\\Documents\\GitHub\\Web-C-Vua\\Chess\\Chess\\Controllers\\PlayController.cs",
+              "RelativeDocumentMoniker": "Chess\\Controllers\\PlayController.cs",
+              "ToolTip": "C:\\Users\\QUYEN\\Documents\\GitHub\\Web-C-Vua\\Chess\\Chess\\Controllers\\PlayController.cs",
+              "RelativeToolTip": "Chess\\Controllers\\PlayController.cs",
+              "ViewState": "AgIAAFgGAAAAAAAAAADwv2oGAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-06T17:37:51.268Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "FriendController.cs",
+              "DocumentMoniker": "C:\\Users\\QUYEN\\Documents\\GitHub\\Web-C-Vua\\Chess\\Chess\\Controllers\\FriendController.cs",
+              "RelativeDocumentMoniker": "Chess\\Controllers\\FriendController.cs",
+              "ToolTip": "C:\\Users\\QUYEN\\Documents\\GitHub\\Web-C-Vua\\Chess\\Chess\\Controllers\\FriendController.cs",
+              "RelativeToolTip": "Chess\\Controllers\\FriendController.cs",
+              "ViewState": "AgIAADMAAAAAAAAAAAAkwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-08T08:26:58.556Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\QUYEN\\Documents\\GitHub\\Web-C-Vua\\Chess\\Chess\\appsettings.json",
+              "RelativeDocumentMoniker": "Chess\\appsettings.json",
+              "ToolTip": "C:\\Users\\QUYEN\\Documents\\GitHub\\Web-C-Vua\\Chess\\Chess\\appsettings.json",
+              "RelativeToolTip": "Chess\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-06-16T02:17:59.882Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "C:\\Users\\QUYEN\\Documents\\GitHub\\Web-C-Vua\\Chess\\Chess\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "Chess\\Controllers\\HomeController.cs",
+              "ToolTip": "C:\\Users\\QUYEN\\Documents\\GitHub\\Web-C-Vua\\Chess\\Chess\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "Chess\\Controllers\\HomeController.cs",
+              "ViewState": "AgIAAKYCAAAAAAAAAAAqwPgCAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-08T08:26:59.554Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "BanCo.js",
+              "DocumentMoniker": "C:\\Users\\QUYEN\\Documents\\GitHub\\Web-C-Vua\\Chess\\Chess\\wwwroot\\js\\BanCo.js",
+              "RelativeDocumentMoniker": "Chess\\wwwroot\\js\\BanCo.js",
+              "ToolTip": "C:\\Users\\QUYEN\\Documents\\GitHub\\Web-C-Vua\\Chess\\Chess\\wwwroot\\js\\BanCo.js",
+              "RelativeToolTip": "Chess\\wwwroot\\js\\BanCo.js",
+              "ViewState": "AgIAAHoAAAAAAAAAAAAgwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2026-06-13T00:05:51.28Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AdminController.cs",
+              "DocumentMoniker": "C:\\Users\\QUYEN\\Documents\\GitHub\\Web-C-Vua\\Chess\\Chess\\Controllers\\AdminController.cs",
+              "RelativeDocumentMoniker": "Chess\\Controllers\\AdminController.cs",
+              "ToolTip": "C:\\Users\\QUYEN\\Documents\\GitHub\\Web-C-Vua\\Chess\\Chess\\Controllers\\AdminController.cs",
+              "RelativeToolTip": "Chess\\Controllers\\AdminController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-08T07:37:33.239Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "HocCoBan.js",
+              "DocumentMoniker": "C:\\Users\\QUYEN\\Documents\\GitHub\\Web-C-Vua\\Chess\\Chess\\wwwroot\\js\\HocCoBan.js",
+              "RelativeDocumentMoniker": "Chess\\wwwroot\\js\\HocCoBan.js",
+              "ToolTip": "C:\\Users\\QUYEN\\Documents\\GitHub\\Web-C-Vua\\Chess\\Chess\\wwwroot\\js\\HocCoBan.js",
+              "RelativeToolTip": "Chess\\wwwroot\\js\\HocCoBan.js",
+              "ViewState": "AgIAABUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2026-06-16T03:46:28.718Z"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Analysis.js",
+              "DocumentMoniker": "C:\\Users\\QUYEN\\Documents\\GitHub\\Web-C-Vua\\Chess\\Chess\\wwwroot\\js\\Analysis.js",
+              "RelativeDocumentMoniker": "Chess\\wwwroot\\js\\Analysis.js",
+              "ToolTip": "C:\\Users\\QUYEN\\Documents\\GitHub\\Web-C-Vua\\Chess\\Chess\\wwwroot\\js\\Analysis.js",
+              "RelativeToolTip": "Chess\\wwwroot\\js\\Analysis.js",
+              "ViewState": "AgIAAAICAAAAWL+G9aswwAcAAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2026-06-13T00:05:28.374Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{0ad07096-bba9-4900-a651-0598d26f6d24}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "DangNhap.js",
+              "DocumentMoniker": "C:\\Users\\QUYEN\\Documents\\GitHub\\Web-C-Vua\\Chess\\Chess\\wwwroot\\js\\DangNhap.js",
+              "RelativeDocumentMoniker": "Chess\\wwwroot\\js\\DangNhap.js",
+              "ToolTip": "C:\\Users\\QUYEN\\Documents\\GitHub\\Web-C-Vua\\Chess\\Chess\\wwwroot\\js\\DangNhap.js",
+              "RelativeToolTip": "Chess\\wwwroot\\js\\DangNhap.js",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAAEsAAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2026-06-08T08:15:31.059Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Puzzle.js",
+              "DocumentMoniker": "C:\\Users\\QUYEN\\Documents\\GitHub\\Web-C-Vua\\Chess\\Chess\\wwwroot\\js\\Puzzle.js",
+              "RelativeDocumentMoniker": "Chess\\wwwroot\\js\\Puzzle.js",
+              "ToolTip": "C:\\Users\\QUYEN\\Documents\\GitHub\\Web-C-Vua\\Chess\\Chess\\wwwroot\\js\\Puzzle.js",
+              "RelativeToolTip": "Chess\\wwwroot\\js\\Puzzle.js",
+              "ViewState": "AgIAAPcBAAAAAAAAAAAmwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2026-06-16T03:54:31.247Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "PvPOnline.js",
+              "DocumentMoniker": "C:\\Users\\QUYEN\\Documents\\GitHub\\Web-C-Vua\\Chess\\Chess\\wwwroot\\js\\PvPOnline.js",
+              "RelativeDocumentMoniker": "Chess\\wwwroot\\js\\PvPOnline.js",
+              "ToolTip": "C:\\Users\\QUYEN\\Documents\\GitHub\\Web-C-Vua\\Chess\\Chess\\wwwroot\\js\\PvPOnline.js",
+              "RelativeToolTip": "Chess\\wwwroot\\js\\PvPOnline.js",
+              "ViewState": "AgIAACYAAAAAAAAAAAAAwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2026-06-16T03:46:58.695Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\QUYEN\\Documents\\GitHub\\Web-C-Vua\\Chess\\Chess\\Views\\Play\\Index.cshtml",
+              "RelativeDocumentMoniker": "Chess\\Views\\Play\\Index.cshtml",
+              "ToolTip": "C:\\Users\\QUYEN\\Documents\\GitHub\\Web-C-Vua\\Chess\\Chess\\Views\\Play\\Index.cshtml",
+              "RelativeToolTip": "Chess\\Views\\Play\\Index.cshtml",
+              "ViewState": "AgIAAL0AAAAAAAAAAAAAAM0AAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-06-08T07:37:48.516Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "LocalGame.js",
+              "DocumentMoniker": "C:\\Users\\QUYEN\\Documents\\GitHub\\Web-C-Vua\\Chess\\Chess\\wwwroot\\js\\LocalGame.js",
+              "RelativeDocumentMoniker": "Chess\\wwwroot\\js\\LocalGame.js",
+              "ToolTip": "C:\\Users\\QUYEN\\Documents\\GitHub\\Web-C-Vua\\Chess\\Chess\\wwwroot\\js\\LocalGame.js",
+              "RelativeToolTip": "Chess\\wwwroot\\js\\LocalGame.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2026-06-13T00:12:28.516Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "Play.css",
+              "DocumentMoniker": "C:\\Users\\QUYEN\\Documents\\GitHub\\Web-C-Vua\\Chess\\Chess\\wwwroot\\css\\Play.css",
+              "RelativeDocumentMoniker": "Chess\\wwwroot\\css\\Play.css",
+              "ToolTip": "C:\\Users\\QUYEN\\Documents\\GitHub\\Web-C-Vua\\Chess\\Chess\\wwwroot\\css\\Play.css",
+              "RelativeToolTip": "Chess\\wwwroot\\css\\Play.css",
+              "ViewState": "AgIAALgAAAAAAAAAAAAIwL4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2026-06-13T00:12:38.346Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "Local.cshtml",
+              "DocumentMoniker": "C:\\Users\\QUYEN\\Documents\\GitHub\\Web-C-Vua\\Chess\\Chess\\Views\\Play\\Local.cshtml",
+              "RelativeDocumentMoniker": "Chess\\Views\\Play\\Local.cshtml",
+              "ToolTip": "C:\\Users\\QUYEN\\Documents\\GitHub\\Web-C-Vua\\Chess\\Chess\\Views\\Play\\Local.cshtml",
+              "RelativeToolTip": "Chess\\Views\\Play\\Local.cshtml",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAA0AAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-06-13T00:13:51.839Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "ChoiVoiAI3D.cshtml",
+              "DocumentMoniker": "C:\\Users\\QUYEN\\Documents\\GitHub\\Web-C-Vua\\Chess\\Chess\\Views\\Home\\ChoiVoiAI3D.cshtml",
+              "RelativeDocumentMoniker": "Chess\\Views\\Home\\ChoiVoiAI3D.cshtml",
+              "ToolTip": "C:\\Users\\QUYEN\\Documents\\GitHub\\Web-C-Vua\\Chess\\Chess\\Views\\Home\\ChoiVoiAI3D.cshtml",
+              "RelativeToolTip": "Chess\\Views\\Home\\ChoiVoiAI3D.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-06-16T03:04:02.446Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\QUYEN\\Documents\\GitHub\\Web-C-Vua\\Chess\\Chess\\Views\\Puzzle\\Index.cshtml",
+              "RelativeDocumentMoniker": "Chess\\Views\\Puzzle\\Index.cshtml",
+              "ToolTip": "C:\\Users\\QUYEN\\Documents\\GitHub\\Web-C-Vua\\Chess\\Chess\\Views\\Puzzle\\Index.cshtml",
+              "RelativeToolTip": "Chess\\Views\\Puzzle\\Index.cshtml",
+              "ViewState": "AgIAADsBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-06-13T09:18:43.994Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\QUYEN\\Documents\\GitHub\\Web-C-Vua\\Chess\\Chess\\Views\\Friend\\Index.cshtml",
+              "RelativeDocumentMoniker": "Chess\\Views\\Friend\\Index.cshtml",
+              "ToolTip": "C:\\Users\\QUYEN\\Documents\\GitHub\\Web-C-Vua\\Chess\\Chess\\Views\\Friend\\Index.cshtml",
+              "RelativeToolTip": "Chess\\Views\\Friend\\Index.cshtml",
+              "ViewState": "AgIAAEUAAAAAAAAAAAAAADoAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-06-12T22:11:48.462Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "LocalGame.cshtml",
+              "DocumentMoniker": "C:\\Users\\QUYEN\\Documents\\GitHub\\Web-C-Vua\\Chess\\Chess\\Views\\Play\\LocalGame.cshtml",
+              "RelativeDocumentMoniker": "Chess\\Views\\Play\\LocalGame.cshtml",
+              "ToolTip": "C:\\Users\\QUYEN\\Documents\\GitHub\\Web-C-Vua\\Chess\\Chess\\Views\\Play\\LocalGame.cshtml",
+              "RelativeToolTip": "Chess\\Views\\Play\\LocalGame.cshtml",
+              "ViewState": "AgIAAKUAAAAAAAAAAAAAwCAAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-06-13T00:14:54.17Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "BanCo3D.js",
+              "DocumentMoniker": "C:\\Users\\QUYEN\\Documents\\GitHub\\Web-C-Vua\\Chess\\Chess\\wwwroot\\js\\BanCo3D.js",
+              "RelativeDocumentMoniker": "Chess\\wwwroot\\js\\BanCo3D.js",
+              "ToolTip": "C:\\Users\\QUYEN\\Documents\\GitHub\\Web-C-Vua\\Chess\\Chess\\wwwroot\\js\\BanCo3D.js",
+              "RelativeToolTip": "Chess\\wwwroot\\js\\BanCo3D.js",
+              "ViewState": "AgIAAPwEAAAAAAAAAAAAwAwFAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2026-06-06T17:40:22.577Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "KichThuoc.css",
+              "DocumentMoniker": "C:\\Users\\QUYEN\\Documents\\GitHub\\Web-C-Vua\\Chess\\Chess\\wwwroot\\css\\KichThuoc.css",
+              "RelativeDocumentMoniker": "Chess\\wwwroot\\css\\KichThuoc.css",
+              "ToolTip": "C:\\Users\\QUYEN\\Documents\\GitHub\\Web-C-Vua\\Chess\\Chess\\wwwroot\\css\\KichThuoc.css",
+              "RelativeToolTip": "Chess\\wwwroot\\css\\KichThuoc.css",
+              "ViewState": "AgIAAAgCAAAAAAAAAAAiwAoCAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2026-06-13T00:15:20.254Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "LocalGame.css",
+              "DocumentMoniker": "C:\\Users\\QUYEN\\Documents\\GitHub\\Web-C-Vua\\Chess\\Chess\\wwwroot\\css\\LocalGame.css",
+              "RelativeDocumentMoniker": "Chess\\wwwroot\\css\\LocalGame.css",
+              "ToolTip": "C:\\Users\\QUYEN\\Documents\\GitHub\\Web-C-Vua\\Chess\\Chess\\wwwroot\\css\\LocalGame.css",
+              "RelativeToolTip": "Chess\\wwwroot\\css\\LocalGame.css",
+              "ViewState": "AgIAAJACAAAAAAAAAAAIwKgCAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2026-06-13T00:16:04.398Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "Online.cshtml",
+              "DocumentMoniker": "C:\\Users\\QUYEN\\Documents\\GitHub\\Web-C-Vua\\Chess\\Chess\\Views\\Play\\Online.cshtml",
+              "RelativeDocumentMoniker": "Chess\\Views\\Play\\Online.cshtml",
+              "ToolTip": "C:\\Users\\QUYEN\\Documents\\GitHub\\Web-C-Vua\\Chess\\Chess\\Views\\Play\\Online.cshtml",
+              "RelativeToolTip": "Chess\\Views\\Play\\Online.cshtml",
+              "ViewState": "AgIAAJEAAAAAAAAAAAAjwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-06-13T00:11:17.827Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "Room.cshtml",
+              "DocumentMoniker": "C:\\Users\\QUYEN\\Documents\\GitHub\\Web-C-Vua\\Chess\\Chess\\Views\\Play\\Room.cshtml",
+              "RelativeDocumentMoniker": "Chess\\Views\\Play\\Room.cshtml",
+              "ToolTip": "C:\\Users\\QUYEN\\Documents\\GitHub\\Web-C-Vua\\Chess\\Chess\\Views\\Play\\Room.cshtml",
+              "RelativeToolTip": "Chess\\Views\\Play\\Room.cshtml",
+              "ViewState": "AgIAAK4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-06-13T00:11:00.44Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "ChoiVoiAI.cshtml",
+              "DocumentMoniker": "C:\\Users\\QUYEN\\Documents\\GitHub\\Web-C-Vua\\Chess\\Chess\\Views\\Home\\ChoiVoiAI.cshtml",
+              "RelativeDocumentMoniker": "Chess\\Views\\Home\\ChoiVoiAI.cshtml",
+              "ToolTip": "C:\\Users\\QUYEN\\Documents\\GitHub\\Web-C-Vua\\Chess\\Chess\\Views\\Home\\ChoiVoiAI.cshtml",
+              "RelativeToolTip": "Chess\\Views\\Home\\ChoiVoiAI.cshtml",
+              "ViewState": "AgIAAKgAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-06-12T22:11:25.642Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "TrangChinh.css",
+              "DocumentMoniker": "C:\\Users\\QUYEN\\Documents\\GitHub\\Web-C-Vua\\Chess\\Chess\\wwwroot\\css\\TrangChinh.css",
+              "RelativeDocumentMoniker": "Chess\\wwwroot\\css\\TrangChinh.css",
+              "ToolTip": "C:\\Users\\QUYEN\\Documents\\GitHub\\Web-C-Vua\\Chess\\Chess\\wwwroot\\css\\TrangChinh.css",
+              "RelativeToolTip": "Chess\\wwwroot\\css\\TrangChinh.css",
+              "ViewState": "AgIAANAIAAAAAAAAAAAAAN8IAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2026-06-12T22:25:20.488Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\QUYEN\\Documents\\GitHub\\Web-C-Vua\\Chess\\Chess\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "Chess\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\QUYEN\\Documents\\GitHub\\Web-C-Vua\\Chess\\Chess\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "Chess\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-06-12T22:20:43.597Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "DangNhap.cshtml",
+              "DocumentMoniker": "C:\\Users\\QUYEN\\Documents\\GitHub\\Web-C-Vua\\Chess\\Chess\\Views\\Home\\DangNhap.cshtml",
+              "RelativeDocumentMoniker": "Chess\\Views\\Home\\DangNhap.cshtml",
+              "ToolTip": "C:\\Users\\QUYEN\\Documents\\GitHub\\Web-C-Vua\\Chess\\Chess\\Views\\Home\\DangNhap.cshtml",
+              "RelativeToolTip": "Chess\\Views\\Home\\DangNhap.cshtml",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-06-08T08:13:17.542Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "Error.cshtml",
+              "DocumentMoniker": "C:\\Users\\QUYEN\\Documents\\GitHub\\Web-C-Vua\\Chess\\Chess\\Views\\Shared\\Error.cshtml",
+              "RelativeDocumentMoniker": "Chess\\Views\\Shared\\Error.cshtml",
+              "ToolTip": "C:\\Users\\QUYEN\\Documents\\GitHub\\Web-C-Vua\\Chess\\Chess\\Views\\Shared\\Error.cshtml",
+              "RelativeToolTip": "Chess\\Views\\Shared\\Error.cshtml",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAABkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-06-08T07:59:54.32Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "Analysis.cshtml",
+              "DocumentMoniker": "C:\\Users\\QUYEN\\Documents\\GitHub\\Web-C-Vua\\Chess\\Chess\\Views\\Play\\Analysis.cshtml",
+              "RelativeDocumentMoniker": "Chess\\Views\\Play\\Analysis.cshtml",
+              "ToolTip": "C:\\Users\\QUYEN\\Documents\\GitHub\\Web-C-Vua\\Chess\\Chess\\Views\\Play\\Analysis.cshtml",
+              "RelativeToolTip": "Chess\\Views\\Play\\Analysis.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-06-08T07:37:38.775Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "Ranking.cshtml",
+              "DocumentMoniker": "C:\\Users\\QUYEN\\Documents\\GitHub\\Web-C-Vua\\Chess\\Chess\\Views\\Play\\Ranking.cshtml",
+              "RelativeDocumentMoniker": "Chess\\Views\\Play\\Ranking.cshtml",
+              "ToolTip": "C:\\Users\\QUYEN\\Documents\\GitHub\\Web-C-Vua\\Chess\\Chess\\Views\\Play\\Ranking.cshtml",
+              "RelativeToolTip": "Chess\\Views\\Play\\Ranking.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACsAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-06-07T04:40:26.566Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

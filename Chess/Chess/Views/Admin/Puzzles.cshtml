@@ -1,0 +1,333 @@
+﻿@{
+    ViewData["Title"] = "Quản lý câu đố";
+    Layout = null;
+
+    var levels = ViewBag.Levels as List<Dictionary<string, object>>;
+    var puzzles = ViewBag.Puzzles as List<Dictionary<string, object>>;
+
+    string GetValue(Dictionary<string, object> item, string key)
+    {
+        if (item == null || !item.ContainsKey(key) || item[key] == null)
+        {
+            return "";
+        }
+
+        return item[key].ToString() ?? "";
+    }
+
+    string StatusText(string value)
+    {
+        return value == "True" || value == "1" ? "Đang dùng" : "Đã ẩn";
+    }
+
+    string StatusClass(string value)
+    {
+        return value == "True" || value == "1" ? "active" : "locked";
+    }
+
+    string TypeText(string type)
+    {
+        return type == "SAVE" ? "Cứu nguy" : "Chiếu hết";
+    }
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Puzzles</title>
+    <link rel="stylesheet" href="~/css/Admin.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/AdminSkin.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/KichThuoc.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="admin-page">
+
+        <aside class="admin-sidebar">
+            <h2>Admin</h2>
+
+            <a asp-controller="Admin" asp-action="Index">Dashboard</a>
+            <a asp-controller="Admin" asp-action="Users">Tài khoản</a>
+            <a asp-controller="Admin" asp-action="Skins">Skin cờ</a>
+            <a asp-controller="Admin" asp-action="Puzzles">Câu đố</a>
+            <a asp-controller="Home" asp-action="Index">Về trang chủ</a>
+        </aside>
+
+        <main class="admin-main">
+            <h1>Quản lý Cờ câu đố</h1>
+
+            @if (TempData["Error"] != null)
+            {
+                <div class="admin-alert error">@TempData["Error"]</div>
+            }
+
+            @if (TempData["Success"] != null)
+            {
+                <div class="admin-alert success">@TempData["Success"]</div>
+            }
+
+            <section class="admin-skin-card">
+                <h2>Thêm câu đố mới</h2>
+
+                <form asp-controller="Admin"
+                      asp-action="AddPuzzle"
+                      method="post"
+                      class="admin-form skin-form">
+
+                    <div class="admin-form-group">
+                        <label>Tiêu đề</label>
+                        <input type="text" name="tieuDe" placeholder="Ví dụ: Chiếu hết bằng hậu" required />
+                    </div>
+
+                    <div class="admin-form-group">
+                        <label>FEN thế cờ</label>
+                        <textarea name="fen" rows="3" placeholder="Ví dụ: 6k1/6pp/8/8/8/8/8/5Q1K w - - 0 1" required></textarea>
+                    </div>
+
+                    <div class="admin-form-group">
+                        <label>Lời giải / nước đúng</label>
+                        <input type="text" name="loiGiai" placeholder="Ví dụ: f1f8" required />
+                    </div>
+
+                    <div class="skin-color-row">
+                        <div class="admin-form-group">
+                            <label>Cấp độ</label>
+                            <select name="capDoId" required>
+                                @if (levels != null)
+                                {
+                                    foreach (var level in levels)
+                                    {
+                                        <option value="@GetValue(level, "CapDoID")">
+                                            @GetValue(level, "TenCapDo") - +@GetValue(level, "DiemCong") điểm
+                                        </option>
+                                    }
+                                }
+                            </select>
+                        </div>
+
+                        <div class="admin-form-group">
+                            <label>Loại câu đố</label>
+                            <select name="loaiCauDo">
+                                <option value="MATE">Chiếu hết</option>
+                                <option value="SAVE">Cứu nguy</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="skin-color-row">
+                        <div class="admin-form-group">
+                            <label>Độ khó</label>
+                            <input type="number" name="doKho" value="1" min="1" max="10" required />
+                        </div>
+
+                        <div class="admin-form-group">
+                            <label>Điểm thưởng</label>
+                            <input type="number" name="diemThuong" value="10" min="1" required />
+                        </div>
+                    </div>
+
+                    <div class="admin-form-group">
+                        <label>Mô tả</label>
+                        <textarea name="moTa" rows="3" placeholder="Mô tả ngắn về câu đố"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-admin-save">
+                        Thêm câu đố
+                    </button>
+                </form>
+            </section>
+
+            <section class="admin-skin-list-section">
+                <h2>Danh sách câu đố</h2>
+
+                <div class="admin-table-wrap">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Tiêu đề</th>
+                                <th>Cấp độ</th>
+                                <th>Loại</th>
+                                <th>Độ khó</th>
+                                <th>Điểm</th>
+                                <th>FEN</th>
+                                <th>Lời giải</th>
+                                <th>Trạng thái</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @if (puzzles != null)
+                            {
+                                foreach (var item in puzzles)
+                                {
+                                    <tr>
+                                        <td>@GetValue(item, "PuzzleID")</td>
+                                        <td>@GetValue(item, "TieuDe")</td>
+                                        <td>@GetValue(item, "TenCapDo")</td>
+                                        <td>@TypeText(GetValue(item, "LoaiCauDo"))</td>
+                                        <td>@GetValue(item, "DoKho")</td>
+                                        <td>@GetValue(item, "DiemThuong")</td>
+                                        <td class="path-cell">@GetValue(item, "FEN")</td>
+                                        <td><strong>@GetValue(item, "LoiGiai")</strong></td>
+
+                                        <td>
+                                            <span class="status-badge @StatusClass(GetValue(item, "TrangThai"))">
+                                                @StatusText(GetValue(item, "TrangThai"))
+                                            </span>
+                                        </td>
+
+                                        <td class="admin-action-cell">
+                                            <button type="button"
+                                                    class="btn-admin-edit btn-open-puzzle-edit"
+                                                    data-id="@GetValue(item, "PuzzleID")"
+                                                    data-title="@GetValue(item, "TieuDe")"
+                                                    data-fen="@GetValue(item, "FEN")"
+                                                    data-solution="@GetValue(item, "LoiGiai")"
+                                                    data-capdo="@GetValue(item, "CapDoID")"
+                                                    data-dokho="@GetValue(item, "DoKho")"
+                                                    data-type="@GetValue(item, "LoaiCauDo")"
+                                                    data-point="@GetValue(item, "DiemThuong")"
+                                                    data-status="@(GetValue(item, "TrangThai") == "True" || GetValue(item, "TrangThai") == "1" ? "1" : "0")"
+                                                    data-desc="@GetValue(item, "MoTa")">
+                                                Sửa
+                                            </button>
+
+                                            <form asp-controller="Admin"
+                                                  asp-action="DeletePuzzle"
+                                                  method="post"
+                                                  class="inline-form"
+                                                  onsubmit="return confirm('Bạn có chắc muốn xóa vĩnh viễn câu đố này không?');">
+                                                <input type="hidden" name="puzzleId" value="@GetValue(item, "PuzzleID")" />
+                                                <button type="submit" class="btn-admin-delete">Xóa</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div class="admin-modal" id="editPuzzleModal">
+        <div class="admin-modal-box wide">
+            <button type="button" class="admin-modal-close" id="closeEditPuzzle">×</button>
+
+            <h2>Sửa câu đố</h2>
+
+            <form asp-controller="Admin"
+                  asp-action="EditPuzzle"
+                  method="post"
+                  class="admin-form modal-form">
+
+                <input type="hidden" name="puzzleId" id="editPuzzleId" />
+
+                <div class="admin-form-group">
+                    <label>Tiêu đề</label>
+                    <input type="text" name="tieuDe" id="editPuzzleTitle" required />
+                </div>
+
+                <div class="admin-form-group">
+                    <label>FEN thế cờ</label>
+                    <textarea name="fen" id="editPuzzleFen" rows="3" required></textarea>
+                </div>
+
+                <div class="admin-form-group">
+                    <label>Lời giải / nước đúng</label>
+                    <input type="text" name="loiGiai" id="editPuzzleSolution" required />
+                </div>
+
+                <div class="skin-color-row">
+                    <div class="admin-form-group">
+                        <label>Cấp độ</label>
+                        <select name="capDoId" id="editPuzzleCapDo" required>
+                            @if (levels != null)
+                            {
+                                foreach (var level in levels)
+                                {
+                                    <option value="@GetValue(level, "CapDoID")">
+                                        @GetValue(level, "TenCapDo")
+                                    </option>
+                                }
+                            }
+                        </select>
+                    </div>
+
+                    <div class="admin-form-group">
+                        <label>Loại câu đố</label>
+                        <select name="loaiCauDo" id="editPuzzleType">
+                            <option value="MATE">Chiếu hết</option>
+                            <option value="SAVE">Cứu nguy</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="skin-color-row">
+                    <div class="admin-form-group">
+                        <label>Độ khó</label>
+                        <input type="number" name="doKho" id="editPuzzleDoKho" min="1" max="10" required />
+                    </div>
+
+                    <div class="admin-form-group">
+                        <label>Điểm thưởng</label>
+                        <input type="number" name="diemThuong" id="editPuzzlePoint" min="1" required />
+                    </div>
+                </div>
+
+                <div class="admin-form-group">
+                    <label>Trạng thái</label>
+                    <select name="trangThai" id="editPuzzleStatus">
+                        <option value="1">Đang dùng</option>
+                        <option value="0">Ẩn</option>
+                    </select>
+                </div>
+
+                <div class="admin-form-group">
+                    <label>Mô tả</label>
+                    <textarea name="moTa" id="editPuzzleDesc" rows="3"></textarea>
+                </div>
+
+                <button type="submit" class="btn-admin-save">
+                    Lưu thay đổi
+                </button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+    const puzzleModal = document.getElementById("editPuzzleModal");
+
+    document.querySelectorAll(".btn-open-puzzle-edit").forEach(function (button) {
+        button.addEventListener("click", function () {
+            document.getElementById("editPuzzleId").value = button.dataset.id || "";
+            document.getElementById("editPuzzleTitle").value = button.dataset.title || "";
+            document.getElementById("editPuzzleFen").value = button.dataset.fen || "";
+            document.getElementById("editPuzzleSolution").value = button.dataset.solution || "";
+            document.getElementById("editPuzzleCapDo").value = button.dataset.capdo || "";
+            document.getElementById("editPuzzleDoKho").value = button.dataset.dokho || "1";
+            document.getElementById("editPuzzleType").value = button.dataset.type || "MATE";
+            document.getElementById("editPuzzlePoint").value = button.dataset.point || "10";
+            document.getElementById("editPuzzleStatus").value = button.dataset.status || "1";
+            document.getElementById("editPuzzleDesc").value = button.dataset.desc || "";
+
+            puzzleModal.classList.add("show");
+        });
+    });
+
+    document.getElementById("closeEditPuzzle").addEventListener("click", function () {
+        puzzleModal.classList.remove("show");
+    });
+
+    puzzleModal.addEventListener("click", function (event) {
+        if (event.target === puzzleModal) {
+            puzzleModal.classList.remove("show");
+        }
+    });
+</script>

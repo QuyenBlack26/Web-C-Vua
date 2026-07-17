@@ -1,0 +1,118 @@
+﻿@{
+    ViewData["Title"] = "Thêm tài khoản";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADMIN</title>
+    <!-- FILE CSS ADMIN -->
+    <link rel="stylesheet" href="~/css/Admin.css" />
+    <link rel="stylesheet" href="~/css/KichThuoc.css" asp-append-version="true" />
+</head>
+<body>
+    <!-- KHUNG TRANG ADMIN -->
+    <div class="admin-page">
+
+        <!-- SIDEBAR ADMIN -->
+        <aside class="admin-sidebar">
+            <h2>Admin</h2>
+
+            <a asp-controller="Admin" asp-action="Index">Dashboard</a>
+            <a asp-controller="Admin" asp-action="Users">Tài khoản</a>
+            <a asp-controller="Admin" asp-action="Skins">Skin cờ</a>
+            <a asp-controller="Home" asp-action="Index">Về trang chủ</a>
+        </aside>
+
+        <!-- NỘI DUNG CHÍNH -->
+        <main class="admin-main">
+            <h1>Thêm tài khoản</h1>
+
+            <!-- THÔNG BÁO LỖI -->
+            @if (TempData["Error"] != null)
+            {
+                <div class="admin-alert error">@TempData["Error"]</div>
+            }
+
+            <!-- FORM THÊM TÀI KHOẢN -->
+            <form asp-controller="Admin" asp-action="CreateUser" method="post" class="admin-form">
+
+                <!-- THÔNG TIN ĐĂNG NHẬP -->
+                <div class="admin-form-group">
+                    <label>Tên đăng nhập</label>
+                    <input type="text" name="tenDangNhap" required />
+                </div>
+
+                <div class="admin-form-group">
+                    <label>Gmail</label>
+                    <input type="email" name="gmail" required />
+                </div>
+
+                <div class="admin-form-group">
+                    <label>Mật khẩu</label>
+                    <input type="password" name="matKhau" required />
+                </div>
+
+                <div class="admin-form-group">
+                    <label>Nhập lại mật khẩu</label>
+                    <input type="password" name="xacNhanMatKhau" required />
+                </div>
+
+                <!-- THÔNG TIN CÁ NHÂN -->
+                <div class="admin-form-group">
+                    <label>Họ tên</label>
+                    <input type="text" name="hoTen" />
+                </div>
+
+                <div class="admin-form-group">
+                    <label>Số điện thoại</label>
+                    <input type="text" name="soDienThoai" placeholder="+84901234567" />
+                </div>
+
+                <div class="admin-form-group">
+                    <label>Ngày sinh</label>
+                    <input type="date" name="ngaySinh" />
+                </div>
+
+                <div class="admin-form-group">
+                    <label>Giới tính</label>
+                    <select name="gioiTinh">
+                        <option value="">Chưa cập nhật</option>
+                        <option value="NAM">Nam</option>
+                        <option value="NU">Nữ</option>
+                        <option value="KHAC">Khác</option>
+                    </select>
+                </div>
+
+                <!-- PHÂN QUYỀN VÀ TRẠNG THÁI -->
+                <div class="admin-form-group">
+                    <label>Vai trò</label>
+                    <select name="role">
+                        <option value="USER">USER</option>
+                        <option value="ADMIN">ADMIN</option>
+                    </select>
+                </div>
+
+                <div class="admin-form-group">
+                    <label>Trạng thái</label>
+                    <select name="trangThai">
+                        <option value="1">Hoạt động</option>
+                        <option value="0">Khóa</option>
+                    </select>
+                </div>
+
+                <!-- NÚT THÊM VÀ QUAY LẠI -->
+                <div class="admin-form-actions">
+                    <button type="submit" class="btn-admin-save">Thêm tài khoản</button>
+                    <a asp-controller="Admin" asp-action="Users" class="btn-admin-back">Quay lại</a>
+                </div>
+            </form>
+        </main>
+    </div>
+</body>
+</html>
+
+

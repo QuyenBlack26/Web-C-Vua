@@ -1,0 +1,590 @@
+﻿@{
+    ViewData["Title"] = "Phòng PvP";
+}
+
+@{
+    Layout = null;
+}
+
+<!-- FILE CSS PHÒNG PVP -->
+<link rel="stylesheet" href="~/css/PvPRoom.css" />
+
+<link rel="stylesheet" href="~/css/TrangChinh.css" asp-append-version="true">
+<link rel="stylesheet" href="~/css/ChessSkin.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/KichThuoc.css" asp-append-version="true" />
+
+
+@using Microsoft.AspNetCore.Http
+
+<!-- THANH ĐIỀU HƯỚNG DÙNG CHUNG -->
+<nav class="navbar">
+    <div class="nav-container">
+
+        <!-- LOGO WEBSITE -->
+        <a asp-controller="Home"
+           asp-action="Index"
+           class="logo-modern nav-logo-link">
+            <img src="/IMG/Logo/LogoTrangChinh.png" alt="Logo Quyến" class="main-logo-img">
+            <span>Chess Online</span>
+        </a>
+
+        <!-- MENU TRANG CHÍNH -->
+        <ul class="nav-menu">
+            <li>
+                <a asp-controller="Home"
+                   asp-action="Index"
+                   asp-fragment="home">
+                    Trang Chủ
+                </a>
+            </li>
+
+            <li>
+                <a asp-controller="Home"
+                   asp-action="Index"
+                   asp-fragment="features">
+                    Tính Năng
+                </a>
+            </li>
+
+            <li>
+                <a asp-controller="Home"
+                   asp-action="Index"
+                   asp-fragment="play">
+                    Chơi Ngay
+                </a>
+            </li>
+
+            <li><a asp-controller="Friend" asp-action="Index">Bạn bè</a></li>
+
+            @if (Context.Session.GetString("TenDangNhap") != null)
+            {
+                var avatar = Context.Session.GetString("Avatar");
+                var tenDangNhap = Context.Session.GetString("TenDangNhap") ?? "U";
+                var hoTen = Context.Session.GetString("HoTen");
+                var tenHienThi = string.IsNullOrWhiteSpace(hoTen) ? tenDangNhap : hoTen;
+                var chuCai = tenHienThi.Length > 0 ? tenHienThi.Substring(0, 1).ToUpper() : "U";
+
+                <li class="user-menu">
+                    <details class="user-dropdown">
+
+                        <!-- AVATAR USER -->
+                        <summary class="avatar-btn">
+                            <div class="avatar-circle">
+                                @if (!string.IsNullOrWhiteSpace(avatar))
+                                {
+                                    <img src="@avatar"
+                                         alt="Avatar"
+                                         class="avatar-img" />
+                                }
+                                else
+                                {
+                                    @chuCai
+                                }
+                            </div>
+                        </summary>
+
+                        <!-- DROPDOWN THÔNG TIN USER -->
+                        <div class="user-card">
+                            <div class="user-card-header">
+                                <div class="user-avatar-lg">
+                                    @if (!string.IsNullOrWhiteSpace(avatar))
+                                    {
+                                        <img src="@avatar"
+                                             alt="Avatar"
+                                             class="user-avatar-img" />
+                                    }
+                                    else
+                                    {
+                                        @chuCai
+                                    }
+                                </div>
+
+                                <div>
+                                    <p class="user-card-name">@tenHienThi</p>
+                                    <p class="user-card-role">Người chơi</p>
+                                </div>
+                            </div>
+
+                            <a asp-controller="Home"
+                               asp-action="ThongTinCaNhan"
+                               class="btn-detail">
+                                👤 Xem chi tiết
+                            </a>
+
+                            <a asp-controller="Home"
+                               asp-action="DangXuat"
+                               class="btn-logout">
+                                🚪 Đăng xuất
+                            </a>
+                        </div>
+
+                    </details>
+                </li>
+            }
+            else
+            {
+                <li>
+                    <a asp-controller="Home"
+                       asp-action="DangNhap"
+                       class="btn-nav-login">
+                        Đăng Nhập
+                    </a>
+                </li>
+            }
+        </ul>
+
+        <!-- NÚT MENU MOBILE -->
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+    </div>
+</nav>
+
+<!-- TRANG PHÒNG PVP -->
+<div class="room-page">
+
+    <!-- PHẦN TIÊU ĐỀ PHÒNG -->
+    <div class="room-header">
+        <div>
+            <h1>Phòng PvP Online</h1>
+            <p>Phòng đấu PvP đã được tạo. Hệ thống đang kết nối người chơi trong phòng.</p>
+        </div>
+
+        <a asp-controller="Play" asp-action="Online" class="btn-back">Rời phòng</a>
+    </div>
+
+    <!-- BỐ CỤC PHÒNG PVP -->
+    <div class="room-layout">
+
+        <!-- KHUNG THÔNG TIN PHÒNG -->
+        <aside class="room-side">
+            <h3>Thông tin phòng</h3>
+
+            <div class="room-info-line">
+                <span>Mã phòng</span>
+                <strong id="roomCode">---</strong>
+            </div>
+
+            <div class="room-info-line">
+                <span>Thời gian</span>
+                <strong id="roomTime">---</strong>
+            </div>
+
+            <div class="room-info-line">
+                <span>Bạn cầm</span>
+                <strong id="myColor">---</strong>
+            </div>
+
+            <div class="room-info-line">
+                <span>Đối thủ</span>
+                <strong id="opponentName">---</strong>
+            </div>
+
+            <!-- TRẠNG THÁI KẾT NỐI -->
+            <div class="connection-status connected">
+                Đã kết nối phòng PvP
+            </div>
+        </aside>
+
+        <!-- KHU VỰC BÀN CỜ -->
+        <main class="room-board-area">
+
+            <!-- BÀN CỜ TẠM -->
+            <div class="fake-board">
+                @for (int row = 0; row < 8; row++)
+                {
+                    for (int col = 0; col < 8; col++)
+                    {
+                        var cls = (row + col) % 2 == 0 ? "light" : "dark";
+                        <div class="fake-square @cls"></div>
+                    }
+                }
+            </div>
+
+            <!-- GHI CHÚ BÊN DƯỚI BÀN CỜ -->
+            <p class="room-note">
+                Bàn cờ realtime sẽ được gắn ở bước sau bằng SignalR.
+            </p>
+        </main>
+    </div>
+</div>
+
+<!-- FOOTER DÙNG CHUNG CHO CÁC TRANG -->
+<footer class="footer-modern">
+    <div class="footer-grid">
+
+        <div class="footer-col">
+            <h4>Sản Phẩm</h4>
+            <ul>
+                <li>
+                    <a asp-controller="Play" asp-action="Online">
+                        Chơi Trực Tiếp
+                    </a>
+                </li>
+
+                <li>
+                    <a asp-controller="Play" asp-action="Analysis">
+                        Phân Tích
+                    </a>
+                </li>
+
+                <li>
+                    <a asp-controller="Play" asp-action="HocCoBan">
+                        Học Tập
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h4>Công Ty</h4>
+            <ul>
+                <li>
+                    <a href="#" class="js-open-about-modal">
+                        Về Chúng Tôi
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="js-open-blog-modal">
+                        Blog
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="js-open-contact-modal">
+                        Liên Hệ
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h4>Pháp Lý</h4>
+            <ul>
+                <li>
+                    <a href="#" class="js-open-terms-modal">
+                        Điều Khoản
+                    </a>
+                </li>
+
+                <li>
+                    <a asp-controller="Home" asp-action="Privacy">
+                        Privacy
+                    </a>
+                </li>
+
+                <li>
+                    <a asp-controller="Home" asp-action="Cookies">
+                        Cookies
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h4>Mạng Xã Hội</h4>
+
+            <div class="social-links">
+                <a href="https://www.facebook.com/"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   aria-label="Facebook">
+                    f
+                </a>
+
+                <a href="https://x.com/"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   aria-label="X Twitter">
+                    x
+                </a>
+
+                <a href="https://www.youtube.com/"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   aria-label="YouTube">
+                    ▶
+                </a>
+
+                <a href="https://discord.com/"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   aria-label="Discord">
+                    ☎
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        <p>&copy; 2026 Chess Online. All rights reserved.</p>
+    </div>
+</footer>
+
+
+<!-- MODAL LIÊN HỆ -->
+<div class="contact-modal-overlay" id="contactModalOverlay">
+    <div class="contact-modal-box">
+
+        <button type="button" class="contact-modal-close" id="contactModalClose">
+            <span class="modal-x-symbol">×</span>
+        </button>
+
+        <div class="contact-modal-header">
+            <span class="contact-modal-icon">
+                ✉
+            </span>
+
+            <h2>Liên Hệ</h2>
+            <p>
+                Gửi góp ý, báo lỗi hoặc yêu cầu hỗ trợ cho Chess Online.
+            </p>
+        </div>
+
+        <form class="contact-modal-form">
+            <div class="contact-form-group">
+                <label>Họ tên</label>
+                <input type="text" placeholder="Nhập họ tên của bạn">
+            </div>
+
+            <div class="contact-form-group">
+                <label>Email</label>
+                <input type="email" placeholder="Nhập email của bạn">
+            </div>
+
+            <div class="contact-form-group">
+                <label>Chủ đề</label>
+                <input type="text" placeholder="Ví dụ: Báo lỗi, góp ý, hỗ trợ tài khoản...">
+            </div>
+
+            <div class="contact-form-group">
+                <label>Nội dung</label>
+                <textarea rows="4" placeholder="Nhập nội dung cần liên hệ..."></textarea>
+            </div>
+
+            <button type="button" class="btn-send-contact">
+                Gửi Liên Hệ
+            </button>
+        </form>
+
+    </div>
+</div>
+
+
+<!-- MODAL ĐIỀU KHOẢN -->
+<div class="terms-modal-overlay" id="termsModalOverlay">
+    <div class="terms-modal-box">
+
+        <button type="button" class="terms-modal-close" id="termsModalClose">
+            <span class="modal-x-symbol">×</span>
+        </button>
+
+        <div class="terms-modal-header">
+            <span class="terms-modal-icon">
+                📄
+            </span>
+
+            <h2>Điều Khoản Sử Dụng</h2>
+            <p>
+                Khi sử dụng Chess Online, bạn đồng ý tuân thủ các điều khoản bên dưới.
+            </p>
+        </div>
+
+        <div class="terms-modal-content">
+            <div class="terms-item">
+                <h3>1. Tài khoản người dùng</h3>
+                <p>
+                    Người dùng cần cung cấp thông tin chính xác khi đăng ký.
+                    Không sử dụng tài khoản của người khác hoặc chia sẻ tài khoản cho mục đích gian lận.
+                </p>
+            </div>
+
+            <div class="terms-item">
+                <h3>2. Hành vi khi chơi</h3>
+                <p>
+                    Không được sử dụng công cụ hỗ trợ bên ngoài trong các trận đấu với người chơi khác.
+                    Không spam, phá ván hoặc có hành vi gây ảnh hưởng xấu đến trải nghiệm của người khác.
+                </p>
+            </div>
+
+            <div class="terms-item">
+                <h3>3. Dữ liệu ván cờ</h3>
+                <p>
+                    Hệ thống có thể lưu lại lịch sử ván đấu, nước đi và kết quả để phục vụ tính năng xem lại,
+                    phân tích và xếp hạng.
+                </p>
+            </div>
+
+            <div class="terms-item">
+                <h3>4. Bảng xếp hạng</h3>
+                <p>
+                    Điểm số và thứ hạng có thể thay đổi dựa trên kết quả thi đấu.
+                    Nếu phát hiện gian lận, hệ thống có quyền điều chỉnh hoặc hủy kết quả.
+                </p>
+            </div>
+
+            <div class="terms-item">
+                <h3>5. Thay đổi điều khoản</h3>
+                <p>
+                    Chess Online có thể cập nhật điều khoản khi cần thiết để cải thiện hệ thống và bảo vệ người dùng.
+                </p>
+            </div>
+        </div>
+
+        <button type="button" class="btn-terms-ok" id="termsModalOk">
+            Tôi đã hiểu
+        </button>
+
+    </div>
+</div>
+
+
+<!-- MODAL BLOG -->
+<div class="blog-modal-overlay" id="blogModalOverlay">
+    <div class="blog-modal-box">
+
+        <button type="button" class="blog-modal-close" id="blogModalClose">
+            <span class="modal-x-symbol">×</span>
+        </button>
+
+        <div class="blog-modal-header">
+            <span class="blog-modal-icon">
+                📰
+            </span>
+
+            <h2>Blog Chess Online</h2>
+            <p>
+                Nơi chia sẻ mẹo chơi cờ, kiến thức luyện tập và cập nhật mới của website.
+            </p>
+        </div>
+
+        <div class="blog-list">
+            <div class="blog-item">
+                <div class="blog-tag">Người mới</div>
+                <h3>5 nguyên tắc khai cuộc cơ bản</h3>
+                <p>
+                    Kiểm soát trung tâm, phát triển quân nhẹ, nhập thành sớm và không di chuyển một quân quá nhiều lần.
+                </p>
+                <button type="button" class="btn-blog-read">
+                    Đọc nhanh
+                </button>
+            </div>
+
+            <div class="blog-item">
+                <div class="blog-tag">Chiến thuật</div>
+                <h3>Cách tránh mất quân đơn giản</h3>
+                <p>
+                    Trước khi đi, hãy kiểm tra quân nào đang bị tấn công,
+                    Vua có an toàn không và đối thủ có nước bắt quân không.
+                </p>
+                <button type="button" class="btn-blog-read">
+                    Đọc nhanh
+                </button>
+            </div>
+
+            <div class="blog-item">
+                <div class="blog-tag">AI</div>
+                <h3>AI phân tích ván cờ hoạt động thế nào?</h3>
+                <p>
+                    AI sẽ xem lại từng nước đi, so sánh với nước tốt hơn và đánh giá lỗi như thiếu chính xác,
+                    sai lầm hoặc lỗi nặng.
+                </p>
+                <button type="button" class="btn-blog-read">
+                    Đọc nhanh
+                </button>
+            </div>
+
+            <div class="blog-item">
+                <div class="blog-tag">Giải đấu</div>
+                <h3>Chuẩn bị trước khi tham gia giải đấu</h3>
+                <p>
+                    Luyện khai cuộc quen thuộc, giữ bình tĩnh ở trung cuộc và quản lý thời gian tốt trong từng ván đấu.
+                </p>
+                <button type="button" class="btn-blog-read">
+                    Đọc nhanh
+                </button>
+            </div>
+        </div>
+
+        <button type="button" class="btn-blog-ok" id="blogModalOk">
+            Đóng Blog
+        </button>
+
+    </div>
+</div>
+
+
+<!-- MODAL VỀ CHÚNG TÔI -->
+<div class="about-modal-overlay" id="aboutModalOverlay">
+    <div class="about-modal-box">
+
+        <button type="button" class="about-modal-close" id="aboutModalClose">
+            <span class="modal-x-symbol">×</span>
+        </button>
+
+        <div class="about-modal-header">
+            <span class="about-modal-icon">
+                ♞
+            </span>
+
+            <h2>Về Chess Online</h2>
+            <p>
+                Chess Online là website chơi cờ vua trực tuyến kết hợp AI, lịch sử ván đấu,
+                phân tích nước đi và bảng xếp hạng người chơi.
+            </p>
+        </div>
+
+        <div class="about-modal-content">
+            <div class="about-item">
+                <h3>🎯 Mục tiêu</h3>
+                <p>
+                    Tạo một nền tảng giúp người chơi vừa giải trí,
+                    vừa học cờ vua thông qua phân tích ván đấu và luyện tập với AI.
+                </p>
+            </div>
+
+            <div class="about-item">
+                <h3><img src="/IMG/Logo/1VS1.png" alt="1vs1 Online" class="play-mode-logo"> Tính năng chính</h3>
+                <p>
+                    Website hỗ trợ chơi với AI, chơi online, lưu lịch sử ván cờ,
+                    xem lại từng nước đi, phân tích lỗi và theo dõi bảng xếp hạng.
+                </p>
+            </div>
+
+            <div class="about-item">
+                <h3><img src="/IMG/Logo/AI.png" alt="Chơi với AI" class="play-mode-logo"> AI phân tích</h3>
+                <p>
+                    AI giúp đánh giá nước đi, chỉ ra lỗi thiếu chính xác,
+                    sai lầm, lỗi nặng và gợi ý cách cải thiện.
+                </p>
+            </div>
+
+            <div class="about-item">
+                <h3>🏆 Hướng phát triển</h3>
+                <p>
+                    Trong tương lai, hệ thống có thể mở rộng thêm giải đấu,
+                    phòng chơi online, phân tích chuyên sâu và học từ các ván cờ mẫu.
+                </p>
+            </div>
+        </div>
+
+        <button type="button" class="btn-about-ok" id="aboutModalOk">
+            Đã hiểu
+        </button>
+
+    </div>
+</div>
+
+
+<!-- FILE JAVASCRIPT FOOTER + MODAL -->
+<script src="~/js/TrangChinh.js" asp-append-version="true"></script>
+<script src="~/js/GameResultModal.js" asp-append-version="true"></script>
+
+<!-- FILE JAVASCRIPT PHÒNG PVP -->
+<script src="~/js/PvPRoom.js"></script>
+<script src="~/js/ChessSkin.js" asp-append-version="true"></script>

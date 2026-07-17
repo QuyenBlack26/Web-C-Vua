@@ -1,0 +1,221 @@
+﻿/* KHUNG TỔNG TRANG ADMIN */
+.admin-page {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    background: #f4f7fb;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* SIDEBAR ADMIN */
+.admin-sidebar {
+    background: #111827;
+    color: white;
+    padding: 28px 20px;
+    min-height: 100vh;
+}
+
+    .admin-sidebar h2 {
+        margin-bottom: 24px;
+        font-size: 28px;
+    }
+
+    .admin-sidebar a {
+        display: block;
+        color: #d1d5db;
+        text-decoration: none;
+        padding: 12px 14px;
+        border-radius: 10px;
+        margin-bottom: 8px;
+    }
+
+        .admin-sidebar a:hover {
+            background: #374151;
+            color: white;
+        }
+
+/* NỘI DUNG CHÍNH ADMIN */
+.admin-main {
+    padding: 36px;
+}
+
+    .admin-main h1 {
+        margin-bottom: 24px;
+        color: #111827;
+    }
+
+/* CARD THỐNG KÊ */
+.admin-cards {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(160px, 1fr));
+    gap: 20px;
+}
+
+.admin-card {
+    background: white;
+    border-radius: 18px;
+    padding: 24px;
+    box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+}
+
+    .admin-card h3 {
+        color: #6b7280;
+        font-size: 16px;
+        margin-bottom: 12px;
+    }
+
+    .admin-card p {
+        color: #111827;
+        font-size: 36px;
+        font-weight: 800;
+    }
+
+/* BẢNG QUẢN LÝ ADMIN */
+.admin-table-wrap {
+    background: white;
+    border-radius: 18px;
+    padding: 18px;
+    box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+    overflow-x: auto;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+    .admin-table th,
+    .admin-table td {
+        padding: 12px 14px;
+        border-bottom: 1px solid #e5e7eb;
+        text-align: left;
+        font-size: 14px;
+    }
+
+    .admin-table th {
+        background: #f9fafb;
+        color: #374151;
+    }
+
+/* AVATAR TRONG BẢNG */
+.admin-avatar {
+    width: 42px;
+    height: 42px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+/* NÚT HÀNH ĐỘNG ADMIN */
+.admin-actions {
+    white-space: nowrap;
+}
+
+.btn-admin-edit,
+.btn-admin-delete,
+.btn-admin-save,
+.btn-admin-back {
+    display: inline-block;
+    padding: 8px 12px;
+    border-radius: 8px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 13px;
+}
+
+.btn-admin-edit {
+    background: #ede9fe;
+    color: #5b21b6;
+    border: 1px solid #c4b5fd;
+}
+
+.btn-admin-delete {
+    background: #fff1f2;
+    color: #be123c;
+    border: 1px solid #fecdd3;
+}
+
+.btn-admin-save {
+    background: #6d28d9;
+    color: #ffffff;
+}
+
+.btn-admin-back {
+    background: #e5e7eb;
+    color: #374151;
+}
+
+/* NHÃN TRẠNG THÁI */
+.status-badge {
+    display: inline-block;
+    padding: 5px 9px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+    .status-badge.active {
+        background: #dcfce7;
+        color: #166534;
+    }
+
+    .status-badge.locked {
+        background: #fee2e2;
+        color: #991b1b;
+    }
+
+/* THÔNG BÁO ADMIN */
+.admin-alert {
+    padding: 12px 14px;
+    border-radius: 12px;
+    margin-bottom: 16px;
+    font-weight: 700;
+}
+
+    .admin-alert.error {
+        background: #fee2e2;
+        color: #b91c1c;
+        border: 1px solid #fecaca;
+    }
+
+    .admin-alert.success {
+        background: #dcfce7;
+        color: #166534;
+        border: 1px solid #bbf7d0;
+    }
+
+/* FORM ADMIN */
+.admin-form {
+    max-width: 700px;
+    background: white;
+    padding: 24px;
+    border-radius: 18px;
+    box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+}
+
+.admin-form-group {
+    margin-bottom: 16px;
+}
+
+    .admin-form-group label {
+        display: block;
+        font-weight: 800;
+        color: #374151;
+        margin-bottom: 7px;
+    }
+
+    .admin-form-group input,
+    .admin-form-group select {
+        width: 100%;
+        padding: 12px 14px;
+        border-radius: 10px;
+        border: 1px solid #d1d5db;
+        outline: none;
+    }
+
+.admin-form-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 18px;
+}

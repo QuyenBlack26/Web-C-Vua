@@ -1,8 +1,685 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    Layout = null;
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<!-- CẤU TRÚC HTML TRANG CHÍNH -->
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cờ Vua Online - Chơi & Thắng</title>
+    <link rel="stylesheet" href="~/css/TrangChinh.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/css/KichThuoc.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+</head>
+<body>
+
+    <!-- NỀN HIỆU ỨNG TRANG CHÍNH -->
+    <div class="stars"></div>
+    <div class="gradient-bg"></div>
+
+    <!-- THANH ĐIỀU HƯỚNG -->
+    <nav class="navbar">
+        <div class="nav-container">
+
+            <!-- LOGO WEBSITE -->
+            <div class="logo-modern">
+                <img src="/IMG/Logo/LogoTrangChinh.png" alt="Logo Quyến" class="main-logo-img">
+            </div>
+
+            <!-- MENU TRANG CHÍNH -->
+            <ul class="nav-menu">
+                <li><a href="#home">Trang Chủ</a></li>
+                <li><a href="#features">Tính Năng</a></li>
+                <li><a href="#play">Chơi Ngay</a></li>
+                <li><a asp-controller="Friend" asp-action="Index">Bạn bè</a></li>
+
+                <!-- KIỂM TRA TRẠNG THÁI ĐĂNG NHẬP -->
+                @if (Context.Session.GetString("TenDangNhap") != null)
+                {
+                    <!-- Đã đăng nhập → hiện avatar -->
+                    <li class="user-menu">
+                        @{
+                            var avatar = Context.Session.GetString("Avatar");
+                            var tenDangNhap = Context.Session.GetString("TenDangNhap") ?? "U";
+                            var hoTen = Context.Session.GetString("HoTen");
+                            var tenHienThi = string.IsNullOrWhiteSpace(hoTen) ? tenDangNhap : hoTen;
+                            var chuCai = tenHienThi.Length > 0 ? tenHienThi.Substring(0, 1).ToUpper() : "U";
+                        }
+
+                        <!-- AVATAR USER TRÊN NAVBAR -->
+                        <div class="avatar-btn" onclick="toggleUserCard()">
+                            <div class="avatar-circle">
+                                @if (!string.IsNullOrWhiteSpace(avatar))
+                                {
+                                    <img src="@avatar"
+                                         alt="Avatar"
+                                         class="avatar-img"
+                                         style="width:42px;height:42px;min-width:42px;min-height:42px;max-width:42px;max-height:42px;object-fit:cover;border-radius:50%;display:block;" />
+                                }
+                                else
+                                {
+                                    @chuCai
+                                }
+                            </div>
+                        </div>
+
+                        <!-- DROPDOWN THÔNG TIN USER -->
+                        <div class="user-card" id="userCard">
+                            <div class="user-card-header">
+                                <div class="user-avatar-lg">
+                                    @if (!string.IsNullOrWhiteSpace(avatar))
+                                    {
+                                        <img src="@avatar"
+                                             alt="Avatar"
+                                             class="user-avatar-img"
+                                             style="width:52px;height:52px;min-width:52px;min-height:52px;max-width:52px;max-height:52px;object-fit:cover;border-radius:50%;display:block;" />
+                                    }
+                                    else
+                                    {
+                                        @chuCai
+                                    }
+                                </div>
+
+                                <div>
+                                    <p class="user-card-name">@tenHienThi</p>
+                                    <p class="user-card-role">Người chơi</p>
+                                </div>
+                            </div>
+
+                            <a asp-controller="Home" asp-action="ThongTinCaNhan" class="btn-detail">👤 Xem chi tiết</a>
+                            <a asp-controller="Home" asp-action="DangXuat" class="btn-logout">🚪 Đăng xuất</a>
+                        </div>
+                    </li>
+                }
+                else
+                {
+                    <li><a href="/Home/DangNhap" class="btn-nav-login">Đăng Nhập</a></li>
+                }
+            </ul>
+
+            <!-- NÚT MENU MOBILE -->
+            <!-- -->
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- PHẦN HERO ĐẦU TRANG -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+
+            <!-- NỘI DUNG GIỚI THIỆU HERO -->
+            <div class="hero-text">
+                <h1 class="hero-title">
+                    <span class="letter">C</span>
+                    <span class="letter">ờ</span>
+                    <span class="letter"> </span>
+                    <span class="letter">V</span>
+                    <span class="letter">u</span>
+                    <span class="letter">a</span>
+                    <span class="letter"> </span>
+                    <span class="letter">3</span>
+                    <span class="letter">D</span>
+                </h1>
+                <p class="hero-subtitle">Trải nghiệm cờ vua tiên tiến với công nghệ AI</p>
+
+                <!-- NÚT HÀNH ĐỘNG HERO -->
+                <div class="hero-buttons">
+                    <a asp-controller="Play" asp-action="Index" class="btn-play">
+                        <i class="fas fa-play"></i> Chơi Ngay
+                    </a>
+                    <a asp-controller="Play" asp-action="HocCoBan" class="btn-learn">
+                        <i class="fas fa-graduation-cap"></i> Học Cơ Bản
+                    </a>
+                </div>
+
+                <!-- THỐNG KÊ HERO -->
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number">@(ViewBag.TotalPlayers ?? 0)+</span>
+                        <span class="stat-text">Người Chơi</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat">
+                        <span class="stat-number">@(ViewBag.TodayMatches ?? 0)+</span>
+                        <span class="stat-text">Trận/Ngày</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat">
+                        <span class="stat-number">9+</span>
+                        <span class="stat-text">Quốc Gia</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CANVAS HIỂN THỊ CỜ 3D -->
+            <div class="hero-3d">
+                <canvas id="chessCanvas"></canvas>
+            </div>
+        </div>
+    </section>
+
+    <!-- PHẦN TÍNH NĂNG -->
+    <section class="features" id="features">
+        <h2 class="section-title">Tính Năng Độc Đáo</h2>
+
+        <!-- DANH SÁCH TÍNH NĂNG -->
+        <div class="features-grid">
+
+            <a asp-controller="Play" asp-action="Online" class="feature-card glassmorphism">
+                <div class="feature-icon">
+                    <i class="fas fa-chess-queen"></i>
+                </div>
+                <h3>Chơi Trực Tiếp</h3>
+                <p>Đấu với hàng triệu người chơi từ khắp thế giới</p>
+            </a>
+
+            <a asp-controller="Play" asp-action="AI" class="feature-card glassmorphism">
+                <div class="feature-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h3>AI Thông Minh</h3>
+                <p>Máy tính với trí tuệ nhân tạo có mức độ từ dễ đến khó</p>
+            </a>
+
+            <a asp-controller="Play" asp-action="Analysis" class="feature-card glassmorphism">
+                <div class="feature-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3>Phân Tích Chi Tiết</h3>
+                <p>Xem lại trò chơi với động cơ phân tích mạnh</p>
+            </a>
+
+            <a asp-controller="Play" asp-action="Master" class="feature-card glassmorphism">
+                <div class="feature-icon">
+                    <i class="fas fa-book"></i>
+                </div>
+                <h3>Học Từ Master</h3>
+                <p>Khoá học từ những người chơi chuyên nghiệp</p>
+            </a>
+
+            <a asp-controller="Play" asp-action="Ranking" class="feature-card glassmorphism">
+                <div class="feature-icon">
+                    <i class="fas fa-star"></i>
+                </div>
+                <h3>Bảng Xếp Hạng</h3>
+                <p>Cạnh tranh với xếp hạng rating ELO toàn cầu</p>
+            </a>
+
+            <a asp-controller="Play" asp-action="Tournament" class="feature-card glassmorphism">
+                <div class="feature-icon">
+                    <i class="fas fa-trophy"></i>
+                </div>
+
+                <h3>Giải Đấu</h3>
+                <p>Tham gia giải đấu loại trực tiếp và tìm ra nhà vô địch</p>
+            </a>
+
+            <a asp-controller="Skin" asp-action="Choose" class="feature-card glassmorphism">
+                <div class="feature-icon">🎨</div>
+                <h3>Đổi Skin</h3>
+                <p>Chọn giao diện bàn cờ và quân cờ theo sở thích.</p>
+            </a>
+
+        </div>
+    </section>
+
+    <!-- PHẦN CHẾ ĐỘ CHƠI -->
+    <section class="game-modes" id="play">
+        <h2 class="section-title">Chế Độ Chơi</h2>
+
+        <!-- DANH SÁCH CHẾ ĐỘ CHƠI -->
+        <div class="modes-container">
+            <a asp-controller="Puzzle" asp-action="Index" class="mode-card-3d mode-link">
+                <div class="mode-icon"><img src="/IMG/Logo/CauDo.png" alt="Cờ Câu Đố" class="play-mode-logo"></div>
+                <h3>Cờ Câu Đố</h3>
+                <p>Giải thế cờ, tìm nước đi hay nhất. Không giới hạn thời gian.</p>
+                <span class="mode-label">Luyện Tư Duy</span>
+            </a>
+
+            <a asp-controller="Play" asp-action="Local" class="mode-card-3d mode-link">
+                <div class="mode-icon"><img src="/IMG/Logo/Solo1vs1.png" alt="Solo 1vs1" class="play-mode-logo"></div>
+                <h3>SOLO 1VS1 Trên Cùng 1 Máy</h3>
+                <p>Hai người chơi cùng thiết bị, chọn thời gian trước khi bắt đầu.</p>
+                <span class="mode-label">Chơi Cùng Bạn</span>
+            </a>
+
+            <a asp-controller="Play" asp-action="Online" class="mode-card-3d mode-link">
+                <div class="mode-icon"><img src="/IMG/Logo/1VS1.png" alt="1vs1 Online" class="play-mode-logo"></div>
+                <h3>PvP Online</h3>
+                <p>Chọn quân, chọn thời gian</p>
+                <span class="mode-label">Đấu Người Chơi</span>
+            </a>
+
+            <a asp-controller="Play" asp-action="AI" class="mode-card-3d mode-link">
+                <div class="mode-icon"><img src="/IMG/Logo/AI.png" alt="Chơi với AI" class="play-mode-logo"></div>
+                <h3>vs AI</h3>
+                <p>Đấu trí với AI</p>
+                <span class="mode-label">Luyện Tập</span>
+            </a>
+
+            <a asp-controller="Home" asp-action="ChoiVoiAI3D" class="mode-card-3d mode-link">
+                <div class="mode-icon"><img src="/IMG/Logo/AI3D.png" alt="Chơi với AI" class="play-mode-logo"></div>
+                    <h3>Chơi với AI 3D</h3>
+                    <p>Bàn cờ 3D, model Blender</p>
+                    <span class="mode-label">3D AI</span>
+            </a>
+
+        </div>
+    </section>
+
+    <!-- PHẦN LÝ DO CHỌN WEBSITE -->
+    <section class="floating-section">
+        <h2 class="section-title">Tại Sao Chọn Chúng Tôi?</h2>
+
+        <!-- DANH SÁCH LÝ DO -->
+        <div class="floating-cards">
+            <div class="floating-card">
+                <div class="card-content">
+                    <span class="card-number">01</span>
+                    <h4>Giao Diện Tương Tác</h4>
+                    <p>Hiện Đại, Màu sắc hấp dẫn,Sống động qua các hiệu ứng</p>
+                </div>
+            </div>
+
+            <div class="floating-card">
+                <div class="card-content">
+                    <span class="card-number">02</span>
+                    <h4>Công Nghệ Mới</h4>
+                    <p>Công nghệ tiên tiến để mang lại trải nghiệm chơi tốt nhất</p>
+                </div>
+            </div>
+
+            <div class="floating-card">
+                <div class="card-content">
+                    <span class="card-number">03</span>
+                    <h4>Cộng Đồng Năng Động</h4>
+                    <p>Giao lưu, chia sẻ kinh nghiệm và học hỏi từ những người chơi giỏi</p>
+                </div>
+            </div>
+
+            <div class="floating-card">
+                <div class="card-content">
+                    <span class="card-number">04</span>
+                    <h4>Hoàn Toàn Miễn Phí</h4>
+                    <p>Truy cập toàn bộ tính năng mà không cần trả phí</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PHẦN KÊU GỌI CHƠI NGAY -->
+    <section class="cta-premium">
+        <div class="cta-content">
+            <h2>Bạn Đã Sẵn Sàng Chưa?</h2>
+            <p>Tham gia hàng triệu người chơi cờ vua hôm nay</p>
+            <a asp-controller="Play" asp-action="Index" class="btn-premium">Bắt Đầu Chơi</a>
+        </div>
+        <div class="cta-bg-effect"></div>
+    </section>
+
+    <!-- FOOTER DÙNG CHUNG CHO CÁC TRANG -->
+    <footer class="footer-modern">
+        <div class="footer-grid">
+
+            <div class="footer-col">
+                <h4>Sản Phẩm</h4>
+                <ul>
+                    <li>
+                        <a asp-controller="Play" asp-action="Online">
+                            Chơi Trực Tiếp
+                        </a>
+                    </li>
+
+                    <li>
+                        <a asp-controller="Play" asp-action="Analysis">
+                            Phân Tích
+                        </a>
+                    </li>
+
+                    <li>
+                        <a asp-controller="Play" asp-action="HocCoBan">
+                            Học Tập
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Công Ty</h4>
+                <ul>
+                    <li>
+                        <a href="#" class="js-open-about-modal">
+                            Về Chúng Tôi
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="js-open-blog-modal">
+                            Blog
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="javascript:void(0)" class="js-open-contact-modal">
+                            Liên Hệ
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Pháp Lý</h4>
+                <ul>
+                    <li>
+                        <a href="#" class="js-open-terms-modal">
+                            Điều Khoản
+                        </a>
+                    </li>
+
+                    <li>
+                        <a asp-controller="Home" asp-action="Privacy">
+                            Privacy
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            Cookies
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Mạng Xã Hội</h4>
+
+                <div class="social-links">
+                    <a href="https://www.facebook.com/"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       aria-label="Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+
+                    <a href="https://x.com/"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       aria-label="X Twitter">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+
+                    <a href="https://www.youtube.com/"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       aria-label="YouTube">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+
+                    <a href="https://discord.com/"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       aria-label="Discord">
+                        <i class="fab fa-discord"></i>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 Chess Online. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- MODAL LIÊN HỆ -->
+    <div class="contact-modal-overlay" id="contactModalOverlay">
+        <div class="contact-modal-box">
+            <button type="button" class="contact-modal-close" id="contactModalClose">
+                <i class="fas fa-times"></i>
+            </button>
+
+            <div class="contact-modal-header">
+                <span class="contact-modal-icon">
+                    <i class="fas fa-envelope"></i>
+                </span>
+
+                <h2>Liên Hệ</h2>
+                <p>
+                    Gửi góp ý, báo lỗi hoặc yêu cầu hỗ trợ cho Chess Online.
+                </p>
+            </div>
+
+            <form class="contact-modal-form">
+                <div class="contact-form-group">
+                    <label>Họ tên</label>
+                    <input type="text" placeholder="Nhập họ tên của bạn">
+                </div>
+
+                <div class="contact-form-group">
+                    <label>Email</label>
+                    <input type="email" placeholder="Nhập email của bạn">
+                </div>
+
+                <div class="contact-form-group">
+                    <label>Chủ đề</label>
+                    <input type="text" placeholder="Ví dụ: Báo lỗi, góp ý, hỗ trợ tài khoản...">
+                </div>
+
+                <div class="contact-form-group">
+                    <label>Nội dung</label>
+                    <textarea rows="4" placeholder="Nhập nội dung cần liên hệ..."></textarea>
+                </div>
+
+                <button type="button" class="btn-send-contact">
+                    Gửi Liên Hệ
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL ĐIỀU KHOẢN -->
+    <div class="terms-modal-overlay" id="termsModalOverlay">
+        <div class="terms-modal-box">
+            <button type="button" class="terms-modal-close" id="termsModalClose">
+                <i class="fas fa-times"></i>
+            </button>
+
+            <div class="terms-modal-header">
+                <span class="terms-modal-icon">
+                    <i class="fas fa-file-contract"></i>
+                </span>
+
+                <h2>Điều Khoản Sử Dụng</h2>
+                <p>
+                    Khi sử dụng Chess Online, bạn đồng ý tuân thủ các điều khoản bên dưới.
+                </p>
+            </div>
+
+            <div class="terms-modal-content">
+                <div class="terms-item">
+                    <h3>1. Tài khoản người dùng</h3>
+                    <p>
+                        Người dùng cần cung cấp thông tin chính xác khi đăng ký. Không sử dụng tài khoản của người khác
+                        hoặc chia sẻ tài khoản cho mục đích gian lận.
+                    </p>
+                </div>
+
+                <div class="terms-item">
+                    <h3>2. Hành vi khi chơi</h3>
+                    <p>
+                        Không được sử dụng công cụ hỗ trợ bên ngoài trong các trận đấu với người chơi khác.
+                        Không spam, phá ván hoặc có hành vi gây ảnh hưởng xấu đến trải nghiệm của người khác.
+                    </p>
+                </div>
+
+                <div class="terms-item">
+                    <h3>3. Dữ liệu ván cờ</h3>
+                    <p>
+                        Hệ thống có thể lưu lại lịch sử ván đấu, nước đi và kết quả để phục vụ tính năng xem lại,
+                        phân tích và xếp hạng.
+                    </p>
+                </div>
+
+                <div class="terms-item">
+                    <h3>4. Bảng xếp hạng</h3>
+                    <p>
+                        Điểm số và thứ hạng có thể thay đổi dựa trên kết quả thi đấu. Nếu phát hiện gian lận,
+                        hệ thống có quyền điều chỉnh hoặc hủy kết quả.
+                    </p>
+                </div>
+
+                <div class="terms-item">
+                    <h3>5. Thay đổi điều khoản</h3>
+                    <p>
+                        Chess Online có thể cập nhật điều khoản khi cần thiết để cải thiện hệ thống và bảo vệ người dùng.
+                    </p>
+                </div>
+            </div>
+
+            <button type="button" class="btn-terms-ok" id="termsModalOk">
+                Tôi đã hiểu
+            </button>
+        </div>
+    </div>
+
+    <!-- MODAL BLOG -->
+    <div class="blog-modal-overlay" id="blogModalOverlay">
+        <div class="blog-modal-box">
+            <button type="button" class="blog-modal-close" id="blogModalClose">
+                <i class="fas fa-times"></i>
+            </button>
+
+            <div class="blog-modal-header">
+                <span class="blog-modal-icon">
+                    <i class="fas fa-newspaper"></i>
+                </span>
+
+                <h2>Blog Chess Online</h2>
+                <p>
+                    Nơi chia sẻ mẹo chơi cờ, kiến thức luyện tập và cập nhật mới của website.
+                </p>
+            </div>
+
+            <div class="blog-list">
+                <div class="blog-item">
+                    <div class="blog-tag">Người mới</div>
+                    <h3>5 nguyên tắc khai cuộc cơ bản</h3>
+                    <p>
+                        Kiểm soát trung tâm, phát triển quân nhẹ, nhập thành sớm và không di chuyển một quân quá nhiều lần.
+                    </p>
+                    <button type="button" class="btn-blog-read">
+                        Đọc nhanh
+                    </button>
+                </div>
+
+                <div class="blog-item">
+                    <div class="blog-tag">Chiến thuật</div>
+                    <h3>Cách tránh mất quân đơn giản</h3>
+                    <p>
+                        Trước khi đi, hãy kiểm tra quân nào đang bị tấn công, Vua có an toàn không và đối thủ có nước bắt quân không.
+                    </p>
+                    <button type="button" class="btn-blog-read">
+                        Đọc nhanh
+                    </button>
+                </div>
+
+                <div class="blog-item">
+                    <div class="blog-tag">AI</div>
+                    <h3>AI phân tích ván cờ hoạt động thế nào?</h3>
+                    <p>
+                        AI sẽ xem lại từng nước đi, so sánh với nước tốt hơn và đánh giá lỗi như thiếu chính xác, sai lầm hoặc lỗi nặng.
+                    </p>
+                    <button type="button" class="btn-blog-read">
+                        Đọc nhanh
+                    </button>
+                </div>
+
+                <div class="blog-item">
+                    <div class="blog-tag">Giải đấu</div>
+                    <h3>Chuẩn bị trước khi tham gia giải đấu</h3>
+                    <p>
+                        Luyện khai cuộc quen thuộc, giữ bình tĩnh ở trung cuộc và quản lý thời gian tốt trong từng ván đấu.
+                    </p>
+                    <button type="button" class="btn-blog-read">
+                        Đọc nhanh
+                    </button>
+                </div>
+            </div>
+
+            <button type="button" class="btn-blog-ok" id="blogModalOk">
+                Đóng Blog
+            </button>
+        </div>
+    </div>
+
+    <!-- MODAL VỀ CHÚNG TÔI -->
+    <div class="about-modal-overlay" id="aboutModalOverlay">
+        <div class="about-modal-box">
+            <button type="button" class="about-modal-close" id="aboutModalClose">
+                <i class="fas fa-times"></i>
+            </button>
+
+            <div class="about-modal-header">
+                <span class="about-modal-icon">
+                    <i class="fas fa-chess-knight"></i>
+                </span>
+
+                <h2>Về Chess Online</h2>
+                <p>
+                    Chess Online là website chơi cờ vua trực tuyến kết hợp AI, lịch sử ván đấu,
+                    phân tích nước đi và bảng xếp hạng người chơi.
+                </p>
+            </div>
+
+            <div class="about-modal-content">
+                <div class="about-item">
+                    <h3>🎯 Mục tiêu</h3>
+                    <p>
+                        Tạo một nền tảng giúp người chơi vừa giải trí, vừa học cờ vua thông qua
+                        phân tích ván đấu và luyện tập với AI.
+                    </p>
+                </div>
+
+                <div class="about-item">
+                    <h3><img src="/IMG/Logo/1VS1.png" alt="1vs1 Online" class="play-mode-logo"> Tính năng chính</h3>
+                    <p>
+                        Website hỗ trợ chơi với AI, chơi online, lưu lịch sử ván cờ,
+                        xem lại từng nước đi, phân tích lỗi và theo dõi bảng xếp hạng.
+                    </p>
+                </div>
+
+                <div class="about-item">
+                    <h3><img src="/IMG/Logo/AI.png" alt="Chơi với AI" class="play-mode-logo"> AI phân tích</h3>
+                    <p>
+                        AI giúp đánh giá nước đi, chỉ ra lỗi thiếu chính xác, sai lầm,
+                        lỗi nặng và gợi ý cách cải thiện.
+                    </p>
+                </div>
+
+                <div class="about-item">
+                    <h3>🏆 Hướng phát triển</h3>
+                    <p>
+                        Trong tương lai, hệ thống có thể mở rộng thêm giải đấu, phòng chơi online,
+                        phân tích chuyên sâu và học từ các ván cờ mẫu.
+                    </p>
+                </div>
+            </div>
+
+            <button type="button" class="btn-about-ok" id="aboutModalOk">
+                Đã hiểu
+            </button>
+        </div>
+    </div>
+
+    <!-- FILE JAVASCRIPT TRANG CHÍNH -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="~/js/TrangChinh.js" asp-append-version="true"></script>
+</body>
+</html>

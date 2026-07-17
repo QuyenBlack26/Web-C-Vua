@@ -1,0 +1,522 @@
+﻿/* ========================= */
+/* RESPONSIVE TỔNG TOÀN WEB */
+/* Không sửa cấu trúc HTML, chỉ ghi đè kích thước */
+/* ========================= */
+
+/* CHỐNG TRÀN NGANG TOÀN TRANG */
+html,
+body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* ẢNH, CANVAS, VIDEO TỰ CO THEO MÀN HÌNH */
+img,
+video,
+canvas {
+    max-width: 100%;
+}
+
+/* KHUNG CHUNG */
+.container,
+.hero-content,
+.features-container,
+.section-container,
+.ranking-container,
+.profile-container {
+    width: min(1200px, 94%);
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ========================= */
+/* LAPTOP NHỎ / TABLET NGANG */
+/* ========================= */
+
+@media (max-width: 1200px) {
+    .ai3d-page {
+        grid-template-columns: 360px 1fr;
+        gap: 24px;
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+
+    .ai3d-setup-card {
+        padding: 24px;
+    }
+
+    .ai3d-board-area {
+        min-height: 620px;
+    }
+
+    .ai3d-scene-container {
+        min-height: 520px;
+    }
+
+    .hero-text h1 {
+        font-size: clamp(38px, 5vw, 64px);
+    }
+
+    .section-title {
+        font-size: clamp(30px, 4vw, 48px);
+    }
+}
+
+/* ========================= */
+/* TABLET */
+/* ========================= */
+
+@media (max-width: 992px) {
+    /* HEADER / NAV */
+    .nav-menu {
+        display: none;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    .nav-container {
+        width: 94%;
+    }
+
+    /* TRANG CHỦ */
+    .hero-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 34px;
+    }
+
+    .hero-buttons {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .features-grid,
+    .play-modes,
+    .footer-grid,
+    .skin-grid,
+    .puzzle-grid,
+    .ranking-cards,
+    .top-ranking-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* BÀN CỜ 2D */
+    .game-layout {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .chess-board {
+        width: min(92vw, 520px);
+        height: min(92vw, 520px);
+    }
+
+    .side-panel,
+    .ai-side-panel {
+        width: min(92vw, 520px);
+    }
+
+    /* BÀN CỜ 3D */
+    .ai3d-page {
+        grid-template-columns: 1fr;
+        padding: 105px 18px 40px;
+    }
+
+    .ai3d-setup-card {
+        width: 100%;
+        max-width: 760px;
+        margin: 0 auto;
+    }
+
+    .ai3d-board-area {
+        width: 100%;
+        min-height: 560px;
+    }
+
+    .ai3d-scene-container {
+        min-height: 480px;
+    }
+
+    .ai3d-board-top {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    /* BẢNG */
+    .ranking-table-wrap,
+    .admin-table-wrap,
+    .table-wrap {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .ranking-table,
+    .admin-table,
+    table {
+        min-width: 760px;
+    }
+
+    /* ADMIN */
+    .admin-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-sidebar,
+    .sidebar {
+        position: relative;
+        width: 100%;
+        min-height: auto;
+    }
+
+    .admin-main,
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+        padding: 20px;
+    }
+
+    .admin-cards,
+    .dashboard-cards,
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* ========================= */
+/* ĐIỆN THOẠI */
+/* ========================= */
+
+@media (max-width: 576px) {
+    /* BODY */
+    body {
+        font-size: 14px;
+    }
+
+    /* NAVBAR */
+    .navbar {
+        padding: 10px 0;
+    }
+
+    .logo-modern span,
+    .logo span,
+    .brand-name {
+        font-size: 18px;
+    }
+
+    .user-card {
+        right: 0;
+        width: min(260px, 92vw);
+    }
+
+    /* TRANG CHỦ */
+    .hero-section {
+        padding-top: 90px;
+    }
+
+    .hero-text h1 {
+        font-size: 34px;
+        line-height: 1.15;
+    }
+
+    .hero-subtitle {
+        font-size: 15px;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .btn-play,
+    .btn-learn,
+    .btn-premium,
+    .primary-btn,
+    .secondary-btn {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .features-grid,
+    .play-modes,
+    .footer-grid,
+    .skin-grid,
+    .puzzle-grid,
+    .ranking-cards,
+    .top-ranking-grid,
+    .admin-cards,
+    .dashboard-cards,
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .section-title {
+        font-size: 28px;
+    }
+
+    /* BÀN CỜ 2D */
+    .game-page {
+        padding: 90px 10px 30px;
+    }
+
+    .chess-board {
+        width: 94vw;
+        height: 94vw;
+    }
+
+    .square {
+        font-size: clamp(24px, 8vw, 42px);
+    }
+
+    .side-panel,
+    .ai-side-panel {
+        width: 94vw;
+    }
+
+    .game-header h1 {
+        font-size: 24px;
+    }
+
+    /* BÀN CỜ 3D */
+    .ai3d-page {
+        padding: 90px 10px 28px;
+        gap: 16px;
+    }
+
+    .ai3d-setup-card {
+        border-radius: 20px;
+        padding: 18px;
+    }
+
+        .ai3d-setup-card h1 {
+            font-size: 25px;
+            line-height: 1.2;
+        }
+
+        .ai3d-setup-card p {
+            font-size: 14px;
+        }
+
+    .ai3d-field select,
+    .ai3d-start-btn {
+        font-size: 14px;
+        padding: 12px;
+    }
+
+    .ai3d-board-area {
+        border-radius: 20px;
+        min-height: 430px;
+    }
+
+    .ai3d-board-top {
+        padding: 16px;
+    }
+
+        .ai3d-board-top h2 {
+            font-size: 20px;
+        }
+
+    .ai3d-status-pill {
+        white-space: normal;
+        font-size: 13px;
+    }
+
+    .ai3d-scene-container {
+        min-height: 360px;
+    }
+
+    .ai3d-actions {
+        flex-direction: column;
+    }
+
+        .ai3d-actions button,
+        .ai3d-actions a {
+            width: 100%;
+        }
+
+    .ai3d-bottom-panel {
+        padding: 14px;
+    }
+
+    .ai3d-history-row {
+        grid-template-columns: 30px 1fr;
+    }
+
+    /* ĐĂNG NHẬP / FORM */
+    .login-container,
+    .register-container,
+    .auth-container,
+    .profile-card {
+        width: 94vw;
+        padding: 20px;
+        border-radius: 20px;
+    }
+
+    input,
+    select,
+    textarea,
+    button {
+        max-width: 100%;
+    }
+
+    /* BẢNG XẾP HẠNG */
+    .ranking-page {
+        padding: 95px 10px 35px;
+    }
+
+    .ranking-title,
+    .ranking-header h1 {
+        font-size: 26px;
+    }
+
+    .ranking-tabs {
+        overflow-x: auto;
+        justify-content: flex-start;
+        padding-bottom: 8px;
+    }
+
+        .ranking-tabs a,
+        .ranking-tab {
+            white-space: nowrap;
+        }
+
+    .ranking-table-card {
+        border-radius: 18px;
+    }
+
+    .ranking-pagination {
+        gap: 7px;
+    }
+
+    .page-btn,
+    .ranking-page-btn {
+        min-width: 36px;
+        height: 36px;
+        font-size: 13px;
+        padding: 0 10px;
+    }
+
+    /* ADMIN */
+    .admin-main,
+    .main-content {
+        padding: 14px;
+    }
+
+    .admin-header,
+    .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+        .admin-header h1,
+        .page-header h1 {
+            font-size: 24px;
+        }
+
+    .admin-actions {
+        width: 100%;
+        flex-direction: column;
+    }
+
+        .admin-actions a,
+        .admin-actions button {
+            width: 100%;
+        }
+
+    /* MODAL */
+    .modal,
+    .modal-content,
+    .ai3d-promotion-box {
+        width: 94vw;
+        max-width: 94vw;
+    }
+
+    .ai3d-promotion-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* ========================= */
+/* ĐIỆN THOẠI NHỎ */
+/* ========================= */
+
+@media (max-width: 380px) {
+    .hero-text h1 {
+        font-size: 28px;
+    }
+
+    .section-title {
+        font-size: 24px;
+    }
+
+    .ai3d-scene-container {
+        min-height: 320px;
+    }
+
+    .ai3d-setup-card h1 {
+        font-size: 22px;
+    }
+
+    .ai3d-board-top h2 {
+        font-size: 18px;
+    }
+
+    .chess-board {
+        width: 96vw;
+        height: 96vw;
+    }
+}
+
+/* ========================= */
+/* FIX NAVBAR SÁT 2 BÊN MÀN HÌNH */
+/* ========================= */
+
+.navbar {
+    width: 100% !important;
+}
+
+.nav-container {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding-left: 32px !important;
+    padding-right: 32px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+}
+
+.logo-modern,
+.nav-logo-link {
+    flex-shrink: 0 !important;
+}
+
+.nav-menu {
+    margin-left: auto !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    gap: 2.2rem !important;
+}
+
+/* MÀN HÌNH LỚN THÌ CHỪA LỀ ĐẸP HƠN */
+@media (min-width: 1200px) {
+    .nav-container {
+        padding-left: 48px !important;
+        padding-right: 48px !important;
+    }
+}
+
+/* ĐIỆN THOẠI */
+@media (max-width: 768px) {
+    .nav-container {
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+    }
+}
+

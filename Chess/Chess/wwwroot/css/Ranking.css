@@ -1,0 +1,449 @@
+﻿.ranking-page {
+    min-height: 100vh;
+    padding: 120px 5% 80px;
+    background: radial-gradient(circle at top left, rgba(113, 183, 230, 0.18), transparent 32%), radial-gradient(circle at top right, rgba(155, 89, 182, 0.16), transparent 30%), linear-gradient(135deg, #eef4ff 0%, #f8f3ff 100%);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.ranking-hero {
+    text-align: center;
+    max-width: 820px;
+    margin: 0 auto 38px;
+}
+
+.ranking-badge {
+    display: inline-block;
+    padding: 8px 18px;
+    border-radius: 999px;
+    background: rgba(139, 92, 246, 0.12);
+    color: #6d28d9;
+    font-weight: 900;
+    margin-bottom: 18px;
+}
+
+.ranking-hero h1 {
+    font-size: 52px;
+    color: #8b8bd8;
+    font-weight: 950;
+    margin-bottom: 16px;
+}
+
+.ranking-hero p {
+    color: #6b7280;
+    font-size: 17px;
+    line-height: 1.8;
+}
+
+.top-ranking {
+    max-width: 1080px;
+    margin: 0 auto 34px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.top-card {
+    background: rgba(255,255,255,0.92);
+    border-radius: 28px;
+    padding: 30px 24px;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.9);
+    box-shadow: 0 22px 50px rgba(15, 23, 42, 0.08);
+    position: relative;
+    overflow: hidden;
+}
+
+    .top-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        opacity: 0.16;
+        background: linear-gradient(135deg, #71b7e6, #9b59b6);
+    }
+
+    .top-card > * {
+        position: relative;
+        z-index: 1;
+    }
+
+.top-rank span {
+    font-size: 42px;
+}
+
+.top-avatar {
+    width: 82px;
+    height: 82px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #ffffff;
+    margin: 14px auto;
+    box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+}
+
+.top-card h2 {
+    color: #111827;
+    font-size: 24px;
+    margin-bottom: 6px;
+}
+
+.top-card p {
+    color: #6b7280;
+    font-weight: 700;
+    margin-bottom: 14px;
+}
+
+.top-score {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+    .top-score strong {
+        display: inline-block;
+        padding: 10px 16px;
+        border-radius: 999px;
+        background: #ffffff;
+        color: #6d28d9;
+        font-weight: 950;
+    }
+
+    .top-score span {
+        color: #4b5563;
+        font-weight: 800;
+    }
+
+.ranking-table-card {
+    max-width: 1180px;
+    margin: 0 auto;
+    background: rgba(255,255,255,0.94);
+    border: 1px solid rgba(255,255,255,0.9);
+    border-radius: 28px;
+    padding: 28px;
+    box-shadow: 0 24px 60px rgba(15, 23, 42, 0.1);
+}
+
+.ranking-table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+    gap: 18px;
+}
+
+    .ranking-table-header h2 {
+        color: #111827;
+        font-size: 28px;
+        margin-bottom: 4px;
+    }
+
+    .ranking-table-header p {
+        color: #6b7280;
+        font-weight: 700;
+    }
+
+    .ranking-table-header > span {
+        padding: 8px 14px;
+        border-radius: 999px;
+        background: #eef2ff;
+        color: #4f46e5;
+        font-weight: 900;
+        white-space: nowrap;
+    }
+
+.ranking-table-wrap {
+    overflow-x: auto;
+}
+
+.ranking-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+    .ranking-table th {
+        text-align: left;
+        padding: 16px;
+        color: #6b7280;
+        font-size: 14px;
+        border-bottom: 1px solid #e5e7eb;
+        white-space: nowrap;
+    }
+
+    .ranking-table td {
+        padding: 16px;
+        border-bottom: 1px solid #f1f5f9;
+        color: #374151;
+        font-weight: 700;
+        white-space: nowrap;
+    }
+
+    .ranking-table tr:hover {
+        background: #f8fafc;
+    }
+
+.rank-number {
+    display: inline-block;
+    min-width: 52px;
+    padding: 8px 10px;
+    border-radius: 999px;
+    background: #f3f4f6;
+    color: #374151;
+    text-align: center;
+    font-weight: 950;
+}
+
+.rank-1 {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.rank-2 {
+    background: #e5e7eb;
+    color: #374151;
+}
+
+.rank-3 {
+    background: #ffedd5;
+    color: #9a3412;
+}
+
+.player-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+    .player-info img {
+        width: 46px;
+        height: 46px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid #ffffff;
+        box-shadow: 0 8px 18px rgba(0,0,0,0.12);
+    }
+
+    .player-info strong {
+        display: block;
+        color: #111827;
+    }
+
+    .player-info span {
+        display: block;
+        color: #6b7280;
+        font-size: 13px;
+    }
+
+.mode-info strong {
+    display: block;
+    color: #111827;
+}
+
+.mode-info span {
+    display: inline-block;
+    margin-top: 4px;
+    padding: 5px 10px;
+    border-radius: 999px;
+    background: #f3f4f6;
+    color: #6b7280;
+    font-size: 12px;
+    font-weight: 900;
+}
+
+.score {
+    color: #6d28d9;
+    font-size: 18px;
+}
+
+.win {
+    color: #15803d;
+    font-weight: 950;
+}
+
+.lose {
+    color: #b91c1c;
+    font-weight: 950;
+}
+
+.draw {
+    color: #92400e;
+    font-weight: 950;
+}
+
+.ranking-empty {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 34px;
+    border-radius: 26px;
+    background: rgba(255,255,255,0.92);
+    border: 1px solid #e5e7eb;
+    text-align: center;
+    box-shadow: 0 20px 45px rgba(15, 23, 42, 0.08);
+}
+
+    .ranking-empty h2 {
+        color: #111827;
+        margin-bottom: 10px;
+    }
+
+    .ranking-empty p {
+        color: #6b7280;
+        margin-bottom: 18px;
+    }
+
+    .ranking-empty a,
+    .btn-ranking-back {
+        display: inline-flex;
+        margin-top: 26px;
+        padding: 12px 20px;
+        border-radius: 14px;
+        background: #ffffff;
+        color: #374151;
+        border: 1px solid #e5e7eb;
+        text-decoration: none;
+        font-weight: 900;
+        transition: 0.22s ease;
+    }
+
+        .ranking-empty a:hover,
+        .btn-ranking-back:hover {
+            transform: translateY(-2px);
+            color: #6d28d9;
+        }
+
+.ranking-actions {
+    text-align: center;
+}
+
+@media (max-width: 900px) {
+    .top-ranking {
+        grid-template-columns: 1fr;
+    }
+
+    .ranking-hero h1 {
+        font-size: 38px;
+    }
+
+    .ranking-table-card {
+        padding: 18px;
+    }
+
+    .ranking-table-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+/* ===== Chọn loại cờ / chế độ chơi ===== */
+.ranking-mode-tabs {
+    max-width: 1180px;
+    margin: 0 auto 30px;
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.ranking-mode-tab {
+    min-width: 170px;
+    padding: 16px 18px;
+    border-radius: 18px;
+    background: rgba(255,255,255,0.92);
+    border: 1px solid #e5e7eb;
+    text-decoration: none;
+    color: #374151;
+    box-shadow: 0 12px 28px rgba(15, 23, 42, 0.06);
+    transition: 0.22s ease;
+    text-align: center;
+}
+
+    .ranking-mode-tab strong {
+        display: block;
+        font-size: 16px;
+        margin-bottom: 5px;
+    }
+
+    .ranking-mode-tab span {
+        color: #6b7280;
+        font-size: 13px;
+        font-weight: 800;
+    }
+
+    .ranking-mode-tab:hover,
+    .ranking-mode-tab.active {
+        transform: translateY(-4px);
+        border-color: #a78bfa;
+        background: linear-gradient(135deg, #71b7e6, #9b59b6);
+        color: #ffffff;
+    }
+
+        .ranking-mode-tab:hover span,
+        .ranking-mode-tab.active span {
+            color: #f3f4f6;
+        }
+
+/* ===== Phân trang ===== */
+.ranking-pagination {
+    max-width: 1180px;
+    margin: 28px auto 0;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.page-btn {
+    min-width: 42px;
+    height: 42px;
+    padding: 0 14px;
+    border-radius: 12px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    color: #374151;
+    text-decoration: none;
+    font-weight: 900;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.22s ease;
+}
+
+    .page-btn:hover,
+    .page-btn.active {
+        background: linear-gradient(135deg, #71b7e6, #9b59b6);
+        color: #ffffff;
+        border-color: transparent;
+        transform: translateY(-2px);
+    }
+
+/* ===== Phân trang ===== */
+.ranking-pagination {
+    max-width: 1180px;
+    margin: 28px auto 0;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.page-btn {
+    min-width: 42px;
+    height: 42px;
+    padding: 0 14px;
+    border-radius: 12px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    color: #374151;
+    text-decoration: none;
+    font-weight: 900;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.22s ease;
+}
+
+    .page-btn:hover,
+    .page-btn.active {
+        background: linear-gradient(135deg, #71b7e6, #9b59b6);
+        color: #ffffff;
+        border-color: transparent;
+    }

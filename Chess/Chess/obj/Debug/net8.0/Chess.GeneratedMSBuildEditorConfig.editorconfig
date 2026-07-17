@@ -20,6 +20,54 @@ build_property._RazorSourceGeneratorDebug =
 build_property.EffectiveAnalysisLevelStyle = 8.0
 build_property.EnableCodeStyleSeverity = 
 
+[C:/Users/QUYEN/Documents/GitHub/Web-C-Vua/Chess/Chess/Views/Admin/CreateUser.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQ3JlYXRlVXNlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/QUYEN/Documents/GitHub/Web-C-Vua/Chess/Chess/Views/Admin/EditUser.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRWRpdFVzZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/QUYEN/Documents/GitHub/Web-C-Vua/Chess/Chess/Views/Admin/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/QUYEN/Documents/GitHub/Web-C-Vua/Chess/Chess/Views/Admin/Puzzles.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cUHV6emxlcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/QUYEN/Documents/GitHub/Web-C-Vua/Chess/Chess/Views/Admin/Skins.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cU2tpbnMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/QUYEN/Documents/GitHub/Web-C-Vua/Chess/Chess/Views/Admin/Users.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cVXNlcnMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/QUYEN/Documents/GitHub/Web-C-Vua/Chess/Chess/Views/Friend/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRnJpZW5kXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/QUYEN/Documents/GitHub/Web-C-Vua/Chess/Chess/Views/Friend/Schedule.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRnJpZW5kXFNjaGVkdWxlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/QUYEN/Documents/GitHub/Web-C-Vua/Chess/Chess/Views/Friend/Search.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRnJpZW5kXFNlYXJjaC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/QUYEN/Documents/GitHub/Web-C-Vua/Chess/Chess/Views/Home/ChoiVoiAI.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxDaG9pVm9pQUkuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/QUYEN/Documents/GitHub/Web-C-Vua/Chess/Chess/Views/Home/ChoiVoiAI3D.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxDaG9pVm9pQUkzRC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/QUYEN/Documents/GitHub/Web-C-Vua/Chess/Chess/Views/Home/DangNhap.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxEYW5nTmhhcC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/QUYEN/Documents/GitHub/Web-C-Vua/Chess/Chess/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -28,12 +76,76 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/QUYEN/Documents/GitHub/Web-C-Vua/Chess/Chess/Views/Home/QuenMatKhau.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxRdWVuTWF0S2hhdS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/QUYEN/Documents/GitHub/Web-C-Vua/Chess/Chess/Views/Home/ThongTinCaNhan.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxUaG9uZ1RpbkNhTmhhbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/QUYEN/Documents/GitHub/Web-C-Vua/Chess/Chess/Views/Play/Analysis.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGxheVxBbmFseXNpcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/QUYEN/Documents/GitHub/Web-C-Vua/Chess/Chess/Views/Play/HocCoBan.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGxheVxIb2NDb0Jhbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/QUYEN/Documents/GitHub/Web-C-Vua/Chess/Chess/Views/Play/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGxheVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/QUYEN/Documents/GitHub/Web-C-Vua/Chess/Chess/Views/Play/Local.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGxheVxMb2NhbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/QUYEN/Documents/GitHub/Web-C-Vua/Chess/Chess/Views/Play/LocalGame.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGxheVxMb2NhbEdhbWUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/QUYEN/Documents/GitHub/Web-C-Vua/Chess/Chess/Views/Play/Master.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGxheVxNYXN0ZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/QUYEN/Documents/GitHub/Web-C-Vua/Chess/Chess/Views/Play/Online.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGxheVxPbmxpbmUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/QUYEN/Documents/GitHub/Web-C-Vua/Chess/Chess/Views/Play/Ranking.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGxheVxSYW5raW5nLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/QUYEN/Documents/GitHub/Web-C-Vua/Chess/Chess/Views/Play/Room.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGxheVxSb29tLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/QUYEN/Documents/GitHub/Web-C-Vua/Chess/Chess/Views/Play/Tournament.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGxheVxUb3VybmFtZW50LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/QUYEN/Documents/GitHub/Web-C-Vua/Chess/Chess/Views/Puzzle/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHV6emxlXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/QUYEN/Documents/GitHub/Web-C-Vua/Chess/Chess/Views/Puzzle/List.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHV6emxlXExpc3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/QUYEN/Documents/GitHub/Web-C-Vua/Chess/Chess/Views/Puzzle/Play.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHV6emxlXFBsYXkuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/QUYEN/Documents/GitHub/Web-C-Vua/Chess/Chess/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/QUYEN/Documents/GitHub/Web-C-Vua/Chess/Chess/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/QUYEN/Documents/GitHub/Web-C-Vua/Chess/Chess/Views/Skin/Choose.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2tpblxDaG9vc2UuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/QUYEN/Documents/GitHub/Web-C-Vua/Chess/Chess/Views/_ViewImports.cshtml]

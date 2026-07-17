@@ -1,0 +1,53 @@
+@{
+    ViewData["Title"] = "Quên mật khẩu";
+}
+
+<link rel="stylesheet" href="~/css/DangNhap.css" />
+
+<div class="container">
+    <div class="form-box" style="width:100%; right:0;">
+        <form asp-controller="Home" asp-action="QuenMatKhau" method="post">
+            <h1>Quên Mật Khẩu</h1>
+
+            <div class="input-box">
+                <input type="text" name="tenDangNhap" placeholder=" " required class="label">
+                <label>Tên đăng nhập</label>
+                <i class="fas fa-user"></i>
+            </div>
+
+            <div class="input-box">
+                <input type="email" name="gmail" placeholder=" " required class="label">
+                <label>Gmail đã đăng ký</label>
+                <i class="fas fa-envelope"></i>
+            </div>
+
+            <div class="input-box">
+                <input type="password" name="matKhauMoi" placeholder=" " required class="label">
+                <label>Mật khẩu mới</label>
+                <i class="fas fa-lock"></i>
+            </div>
+
+            <div class="input-box">
+                <input type="password" name="xacNhanMatKhauMoi" placeholder=" " required class="label">
+                <label>Nhập lại mật khẩu mới</label>
+                <i class="fas fa-lock"></i>
+            </div>
+
+            @if (ViewBag.Error != null)
+            {
+                <p style="color:red; text-align:center;">@ViewBag.Error</p>
+            }
+
+            @if (ViewBag.Success != null)
+            {
+                <p style="color:green; text-align:center;">@ViewBag.Success</p>
+            }
+
+            <button type="submit" class="btn">Đổi mật khẩu</button>
+
+            <p style="margin-top:15px;">
+                <a asp-controller="Home" asp-action="DangNhap">Quay lại đăng nhập</a>
+            </p>
+        </form>
+    </div>
+</div>

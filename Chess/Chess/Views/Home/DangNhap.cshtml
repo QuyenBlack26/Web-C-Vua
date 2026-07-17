@@ -1,0 +1,182 @@
+﻿@{
+    ViewData["Title"] = "Đăng Nhập";
+}
+
+@{
+    Layout = null;
+}
+
+<!-- CẤU TRÚC HTML TRANG ĐĂNG NHẬP -->
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Đăng Nhập / Đăng Ký</title>
+    <link rel="stylesheet" href="~/css/DangNhap.css">
+    <link rel="stylesheet" href="~/css/KichThuoc.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- THÔNG BÁO LỖI ĐĂNG NHẬP -->
+    @if (ViewBag.Error != null)
+    {
+        <div class="top-alert error">
+            @ViewBag.Error
+        </div>
+    }
+
+    <!-- THÔNG BÁO LỖI TỪ TEMPDATA -->
+    @if (TempData["Error"] != null)
+    {
+        <div class="top-alert error">
+            @TempData["Error"]
+        </div>
+    }
+
+    <!-- THÔNG BÁO LỖI ĐĂNG KÝ -->
+    @if (ViewBag.RegisterError != null)
+    {
+        <div class="top-alert error">
+            @ViewBag.RegisterError
+        </div>
+    }
+
+
+    <!-- THÔNG BÁO ĐĂNG KÝ THÀNH CÔNG -->
+    @if (ViewBag.RegisterSuccess != null)
+    {
+        <div class="top-alert success">
+            @ViewBag.RegisterSuccess
+        </div>
+    }
+
+    <!-- KHUNG CHỨA FORM ĐĂNG NHẬP VÀ ĐĂNG KÝ -->
+    <div class="container">
+
+        <!-- FORM ĐĂNG NHẬP -->
+        <div class="form-box DangNhap">
+            <form asp-controller="Home" asp-action="DangNhap" method="post">
+                <h1>Đăng Nhập</h1>
+
+                <!-- Ô NHẬP TÊN ĐĂNG NHẬP -->
+                <div class="input-box">
+                    <input type="text" name="tenDangNhap" placeholder=" " required class="label" id="username1">
+                    <label for="username1">Tên đăng nhập</label>
+                    <i class="fas fa-user"></i>
+                </div>
+
+                <!-- Ô NHẬP MẬT KHẨU -->
+                <div class="input-box">
+                    <input type="password" name="matKhau" placeholder=" " required class="label" id="password1">
+                    <label for="password1">Mật khẩu</label>
+                    <i class="fas fa-lock"></i>
+                   
+                </div>
+
+                <!-- LINK QUÊN MẬT KHẨU -->
+                <div class="forgot-link">
+                    <a asp-controller="Home" asp-action="QuenMatKhau">Quên mật khẩu?</a>
+                </div>
+
+                <button type="submit" class="btn">Đăng Nhập</button>
+
+                <p>Hoặc đăng nhập bằng</p>
+
+                <!-- NÚT ĐĂNG NHẬP MẠNG XÃ HỘI -->
+                <div class="social">
+                    <a href="#" class="social-disabled" data-name="Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+
+                    <a href="#" class="social-disabled" data-name="Google">
+                        <i class="fab fa-google"></i>
+                    </a>
+
+                    <a href="#" class="social-disabled" data-name="Twitter">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                </div>
+            </form>
+        </div>
+
+        <!-- FORM ĐĂNG KÝ -->
+        <div class="form-box DangKy">
+            <form asp-controller="Home" asp-action="DangKy" method="post">
+                <h1>Đăng Ký</h1>
+
+                <!-- Ô NHẬP TÊN ĐĂNG KÝ -->
+                <div class="input-box">
+                    <input type="text" name="tenDangNhap" placeholder=" " required class="label" id="username2">
+                    <label for="username2">Tên đăng nhập</label>
+                    <i class="fas fa-user"></i>
+                </div>
+
+                <!-- Ô NHẬP EMAIL -->
+                <div class="input-box">
+                    <input type="email" name="gmail" placeholder=" " required class="label" id="email">
+                    <label for="email">Email</label>
+                    <i class="fas fa-envelope"></i>
+                </div>
+
+                <!-- Ô NHẬP MẬT KHẨU ĐĂNG KÝ -->
+                <div class="input-box">
+                    <input type="password" name="matKhau" placeholder=" " required class="label" id="password2">
+                    <label for="password2">Mật khẩu</label>
+                    <i class="fas fa-lock"></i>
+                    
+                </div>
+
+                <!-- Ô NHẬP LẠI MẬT KHẨU -->
+                <div class="input-box">
+                    <input type="password" name="xacNhanMatKhau" placeholder=" " required class="label" id="confirmPassword">
+                    <label for="confirmPassword">Nhập lại mật khẩu</label>
+                    <i class="fas fa-lock"></i>                    
+                    <span class="match-message" id="matchMessage"></span>
+                </div>
+
+                <button type="submit" class="btn DangKy">Đăng Ký</button>
+
+                <!-- NÚT ĐĂNG KÝ MẠNG XÃ HỘI -->
+                <div class="social">
+                    <a href="#" class="social-disabled" data-name="Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+
+                    <a href="#" class="social-disabled" data-name="Google">
+                        <i class="fab fa-google"></i>
+                    </a>
+
+                    <a href="#" class="social-disabled" data-name="Twitter">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                </div>
+            </form>
+        </div>
+
+        <!-- KHUNG CHUYỂN ĐỔI ĐĂNG NHẬP VÀ ĐĂNG KÝ -->
+        <div class="toggle">
+
+            <!-- PANEL CHUYỂN SANG ĐĂNG KÝ -->
+            <div class="toggle-panel left">
+                <h1>Xin Chào!</h1>
+                <p>Chưa có tài khoản?</p>
+                <button type="button" id="registerBtn">Đăng Ký</button>
+            </div>
+
+            <!-- PANEL CHUYỂN SANG ĐĂNG NHẬP -->
+            <div class="toggle-panel right">
+                <h1>Chào Mừng!</h1>
+                <p>Đã có tài khoản?</p>
+                <button type="button" id="loginBtn">Đăng Nhập</button>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- FILE JAVASCRIPT ĐĂNG NHẬP -->
+    <script src="~/js/DangNhap.js"></script>
+</body>
+</html>

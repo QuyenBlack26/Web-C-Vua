@@ -1,0 +1,653 @@
+﻿/* ========================= */
+/* TRANG BÀN CỜ CHƠI VỚI AI */
+/* ========================= */
+
+.game-page {
+    min-height: 100vh;
+    padding: 120px 40px 50px;
+    background: linear-gradient(135deg, #eef4ff, #f8f3ff);
+    font-family: Arial, sans-serif;
+}
+
+/* ========================= */
+/* TIÊU ĐỀ VÀ KHU ĐIỀU KHIỂN */
+/* ========================= */
+
+.game-header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+    .game-header h1 {
+        color: #111827;
+        margin-bottom: 18px;
+        font-size: 38px;
+        font-weight: 900;
+    }
+
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+    .controls label {
+        font-size: 17px;
+        font-weight: 700;
+        color: #374151;
+    }
+
+    .controls select,
+    .controls button {
+        padding: 12px 16px;
+        border-radius: 10px;
+        border: 1px solid #cbd5e1;
+        font-size: 16px;
+        font-weight: 700;
+    }
+
+    .controls select {
+        background: white;
+        color: #111827;
+    }
+
+    .controls button {
+        cursor: pointer;
+        background: #111827;
+        color: white;
+        border: none;
+        transition: 0.2s ease;
+    }
+
+        .controls button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 25px rgba(15, 23, 42, 0.2);
+        }
+
+.resign-btn {
+    background: #ef4444 !important;
+    color: white !important;
+}
+
+    .resign-btn:hover {
+        background: #dc2626 !important;
+    }
+
+/* ========================= */
+/* BỐ CỤC BÀN CỜ */
+/* ========================= */
+
+.game-layout {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 34px;
+}
+
+/* ========================= */
+/* BÀN CỜ */
+/* ========================= */
+
+.chess-board {
+    width: 560px;
+    height: 560px;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    border: 5px solid #222;
+    box-shadow: 0 22px 50px rgba(0, 0, 0, 0.25);
+    background: #111827;
+}
+
+/* ========================= */
+/* Ô CỜ */
+/* ========================= */
+
+.square {
+    width: 70px;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 44px;
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+}
+
+.light {
+    background-color: var(--skin-light-square, #f0d9b5);
+    background-image: var(--skin-light-image, none);
+}
+
+.dark {
+    background-color: var(--skin-dark-square, #b58863);
+    background-image: var(--skin-dark-image, none);
+}
+
+/* ========================= */
+/* HIỆU ỨNG TRÊN BÀN CỜ */
+/* ========================= */
+
+.selected {
+    outline: 4px solid #00ff88;
+    outline-offset: -4px;
+}
+
+.last-move {
+    box-shadow: inset 0 0 0 5px rgba(255, 255, 0, 0.55);
+}
+
+.square.legal-hint::after {
+    content: "";
+    position: absolute;
+    width: 30%;
+    height: 30%;
+    background: rgba(0, 200, 100, 0.65);
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    box-shadow: 0 0 16px rgba(34, 197, 94, 0.6);
+}
+
+/* ========================= */
+/* PANEL BÊN PHẢI */
+/* ========================= */
+
+.side-panel {
+    width: 300px;
+    min-height: 560px;
+    background: white;
+    border-radius: 18px;
+    padding: 22px;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.14);
+}
+
+.ai-side-panel {
+    width: 340px;
+}
+
+.side-panel h2 {
+    color: #111827;
+    margin: 0 0 16px;
+    font-size: 27px;
+    font-weight: 900;
+}
+
+.side-panel h3 {
+    color: #111827;
+    margin: 0 0 10px;
+    font-size: 20px;
+    font-weight: 900;
+}
+
+#statusText {
+    background: #f1f1f1;
+    padding: 14px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    font-weight: 800;
+    color: #111827;
+    line-height: 1.4;
+}
+
+/* ========================= */
+/* QUÂN BỊ ĂN */
+/* ========================= */
+
+.captured-section {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.captured-card {
+    background: #f8fafc;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    padding: 12px;
+}
+
+    .captured-card h3 {
+        margin: 0 0 8px;
+        font-size: 15px;
+        color: #111827;
+    }
+
+.captured-pieces {
+    min-height: 38px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    font-size: 26px;
+    font-weight: 800;
+}
+
+    .captured-pieces.empty {
+        font-size: 14px;
+        color: #6b7280;
+    }
+
+.captured-piece {
+    display: inline-flex;
+    width: 34px;
+    height: 34px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: white;
+    border: 1px solid #e5e7eb;
+}
+
+/* ========================= */
+/* LỊCH SỬ NƯỚC ĐI */
+/* ========================= */
+
+.move-history {
+    max-height: 330px;
+    overflow-y: auto;
+    background: #f8f8f8;
+    padding: 10px;
+    border-radius: 12px;
+    font-family: Consolas, monospace;
+}
+
+.ai-move-history {
+    max-height: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-family: Arial, sans-serif;
+}
+
+.ai-move-row {
+    display: grid;
+    grid-template-columns: 34px 1fr;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 10px;
+    border-radius: 12px;
+    background: white;
+    border: 1px solid #e5e7eb;
+}
+
+    .ai-move-row.player-move {
+        border-left: 4px solid #4f46e5;
+    }
+
+    .ai-move-row.ai-move {
+        border-left: 4px solid #ef4444;
+    }
+
+.ai-move-no {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #f3f4f6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 900;
+    color: #374151;
+}
+
+.ai-move-main {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.ai-move-side {
+    font-size: 12px;
+    font-weight: 900;
+    color: #6b7280;
+}
+
+.ai-move-text {
+    font-size: 15px;
+    font-weight: 900;
+    color: #111827;
+}
+
+/* ========================= */
+/* MODAL CHỌN CHẾ ĐỘ AI */
+/* ========================= */
+
+.ai-setup-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.62);
+    backdrop-filter: blur(10px);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 99990;
+    padding: 20px;
+}
+
+    .ai-setup-overlay.show {
+        display: flex;
+    }
+
+.ai-setup-card {
+    width: min(480px, 94vw);
+    background: linear-gradient(135deg, #ffffff, #f4f0ff);
+    border-radius: 30px;
+    padding: 34px 30px;
+    text-align: center;
+    box-shadow: 0 35px 90px rgba(79, 70, 229, 0.36);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    animation: aiSetupPop 0.28s ease-out;
+}
+
+.ai-setup-badge {
+    display: inline-flex;
+    padding: 8px 16px;
+    border-radius: 999px;
+    background: #ede9fe;
+    color: #6d28d9;
+    font-weight: 900;
+    margin-bottom: 14px;
+}
+
+.ai-setup-card h1 {
+    margin: 0 0 10px;
+    color: #111827;
+    font-size: 32px;
+    font-weight: 900;
+}
+
+.ai-setup-card p {
+    margin: 0 0 22px;
+    color: #4b5563;
+    line-height: 1.55;
+    font-weight: 600;
+}
+
+.ai-setup-group {
+    text-align: left;
+    margin-bottom: 16px;
+}
+
+    .ai-setup-group label {
+        display: block;
+        font-weight: 900;
+        color: #111827;
+        margin-bottom: 8px;
+    }
+
+    .ai-setup-group select {
+        width: 100%;
+        padding: 14px 16px;
+        border-radius: 16px;
+        border: 1px solid #c4b5fd;
+        font-size: 16px;
+        font-weight: 700;
+        background: #ffffff;
+    }
+
+.ai-setup-note {
+    background: #f5f3ff;
+    color: #5b21b6;
+    font-weight: 800;
+    padding: 12px 14px;
+    border-radius: 16px;
+    margin-bottom: 20px;
+}
+
+.ai-start-btn {
+    width: 100%;
+    border: none;
+    border-radius: 18px;
+    padding: 15px 20px;
+    color: white;
+    font-size: 17px;
+    font-weight: 900;
+    cursor: pointer;
+    background: linear-gradient(135deg, #7c3aed, #4f46e5);
+    box-shadow: 0 18px 35px rgba(79, 70, 229, 0.32);
+    transition: 0.2s ease;
+}
+
+    .ai-start-btn:hover {
+        transform: translateY(-2px);
+    }
+
+@keyframes aiSetupPop {
+    from {
+        opacity: 0;
+        transform: translateY(18px) scale(0.94);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.ai-game-locked {
+    filter: blur(2px);
+    pointer-events: none;
+}
+
+/* ========================= */
+/* MODAL PHONG CẤP */
+/* ========================= */
+
+.promotion-overlay {
+    position: fixed;
+    inset: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background: rgba(15, 23, 42, 0.55);
+    backdrop-filter: blur(8px);
+    z-index: 99995;
+}
+
+    .promotion-overlay.show {
+        display: flex;
+    }
+
+.promotion-box {
+    width: min(420px, 92vw);
+    background: white;
+    border-radius: 26px;
+    padding: 28px 24px;
+    text-align: center;
+    box-shadow: 0 28px 80px rgba(15, 23, 42, 0.35);
+}
+
+    .promotion-box h2 {
+        margin: 0 0 8px;
+        font-size: 26px;
+        font-weight: 900;
+        color: #111827;
+    }
+
+    .promotion-box p {
+        margin: 0 0 20px;
+        color: #4b5563;
+        font-weight: 700;
+    }
+
+.promotion-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.promotion-choice {
+    border: none;
+    border-radius: 18px;
+    padding: 12px 8px;
+    background: #f3f4f6;
+    cursor: pointer;
+    transition: 0.18s ease;
+}
+
+    .promotion-choice span {
+        display: block;
+        font-size: 38px;
+        line-height: 1;
+        margin-bottom: 8px;
+    }
+
+    .promotion-choice strong {
+        display: block;
+        font-size: 13px;
+        color: #111827;
+    }
+
+    .promotion-choice:hover {
+        transform: translateY(-3px);
+        background: #ede9fe;
+        box-shadow: 0 14px 25px rgba(79, 70, 229, 0.18);
+    }
+
+/* ========================= */
+/* MODAL KẾT QUẢ TRẬN ĐẤU */
+/* ========================= */
+
+.game-result-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.55);
+    backdrop-filter: blur(8px);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 99999;
+}
+
+    .game-result-overlay.show {
+        display: flex;
+    }
+
+.game-result-box {
+    width: min(420px, 92vw);
+    background: linear-gradient(135deg, #ffffff, #f3f0ff);
+    border-radius: 28px;
+    padding: 34px 28px;
+    text-align: center;
+    box-shadow: 0 30px 80px rgba(79, 70, 229, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    animation: gameResultPop 0.28s ease-out;
+}
+
+.game-result-icon {
+    width: 84px;
+    height: 84px;
+    margin: 0 auto 18px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #7c3aed, #4f46e5);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 42px;
+    box-shadow: 0 18px 35px rgba(79, 70, 229, 0.35);
+}
+
+.game-result-box h2 {
+    font-size: 30px;
+    font-weight: 900;
+    color: #111827;
+    margin: 0 0 10px;
+}
+
+.game-result-box p {
+    font-size: 17px;
+    font-weight: 600;
+    color: #4b5563;
+    margin: 0 0 18px;
+    line-height: 1.5;
+}
+
+.game-result-score {
+    display: inline-flex;
+    padding: 12px 22px;
+    border-radius: 999px;
+    background: #ede9fe;
+    color: #6d28d9;
+    font-size: 22px;
+    font-weight: 900;
+    margin-bottom: 24px;
+}
+
+.game-result-btn {
+    width: 100%;
+    border: none;
+    outline: none;
+    border-radius: 16px;
+    padding: 14px 18px;
+    background: linear-gradient(135deg, #7c3aed, #4f46e5);
+    color: white;
+    font-size: 16px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+    .game-result-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 14px 30px rgba(79, 70, 229, 0.35);
+    }
+
+@keyframes gameResultPop {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.92);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* ========================= */
+/* RESPONSIVE */
+/* ========================= */
+
+@media (max-width: 900px) {
+    .game-page {
+        padding: 100px 16px 40px;
+    }
+
+    .game-layout {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .chess-board {
+        width: 90vw;
+        height: 90vw;
+    }
+
+    .square {
+        width: auto;
+        height: auto;
+        font-size: 7vw;
+    }
+
+    .side-panel,
+    .ai-side-panel {
+        width: 90vw;
+    }
+
+    .promotion-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .game-header h1 {
+        font-size: 30px;
+    }
+}

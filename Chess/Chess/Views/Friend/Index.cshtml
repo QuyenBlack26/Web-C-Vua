@@ -1,0 +1,716 @@
+﻿@{
+    Layout = null;
+
+    var friends = ViewBag.Friends as List<Dictionary<string, object>> ?? new List<Dictionary<string, object>>();
+    var incomingRequests = ViewBag.IncomingRequests as List<Dictionary<string, object>> ?? new List<Dictionary<string, object>>();
+    var outgoingRequests = ViewBag.OutgoingRequests as List<Dictionary<string, object>> ?? new List<Dictionary<string, object>>();
+    var schedules = ViewBag.Schedules as List<Dictionary<string, object>> ?? new List<Dictionary<string, object>>();
+
+    int currentUserId = ViewBag.CurrentUserId == null ? 0 : Convert.ToInt32(ViewBag.CurrentUserId);
+}
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Bạn bè - Chess Online</title>
+
+    <link rel="stylesheet" href="~/css/TrangChinh.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Friend.css" asp-append-version="true" />
+</head>
+
+<body>
+    <div class="gradient-bg"></div>
+    <div class="stars"></div>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <a class="logo-modern nav-logo-link" asp-controller="Home" asp-action="Index">
+                <img src="/IMG/Logo/LogoTrangChinh.png" alt="Logo Quyến" class="main-logo-img">
+                <span>Chess Online</span>
+            </a>
+
+            <ul class="nav-menu">
+                <li><a asp-controller="Home" asp-action="Index">Trang chủ</a></li>
+                <li><a asp-controller="Play" asp-action="Index">Chơi cờ</a></li>
+                <li><a asp-controller="Friend" asp-action="Index">Bạn bè</a></li>
+                <li><a asp-controller="Play" asp-action="Ranking">Xếp hạng</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="friend-page">
+        <section class="friend-hero">
+            <div>
+                <p class="friend-subtitle">Kết nối người chơi</p>
+                <h1>Bạn bè & hẹn phòng</h1>
+                <p>
+                    Tìm kiếm người chơi, gửi lời mời kết bạn, xem danh sách bạn bè và hẹn phòng chơi cờ.
+                </p>
+            </div>
+
+            <a class="friend-search-btn" asp-controller="Friend" asp-action="Search">
+                🔍 Tìm kiếm bạn
+            </a>
+        </section>
+
+        @if (TempData["Success"] != null)
+        {
+            <div class="friend-alert success">
+                @TempData["Success"]
+            </div>
+        }
+
+        @if (TempData["Error"] != null)
+        {
+            <div class="friend-alert error">
+                @TempData["Error"]
+            </div>
+        }
+
+        <section class="friend-grid">
+            <div class="friend-card">
+                <div class="friend-card-header">
+                    <h2>Lời mời kết bạn</h2>
+                    <span>@incomingRequests.Count lời mời</span>
+                </div>
+
+                @if (incomingRequests.Count == 0)
+                {
+                    <div class="friend-empty">
+                        Hiện chưa có lời mời kết bạn nào.
+                    </div>
+                }
+                else
+                {
+                    <div class="friend-list">
+                        @foreach (var item in incomingRequests)
+                        {
+                            var userId = Convert.ToInt32(item["UserID"]);
+                            var avatar = item["Avatar"]?.ToString();
+                            var tenDangNhap = item["TenDangNhap"]?.ToString();
+                            var hoTen = item["HoTen"]?.ToString();
+                            var diem = item["Diem"]?.ToString();
+                            var loiMoiId = Convert.ToInt32(item["LoiMoiID"]);
+
+                            <div class="friend-item">
+                                <div class="friend-user">
+                                    <div class="friend-avatar">
+                                        @if (!string.IsNullOrWhiteSpace(avatar))
+                                        {
+                                            <img src="@avatar" alt="@tenDangNhap" />
+                                        }
+                                        else
+                                        {
+                                            <span>@(string.IsNullOrWhiteSpace(tenDangNhap) ? "U" : tenDangNhap.Substring(0, 1).ToUpper())</span>
+                                        }
+                                    </div>
+
+                                    <div>
+                                        <h3>@tenDangNhap</h3>
+                                        <p>@(string.IsNullOrWhiteSpace(hoTen) ? "Người chơi Chess Online" : hoTen)</p>
+                                        <small>Điểm: @diem</small>
+                                    </div>
+                                </div>
+
+                                <div class="friend-actions">
+                                    <form asp-controller="Friend" asp-action="AcceptRequest" method="post">
+                                        <input type="hidden" name="requestId" value="@loiMoiId" />
+                                        <button type="submit" class="btn-accept">Chấp nhận</button>
+                                    </form>
+
+                                    <form asp-controller="Friend" asp-action="RejectRequest" method="post">
+                                        <input type="hidden" name="requestId" value="@loiMoiId" />
+                                        <button type="submit" class="btn-reject">Từ chối</button>
+                                    </form>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+            </div>
+
+            <div class="friend-card">
+                <div class="friend-card-header">
+                    <h2>Lời mời đã gửi</h2>
+                    <span>@outgoingRequests.Count đang chờ</span>
+                </div>
+
+                @if (outgoingRequests.Count == 0)
+                {
+                    <div class="friend-empty">
+                        Bạn chưa gửi lời mời nào.
+                    </div>
+                }
+                else
+                {
+                    <div class="friend-list">
+                        @foreach (var item in outgoingRequests)
+                        {
+                            var avatar = item["Avatar"]?.ToString();
+                            var tenDangNhap = item["TenDangNhap"]?.ToString();
+                            var hoTen = item["HoTen"]?.ToString();
+                            var diem = item["Diem"]?.ToString();
+                            var loiMoiId = Convert.ToInt32(item["LoiMoiID"]);
+
+                            <div class="friend-item">
+                                <div class="friend-user">
+                                    <div class="friend-avatar">
+                                        @if (!string.IsNullOrWhiteSpace(avatar))
+                                        {
+                                            <img src="@avatar" alt="@tenDangNhap" />
+                                        }
+                                        else
+                                        {
+                                            <span>@(string.IsNullOrWhiteSpace(tenDangNhap) ? "U" : tenDangNhap.Substring(0, 1).ToUpper())</span>
+                                        }
+                                    </div>
+
+                                    <div>
+                                        <h3>@tenDangNhap</h3>
+                                        <p>@(string.IsNullOrWhiteSpace(hoTen) ? "Người chơi Chess Online" : hoTen)</p>
+                                        <small>Điểm: @diem</small>
+                                    </div>
+                                </div>
+
+                                <div class="friend-actions">
+                                    <form asp-controller="Friend" asp-action="CancelRequest" method="post">
+                                        <input type="hidden" name="requestId" value="@loiMoiId" />
+                                        <button type="submit" class="btn-cancel">Hủy lời mời</button>
+                                    </form>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+            </div>
+        </section>
+
+        <section class="friend-card full">
+            <div class="friend-card-header">
+                <h2>Danh sách bạn bè</h2>
+                <span>@friends.Count bạn bè</span>
+            </div>
+
+            @if (friends.Count == 0)
+            {
+                <div class="friend-empty large">
+                    Bạn chưa có bạn bè nào. Hãy tìm kiếm người chơi và gửi lời mời kết bạn.
+                    <br />
+                    <a asp-controller="Friend" asp-action="Search">Tìm bạn ngay</a>
+                </div>
+            }
+            else
+            {
+                <div class="friend-list grid-list">
+                    @foreach (var item in friends)
+                    {
+                        var friendId = Convert.ToInt32(item["UserID"]);
+                        var avatar = item["Avatar"]?.ToString();
+                        var tenDangNhap = item["TenDangNhap"]?.ToString();
+                        var hoTen = item["HoTen"]?.ToString();
+                        var diem = item["Diem"]?.ToString();
+
+                        <div class="friend-item friend-box">
+                            <div class="friend-user">
+                                <div class="friend-avatar big">
+                                    @if (!string.IsNullOrWhiteSpace(avatar))
+                                    {
+                                        <img src="@avatar" alt="@tenDangNhap" />
+                                    }
+                                    else
+                                    {
+                                        <span>@(string.IsNullOrWhiteSpace(tenDangNhap) ? "U" : tenDangNhap.Substring(0, 1).ToUpper())</span>
+                                    }
+                                </div>
+
+                                <div>
+                                    <h3>@tenDangNhap</h3>
+                                    <p>@(string.IsNullOrWhiteSpace(hoTen) ? "Người chơi Chess Online" : hoTen)</p>
+                                    <small>Điểm cao nhất: @diem</small>
+                                </div>
+                            </div>
+
+                            <div class="friend-actions friend-actions-row">
+                                <a class="btn-schedule" asp-controller="Friend" asp-action="Schedule" asp-route-friendId="@friendId">
+                                    Hẹn phòng
+                                </a>
+
+                                <form asp-controller="Friend" asp-action="RemoveFriend" method="post"
+                                      onsubmit="return confirm('Bạn có chắc muốn hủy kết bạn không?');">
+                                    <input type="hidden" name="friendId" value="@friendId" />
+                                    <button type="submit" class="btn-remove">Hủy bạn</button>
+                                </form>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+        </section>
+
+        <section class="friend-card full">
+            <div class="friend-card-header">
+                <h2>Lịch hẹn phòng</h2>
+                <span>@schedules.Count lịch hẹn</span>
+            </div>
+
+            @if (schedules.Count == 0)
+            {
+                <div class="friend-empty">
+                    Chưa có lịch hẹn phòng nào.
+                </div>
+            }
+            else
+            {
+                <div class="schedule-list">
+                    @foreach (var item in schedules)
+                    {
+                        var scheduleId = Convert.ToInt32(item["LichHenID"]);
+                        var nguoiTaoId = Convert.ToInt32(item["NguoiTaoID"]);
+                        var nguoiDuocMoiId = Convert.ToInt32(item["NguoiDuocMoiID"]);
+                        var trangThai = item["TrangThai"]?.ToString();
+                        var tenCheDo = item["TenCheDo"]?.ToString();
+                        var loaiCheDo = item["LoaiCheDo"]?.ToString();
+                        var ghiChu = item["GhiChu"]?.ToString();
+                        var thoiGianHen = item["ThoiGianHen"] == null || item["ThoiGianHen"].ToString() == ""
+                        ? ""
+                        : Convert.ToDateTime(item["ThoiGianHen"]).ToString("dd/MM/yyyy HH:mm");
+
+                        var tenNguoiTao = item["TenNguoiTao"]?.ToString();
+                        var tenNguoiDuocMoi = item["TenNguoiDuocMoi"]?.ToString();
+
+                        bool isReceiver = nguoiDuocMoiId == currentUserId;
+                        bool canRespond = isReceiver && trangThai == "PENDING";
+                        bool canCreateRoom = trangThai == "ACCEPTED";
+                        bool hasRoom = item["PhongID"] != null && item["PhongID"].ToString() != "";
+
+                        <div class="schedule-item">
+                            <div class="schedule-main">
+                                <h3>
+                                    @tenNguoiTao hẹn @tenNguoiDuocMoi
+                                </h3>
+
+                                <p>
+                                    Chế độ: <b>@tenCheDo</b> - @loaiCheDo
+                                </p>
+
+                                <p>
+                                    Thời gian: <b>@thoiGianHen</b>
+                                </p>
+
+                                @if (!string.IsNullOrWhiteSpace(ghiChu))
+                                {
+                                    <p>Ghi chú: @ghiChu</p>
+                                }
+
+                                <span class="schedule-status @trangThai?.ToLower()">
+                                    @trangThai
+                                </span>
+                            </div>
+
+                            <div class="schedule-actions">
+                                @if (canRespond)
+                                {
+                                    <form asp-controller="Friend" asp-action="AcceptSchedule" method="post">
+                                        <input type="hidden" name="scheduleId" value="@scheduleId" />
+                                        <button type="submit" class="btn-accept">Chấp nhận</button>
+                                    </form>
+
+                                    <form asp-controller="Friend" asp-action="RejectSchedule" method="post">
+                                        <input type="hidden" name="scheduleId" value="@scheduleId" />
+                                        <button type="submit" class="btn-reject">Từ chối</button>
+                                    </form>
+                                }
+
+                                @if (canCreateRoom && !hasRoom)
+                                {
+                                    <form asp-controller="Friend" asp-action="CreateRoomFromSchedule" method="post">
+                                        <input type="hidden" name="scheduleId" value="@scheduleId" />
+                                        <button type="submit" class="btn-room">Tạo phòng</button>
+                                    </form>
+                                }
+
+                                @if (hasRoom)
+                                {
+                                    <a class="btn-room" asp-controller="Play" asp-action="Room" asp-route-id="@item["PhongID"]">
+                                        Vào phòng
+                                    </a>
+                                }
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+        </section>
+    </main>
+</body>
+<!-- FOOTER DÙNG CHUNG CHO CÁC TRANG -->
+<footer class="footer-modern">
+    <div class="footer-grid">
+
+        <div class="footer-col">
+            <h4>Sản Phẩm</h4>
+            <ul>
+                <li>
+                    <a asp-controller="Play" asp-action="Online">
+                        Chơi Trực Tiếp
+                    </a>
+                </li>
+
+                <li>
+                    <a asp-controller="Play" asp-action="Analysis">
+                        Phân Tích
+                    </a>
+                </li>
+
+                <li>
+                    <a asp-controller="Play" asp-action="HocCoBan">
+                        Học Tập
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h4>Công Ty</h4>
+            <ul>
+                <li>
+                    <a href="#" class="js-open-about-modal">
+                        Về Chúng Tôi
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="js-open-blog-modal">
+                        Blog
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="js-open-contact-modal">
+                        Liên Hệ
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h4>Pháp Lý</h4>
+            <ul>
+                <li>
+                    <a href="#" class="js-open-terms-modal">
+                        Điều Khoản
+                    </a>
+                </li>
+
+                <li>
+                    <a asp-controller="Home" asp-action="Privacy">
+                        Privacy
+                    </a>
+                </li>
+
+                <li>
+                    <a asp-controller="Home" asp-action="Cookies">
+                        Cookies
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h4>Mạng Xã Hội</h4>
+
+            <div class="social-links">
+                <a href="https://www.facebook.com/"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   aria-label="Facebook">
+                    f
+                </a>
+
+                <a href="https://x.com/"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   aria-label="X Twitter">
+                    x
+                </a>
+
+                <a href="https://www.youtube.com/"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   aria-label="YouTube">
+                    ▶
+                </a>
+
+                <a href="https://discord.com/"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   aria-label="Discord">
+                    ☎
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        <p>&copy; 2026 Chess Online. All rights reserved.</p>
+    </div>
+</footer>
+
+<!-- MODAL LIÊN HỆ -->
+<div class="contact-modal-overlay" id="contactModalOverlay">
+    <div class="contact-modal-box">
+
+        <button type="button" class="contact-modal-close" id="contactModalClose">
+            <span class="modal-x-symbol">×</span>
+        </button>
+
+        <div class="contact-modal-header">
+            <span class="contact-modal-icon">
+                ✉
+            </span>
+
+            <h2>Liên Hệ</h2>
+            <p>
+                Gửi góp ý, báo lỗi hoặc yêu cầu hỗ trợ cho Chess Online.
+            </p>
+        </div>
+
+        <form class="contact-modal-form">
+            <div class="contact-form-group">
+                <label>Họ tên</label>
+                <input type="text" placeholder="Nhập họ tên của bạn">
+            </div>
+
+            <div class="contact-form-group">
+                <label>Email</label>
+                <input type="email" placeholder="Nhập email của bạn">
+            </div>
+
+            <div class="contact-form-group">
+                <label>Chủ đề</label>
+                <input type="text" placeholder="Ví dụ: Báo lỗi, góp ý, hỗ trợ tài khoản...">
+            </div>
+
+            <div class="contact-form-group">
+                <label>Nội dung</label>
+                <textarea rows="4" placeholder="Nhập nội dung cần liên hệ..."></textarea>
+            </div>
+
+            <button type="button" class="btn-send-contact">
+                Gửi Liên Hệ
+            </button>
+        </form>
+
+    </div>
+</div>
+
+<!-- MODAL ĐIỀU KHOẢN -->
+<div class="terms-modal-overlay" id="termsModalOverlay">
+    <div class="terms-modal-box">
+
+        <button type="button" class="terms-modal-close" id="termsModalClose">
+            <span class="modal-x-symbol">×</span>
+        </button>
+
+        <div class="terms-modal-header">
+            <span class="terms-modal-icon">
+                📄
+            </span>
+
+            <h2>Điều Khoản Sử Dụng</h2>
+            <p>
+                Khi sử dụng Chess Online, bạn đồng ý tuân thủ các điều khoản bên dưới.
+            </p>
+        </div>
+
+        <div class="terms-modal-content">
+            <div class="terms-item">
+                <h3>1. Tài khoản người dùng</h3>
+                <p>
+                    Người dùng cần cung cấp thông tin chính xác khi đăng ký.
+                    Không sử dụng tài khoản của người khác hoặc chia sẻ tài khoản cho mục đích gian lận.
+                </p>
+            </div>
+
+            <div class="terms-item">
+                <h3>2. Hành vi khi chơi</h3>
+                <p>
+                    Không được sử dụng công cụ hỗ trợ bên ngoài trong các trận đấu với người chơi khác.
+                    Không spam, phá ván hoặc có hành vi gây ảnh hưởng xấu đến trải nghiệm của người khác.
+                </p>
+            </div>
+
+            <div class="terms-item">
+                <h3>3. Dữ liệu ván cờ</h3>
+                <p>
+                    Hệ thống có thể lưu lại lịch sử ván đấu, nước đi và kết quả để phục vụ tính năng xem lại,
+                    phân tích và xếp hạng.
+                </p>
+            </div>
+
+            <div class="terms-item">
+                <h3>4. Bảng xếp hạng</h3>
+                <p>
+                    Điểm số và thứ hạng có thể thay đổi dựa trên kết quả thi đấu.
+                    Nếu phát hiện gian lận, hệ thống có quyền điều chỉnh hoặc hủy kết quả.
+                </p>
+            </div>
+
+            <div class="terms-item">
+                <h3>5. Thay đổi điều khoản</h3>
+                <p>
+                    Chess Online có thể cập nhật điều khoản khi cần thiết để cải thiện hệ thống và bảo vệ người dùng.
+                </p>
+            </div>
+        </div>
+
+        <button type="button" class="btn-terms-ok" id="termsModalOk">
+            Tôi đã hiểu
+        </button>
+
+    </div>
+</div>
+
+<!-- MODAL BLOG -->
+<div class="blog-modal-overlay" id="blogModalOverlay">
+    <div class="blog-modal-box">
+
+        <button type="button" class="blog-modal-close" id="blogModalClose">
+            <span class="modal-x-symbol">×</span>
+        </button>
+
+        <div class="blog-modal-header">
+            <span class="blog-modal-icon">
+                📰
+            </span>
+
+            <h2>Blog Chess Online</h2>
+            <p>
+                Nơi chia sẻ mẹo chơi cờ, kiến thức luyện tập và cập nhật mới của website.
+            </p>
+        </div>
+
+        <div class="blog-list">
+            <div class="blog-item">
+                <div class="blog-tag">Người mới</div>
+                <h3>5 nguyên tắc khai cuộc cơ bản</h3>
+                <p>
+                    Kiểm soát trung tâm, phát triển quân nhẹ, nhập thành sớm và không di chuyển một quân quá nhiều lần.
+                </p>
+                <button type="button" class="btn-blog-read">
+                    Đọc nhanh
+                </button>
+            </div>
+
+            <div class="blog-item">
+                <div class="blog-tag">Chiến thuật</div>
+                <h3>Cách tránh mất quân đơn giản</h3>
+                <p>
+                    Trước khi đi, hãy kiểm tra quân nào đang bị tấn công,
+                    Vua có an toàn không và đối thủ có nước bắt quân không.
+                </p>
+                <button type="button" class="btn-blog-read">
+                    Đọc nhanh
+                </button>
+            </div>
+
+            <div class="blog-item">
+                <div class="blog-tag">AI</div>
+                <h3>AI phân tích ván cờ hoạt động thế nào?</h3>
+                <p>
+                    AI sẽ xem lại từng nước đi, so sánh với nước tốt hơn và đánh giá lỗi như thiếu chính xác,
+                    sai lầm hoặc lỗi nặng.
+                </p>
+                <button type="button" class="btn-blog-read">
+                    Đọc nhanh
+                </button>
+            </div>
+
+            <div class="blog-item">
+                <div class="blog-tag">Giải đấu</div>
+                <h3>Chuẩn bị trước khi tham gia giải đấu</h3>
+                <p>
+                    Luyện khai cuộc quen thuộc, giữ bình tĩnh ở trung cuộc và quản lý thời gian tốt trong từng ván đấu.
+                </p>
+                <button type="button" class="btn-blog-read">
+                    Đọc nhanh
+                </button>
+            </div>
+        </div>
+
+        <button type="button" class="btn-blog-ok" id="blogModalOk">
+            Đóng Blog
+        </button>
+
+    </div>
+</div>
+
+<!-- MODAL VỀ CHÚNG TÔI -->
+<div class="about-modal-overlay" id="aboutModalOverlay">
+    <div class="about-modal-box">
+
+        <button type="button" class="about-modal-close" id="aboutModalClose">
+            <span class="modal-x-symbol">×</span>
+        </button>
+
+        <div class="about-modal-header">
+            <span class="about-modal-icon">
+                ♞
+            </span>
+
+            <h2>Về Chess Online</h2>
+            <p>
+                Chess Online là website chơi cờ vua trực tuyến kết hợp AI, lịch sử ván đấu,
+                phân tích nước đi và bảng xếp hạng người chơi.
+            </p>
+        </div>
+
+        <div class="about-modal-content">
+            <div class="about-item">
+                <h3>🎯 Mục tiêu</h3>
+                <p>
+                    Tạo một nền tảng giúp người chơi vừa giải trí,
+                    vừa học cờ vua thông qua phân tích ván đấu và luyện tập với AI.
+                </p>
+            </div>
+
+            <div class="about-item">
+                <h3><img src="/IMG/Logo/1VS1.png" alt="1vs1 Online" class="play-mode-logo"> Tính năng chính</h3>
+                <p>
+                    Website hỗ trợ chơi với AI, chơi online, lưu lịch sử ván cờ,
+                    xem lại từng nước đi, phân tích lỗi và theo dõi bảng xếp hạng.
+                </p>
+            </div>
+
+            <div class="about-item">
+                <h3><img src="/IMG/Logo/AI.png" alt="Chơi với AI" class="play-mode-logo"> AI phân tích</h3>
+                <p>
+                    AI giúp đánh giá nước đi, chỉ ra lỗi thiếu chính xác,
+                    sai lầm, lỗi nặng và gợi ý cách cải thiện.
+                </p>
+            </div>
+
+            <div class="about-item">
+                <h3>🏆 Hướng phát triển</h3>
+                <p>
+                    Trong tương lai, hệ thống có thể mở rộng thêm giải đấu,
+                    phòng chơi online, phân tích chuyên sâu và học từ các ván cờ mẫu.
+                </p>
+            </div>
+        </div>
+
+        <button type="button" class="btn-about-ok" id="aboutModalOk">
+            Đã hiểu
+        </button>
+
+    </div>
+</div>
+
+
+<!-- FILE JAVASCRIPT FOOTER + MODAL -->
+<script src="~/js/TrangChinh.js" asp-append-version="true"></script>
+</html>

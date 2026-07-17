@@ -1,0 +1,103 @@
+@{
+    ViewData["Title"] = "Thông tin cá nhân";
+}
+
+<link rel="stylesheet" href="~/css/ThongTinCaNhan.css" />
+
+<div class="profile-page">
+    <div class="profile-card">
+        <div class="profile-header">
+            <div class="profile-avatar">
+                @{
+                    string ten = ViewBag.TenDangNhap ?? "U";
+                    string chuCai = ten.Length > 0 ? ten.Substring(0, 1).ToUpper() : "U";
+                }
+                @chuCai
+            </div>
+
+            <div>
+                <h1>Thông tin cá nhân</h1>
+                <p>Tài khoản: <strong>@ViewBag.TenDangNhap</strong></p>
+            </div>
+        </div>
+
+        @if (ViewBag.Error != null)
+        {
+            <div class="alert error">@ViewBag.Error</div>
+        }
+
+        @if (ViewBag.Success != null)
+        {
+            <div class="alert success">@ViewBag.Success</div>
+        }
+
+        <form asp-controller="Home" asp-action="ThongTinCaNhan" method="post" class="profile-form">
+            <div class="form-group">
+                <label>Họ tên</label>
+                <input type="text" name="hoTen" value="@ViewBag.HoTen" placeholder="Nhập họ tên của bạn" />
+            </div>
+
+            <div class="form-group">
+                <label>Gmail</label>
+                <input type="email" name="gmail" value="@ViewBag.Gmail" placeholder="Nhập Gmail" required />
+            </div>
+
+            <div class="form-group">
+                <label>Ngày sinh</label>
+                <input type="date" name="ngaySinh" value="@ViewBag.NgaySinh" />
+            </div>
+
+            <div class="form-group">
+                <label>Giới tính</label>
+                <select name="gioiTinh">
+                    @if (ViewBag.GioiTinh == "")
+                    {
+                        <option value="" selected>Chưa cập nhật</option>
+                    }
+                    else
+                    {
+                        <option value="">Chưa cập nhật</option>
+                    }
+
+                    @if (ViewBag.GioiTinh == "NAM")
+                    {
+                        <option value="NAM" selected>Nam</option>
+                    }
+                    else
+                    {
+                        <option value="NAM">Nam</option>
+                    }
+
+                    @if (ViewBag.GioiTinh == "NU")
+                    {
+                        <option value="NU" selected>Nữ</option>
+                    }
+                    else
+                    {
+                        <option value="NU">Nữ</option>
+                    }
+
+                    @if (ViewBag.GioiTinh == "KHAC")
+                    {
+                        <option value="KHAC" selected>Khác</option>
+                    }
+                    else
+                    {
+                        <option value="KHAC">Khác</option>
+                    }
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Avatar</label>
+                <input type="text" name="avatar" value="@ViewBag.Avatar" placeholder="/images/default-avatar.png" />
+                <small>Hiện tại nhập đường dẫn ảnh trước. Sau này có thể làm upload ảnh.</small>
+            </div>
+
+            <div class="profile-actions">
+                <button type="submit" class="btn-save">Lưu thông tin</button>
+                <a asp-controller="Home" asp-action="Index" class="btn-back">Quay về trang chủ</a>
+            </div>
+        </form>
+    </div>
+</div>

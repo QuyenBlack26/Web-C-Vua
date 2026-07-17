@@ -1,0 +1,170 @@
+﻿.admin-skin-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+    align-items: start;
+    margin-top: 20px;
+}
+
+.admin-skin-card {
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 22px;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+}
+
+    .admin-skin-card h2,
+    .admin-skin-list-section h2 {
+        color: #111827;
+        margin-bottom: 16px;
+    }
+
+.skin-form {
+    max-width: none;
+    width: 100%;
+    box-shadow: none;
+    padding: 0;
+}
+
+.skin-color-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+}
+
+.piece-upload-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.admin-skin-list-section {
+    margin-top: 28px;
+}
+
+.color-preview {
+    width: 26px;
+    height: 26px;
+    border-radius: 8px;
+    border: 1px solid #d1d5db;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 8px;
+}
+
+.path-cell {
+    max-width: 220px;
+    word-break: break-all;
+    color: #4b5563;
+    font-size: 12px;
+}
+
+.admin-action-cell {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    min-width: 120px;
+}
+
+.inline-form {
+    display: inline;
+    margin: 0;
+}
+
+.admin-action-cell .btn-admin-edit,
+.admin-action-cell .btn-admin-delete {
+    padding: 8px 12px;
+    border-radius: 10px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.admin-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(15, 23, 42, 0.55);
+}
+
+    .admin-modal.show {
+        display: flex;
+    }
+
+.admin-modal-box {
+    width: min(620px, 100%);
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    background: #ffffff;
+    border-radius: 22px;
+    padding: 26px;
+    box-shadow: 0 30px 80px rgba(15, 23, 42, 0.35);
+}
+
+    .admin-modal-box.wide {
+        width: min(900px, 100%);
+    }
+
+    .admin-modal-box h2 {
+        margin-bottom: 18px;
+        color: #111827;
+    }
+
+.admin-modal-close {
+    position: absolute;
+    top: 14px;
+    right: 16px;
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 999px;
+    background: #f3f4f6;
+    color: #111827;
+    font-size: 24px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+    .admin-modal-close:hover {
+        background: #e5e7eb;
+    }
+
+.modal-form {
+    max-width: none;
+    width: 100%;
+    box-shadow: none;
+    padding: 0;
+}
+
+.admin-form-note {
+    color: #6b7280;
+    font-weight: 700;
+    margin: 8px 0 12px;
+}
+
+@media (max-width: 1000px) {
+    .admin-skin-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 700px) {
+    .skin-color-row,
+    .piece-upload-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-modal {
+        padding: 12px;
+    }
+
+    .admin-modal-box {
+        padding: 20px;
+    }
+}

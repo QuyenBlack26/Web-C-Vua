@@ -1,0 +1,190 @@
+﻿/* TRANG CHỌN CHẾ ĐỘ CHƠI */
+.play-page {
+    min-height: 100vh;
+    padding: 115px 38px 70px;
+    background: linear-gradient(135deg, #eef4ff 0%, #f8f3ff 100%);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* PHẦN TIÊU ĐỀ TRANG PLAY */
+.play-hero {
+    text-align: center;
+    margin-bottom: 54px;
+}
+
+.play-kicker {
+    display: inline-block;
+    margin-bottom: 10px;
+    padding: 7px 16px;
+    border-radius: 999px;
+    background: rgba(113, 183, 230, 0.16);
+    color: #6b6fc4;
+    font-weight: 800;
+    font-size: 14px;
+}
+
+.play-hero h1 {
+    font-size: 54px;
+    color: #8d91d6;
+    font-weight: 900;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+}
+
+.play-hero p {
+    color: #6b7280;
+    font-size: 18px;
+}
+
+/* DANH SÁCH CÁC THẺ CHẾ ĐỘ CHƠI */
+.play-grid {
+    max-width: 1500px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(230px, 1fr));
+    gap: 34px;
+}
+
+/* THẺ CHẾ ĐỘ CHƠI */
+.play-card {
+    min-height: 260px;
+    background: rgba(255, 255, 255, 0.78);
+    border-radius: 22px;
+    padding: 42px 28px 34px;
+    text-align: center;
+    text-decoration: none;
+    color: #333;
+    border: 1px solid rgba(255, 255, 255, 0.75);
+    box-shadow: 0 20px 48px rgba(113, 183, 230, 0.12);
+    transition: 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+    .play-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(113, 183, 230, 0.14), rgba(155, 89, 182, 0.14));
+        opacity: 0;
+        transition: 0.3s ease;
+    }
+
+    .play-card:hover::before {
+        opacity: 1;
+    }
+
+    .play-card:hover {
+        transform: translateY(-12px);
+        border-color: rgba(155, 89, 182, 0.42);
+        box-shadow: 0 28px 65px rgba(113, 183, 230, 0.25);
+    }
+
+/* ICON TRONG THẺ CHẾ ĐỘ CHƠI */
+.play-icon {
+    font-size: 54px;
+    margin-bottom: 26px;
+    position: relative;
+    z-index: 1;
+    filter: drop-shadow(0 8px 12px rgba(0,0,0,0.08));
+}
+
+/* NỘI DUNG TRONG THẺ CHẾ ĐỘ CHƠI */
+.play-card h2 {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 14px;
+    font-weight: 900;
+    position: relative;
+    z-index: 1;
+}
+
+.play-card p {
+    color: #8a8a8a;
+    line-height: 1.5;
+    min-height: 48px;
+    font-size: 17px;
+    position: relative;
+    z-index: 1;
+}
+
+.play-card span {
+    display: inline-block;
+    margin-top: 18px;
+    padding: 9px 22px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #71b7e6, #9b59b6);
+    color: #ffffff;
+    font-weight: 800;
+    font-size: 14px;
+    position: relative;
+    z-index: 1;
+}
+
+/* KHU VỰC NÚT HÀNH ĐỘNG */
+.play-actions {
+    text-align: center;
+    margin-top: 38px;
+}
+
+/* NÚT QUAY LẠI TRANG CHỦ */
+.btn-back-home {
+    display: inline-block;
+    padding: 12px 24px;
+    border-radius: 12px;
+    background: #ffffff;
+    color: #374151;
+    text-decoration: none;
+    border: 1px solid #e5e7eb;
+    font-weight: 800;
+    box-shadow: 0 12px 28px rgba(0,0,0,0.06);
+}
+
+    .btn-back-home:hover {
+        background: #f3f4f6;
+    }
+
+/* THÔNG BÁO TRONG TRANG PLAY */
+.play-alert {
+    max-width: 720px;
+    margin: 0 auto 22px;
+    padding: 13px 16px;
+    border-radius: 14px;
+    text-align: center;
+    font-weight: 800;
+}
+
+    .play-alert.info {
+        background: #dbeafe;
+        color: #1e40af;
+        border: 1px solid #bfdbfe;
+    }
+
+    .play-alert.error {
+        background: #fee2e2;
+        color: #991b1b;
+        border: 1px solid #fecaca;
+    }
+
+/* RESPONSIVE CHO MÀN HÌNH VỪA */
+@media (max-width: 1150px) {
+    .play-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* RESPONSIVE CHO ĐIỆN THOẠI */
+@media (max-width: 650px) {
+    .play-page {
+        padding: 90px 18px 50px;
+    }
+
+    .play-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .play-hero h1 {
+        font-size: 38px;
+    }
+}
+

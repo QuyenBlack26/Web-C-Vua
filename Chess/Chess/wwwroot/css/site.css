@@ -1,22 +1,27 @@
+﻿/* CẤU HÌNH CỠ CHỮ GỐC */
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
+/* CỠ CHỮ CHO MÀN HÌNH TỪ TABLET TRỞ LÊN */
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
+/* HIỆU ỨNG FOCUS CHO BUTTON, LINK VÀ FORM */
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
+/* THIẾT LẬP HTML CHIỀU CAO TỐI THIỂU */
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
+/* KHOẢNG CÁCH DƯỚI BODY */
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
 }

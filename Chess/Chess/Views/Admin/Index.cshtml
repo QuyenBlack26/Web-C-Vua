@@ -1,0 +1,68 @@
+﻿@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+@* Tránh tạo một tab đưa về trang chính *@
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Chu Admin</title>
+    <!-- FILE CSS ADMIN -->
+    <link rel="stylesheet" href="~/css/Admin.css" />
+    <link rel="stylesheet" href="~/css/KichThuoc.css" asp-append-version="true" />
+</head>
+<body>
+    <!-- KHUNG TRANG ADMIN -->
+    <div class="admin-page">
+
+        <!-- SIDEBAR ADMIN -->
+        <aside class="admin-sidebar">
+            <h2>Admin</h2>
+
+            <a asp-controller="Admin" asp-action="Index">Dashboard</a>
+            <a asp-controller="Admin" asp-action="Users">Tài khoản</a>
+            <a asp-controller="Admin" asp-action="Skins">Skin cờ</a>
+            <a asp-controller="Admin" asp-action="Puzzles">Câu đố</a>
+            <a asp-controller="Home" asp-action="Index">Về trang chủ</a>
+        </aside>
+
+        <!-- NỘI DUNG CHÍNH -->
+        <main class="admin-main">
+            <h1>Bảng điều khiển Admin</h1>
+
+            <!-- CÁC THẺ THỐNG KÊ -->
+            <div class="admin-cards">
+
+                <!-- THẺ THỐNG KÊ NGƯỜI DÙNG -->
+                <div class="admin-card">
+                    <h3>Người dùng</h3>
+                    <p>@ViewBag.TotalUsers</p>
+                </div>
+
+                <!-- THẺ THỐNG KÊ BOT AI -->
+                <div class="admin-card">
+                    <h3>Bot AI</h3>
+                    <p>@ViewBag.TotalBots</p>
+                </div>
+
+                <!-- THẺ THỐNG KÊ CÂU ĐỐ -->
+                <div class="admin-card">
+                    <h3>Câu đố</h3>
+                    <p>@ViewBag.TotalPuzzles</p>
+                </div>
+
+                <!-- THẺ THỐNG KÊ VÁN CỜ -->
+                <div class="admin-card">
+                    <h3>Ván cờ</h3>
+                    <p>@ViewBag.TotalGames</p>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
